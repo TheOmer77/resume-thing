@@ -1,6 +1,6 @@
 export const ExampleContent = () => (
   <div className='prose prose-sm prose-slate max-w-none'>
-    <h1>Tailwind Typography test</h1>
+    <h1>Tailwind CSS Typography</h1>
     <p className='lead'>
       Until now, trying to style an article, document, or blog post with
       Tailwind has been a tedious task that required a keen eye for typography
@@ -20,9 +20,9 @@ export const ExampleContent = () => (
     </p>
     <blockquote>
       <p>
-        Why is Tailwind removing the default styles on my
-        <code>h1</code> elements? How do I disable this? What do you mean I lose
-        all the other base styles too?
+        Why is Tailwind removing the default styles on my <code>h1</code>{' '}
+        elements? How do I disable this? What do you mean I lose all the other
+        base styles too?
       </p>
     </blockquote>
     <p>
@@ -173,7 +173,8 @@ export const ExampleContent = () => (
         <p>
           I think it probably would've been fine to just use two items but three
           is definitely not worse, and since I seem to be having no trouble
-          making up arbitrary things to type, I might as well include it.
+          making up arbitrary things to type, I might as well include it. I'm
+          going to press <kbd>Enter</kbd> now.
         </p>
       </li>
     </ul>
@@ -255,8 +256,8 @@ export const ExampleContent = () => (
       </li>
     </ol>
     <p>
-      The most annoying thing about lists in Markdown is that
-      <code>&lt;li&gt;</code> elements aren't given a child
+      The most annoying thing about lists in Markdown is that{' '}
+      <code>&lt;li&gt;</code> elements aren't given a child{' '}
       <code>&lt;p&gt;</code> tag unless there are multiple paragraphs in the
       list item. That means I have to worry about styling that annoying
       situation too.
@@ -299,6 +300,33 @@ export const ExampleContent = () => (
       </li>
     </ul>
     <p>And finally a sentence to close off this section.</p>
+    <h2>We didn't forget about description lists</h2>
+    <p>
+      Well, that's not exactly true, we first released this plugin back in 2020
+      and it took three years before we added description lists. But they're
+      here now, so let's just be happy about that…okay? They can be great for
+      things like FAQs.
+    </p>
+    <dl>
+      <dt>Why do you never see elephants hiding in trees?</dt>
+      <dd>
+        Because they're so good at it. Lorem ipsum dolor sit amet consectetur
+        adipisicing elit. Quas cupiditate laboriosam fugiat.
+      </dd>
+      <dt>What do you call someone with no body and no nose?</dt>
+      <dd>
+        Nobody knows. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Culpa, voluptas ipsa quia excepturi, quibusdam natus exercitationem
+        sapiente tempore labore voluptatem.
+      </dd>
+      <dt>Why can't you hear a pterodactyl go to the bathroom?</dt>
+      <dd>
+        Because the pee is silent. Lorem ipsum dolor sit amet, consectetur
+        adipisicing elit. Ipsam, quas voluptatibus ex culpa ipsum, aspernatur
+        blanditiis fugiat ullam magnam suscipit deserunt illum natus facilis
+        atque vero consequatur! Quisquam, debitis error.
+      </dd>
+    </dl>
     <h2>There are other elements we need to style</h2>
     <p>
       I almost forgot to mention links, like{' '}
@@ -347,7 +375,7 @@ export const ExampleContent = () => (
     </table>
     <p>
       We also need to make sure inline code looks good, like if I wanted to talk
-      about <code>&lt;span&gt;</code> elements or tell you the good news about
+      about <code>&lt;span&gt;</code> elements or tell you the good news about{' '}
       <code>@tailwindcss/typography</code>.
     </p>
     <h3>
