@@ -61,7 +61,7 @@ export const ExampleContent = () => (
     </pre>
     <p>
       For more information about how to use the plugin and the features it
-      includes,
+      includes,{' '}
       <a href='https://github.com/tailwindcss/typography/blob/master/README.md'>
         read the documentation
       </a>
@@ -183,8 +183,8 @@ export const ExampleContent = () => (
     </p>
     <h2>Code should look okay by default.</h2>
     <p>
-      I think most people are going to use
-      <a href='https://highlightjs.org/'>highlight.js</a> or
+      I think most people are going to use{' '}
+      <a href='https://highlightjs.org/'>highlight.js</a> or{' '}
       <a href='https://prismjs.com/'>Prism</a> or something if they want to
       style their code blocks but it wouldn't hurt to make them look{' '}
       <em>okay</em> out of the box, even with no syntax highlighting.
@@ -196,12 +196,12 @@ export const ExampleContent = () => (
     <pre>
       <code className='language-js'>
         {`module.exports = {
-purge: [],
-theme: {
-extend: {},
-},
-variants: {},
-plugins: [],
+  purge: [],
+  theme: {
+    extend: {},
+  },
+  variants: {},
+  plugins: [],
 }`}
       </code>
     </pre>
@@ -301,7 +301,7 @@ plugins: [],
     <p>And finally a sentence to close off this section.</p>
     <h2>There are other elements we need to style</h2>
     <p>
-      I almost forgot to mention links, like
+      I almost forgot to mention links, like{' '}
       <a href='https://tailwindcss.com'>
         this link to the Tailwind CSS website
       </a>
@@ -361,10 +361,10 @@ plugins: [],
     </p>
     <p>
       Another thing I've done in the past is put a <code>code</code> tag inside
-      of a link, like if I wanted to tell you about the
+      of a link, like if I wanted to tell you about the{' '}
       <a href='https://github.com/tailwindcss/docs'>
         <code>tailwindcss/docs</code>
-      </a>
+      </a>{' '}
       repository. I don't love that there is an underline below the backticks
       but it is absolutely not worth the madness it would require to avoid it.
     </p>
