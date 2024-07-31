@@ -1,7 +1,9 @@
 import puppeteer from 'puppeteer-core';
 import chromium from '@sparticuz/chromium';
+import tailwindTypography from '@tailwindcss/typography';
 
 import { ExampleContent } from '@/components/example';
+import { generateTailwindCss } from '@/lib/generateTailwindCss';
 import { EXAMPLE_MARGINS } from '@/constants/margins';
 
 export const GET = async () => {
@@ -9,7 +11,17 @@ export const GET = async () => {
   const { renderToStaticMarkup } = await import('react-dom/server');
 
   const html = renderToStaticMarkup(ExampleContent());
-  const dataUrl = `data:text/html,${encodeURIComponent(html)}`;
+  const css = await generateTailwindCss(
+    html,
+    "@import url('https://rsms.me/inter/inter.css');",
+    {
+      plugins: [tailwindTypography],
+      theme: { extend: { fontFamily: { sans: 'Inter, sans-serif' } } },
+    }
+  );
+  const dataUrl = `data:text/html,${encodeURIComponent(
+    `<style>${css}</style>`
+  )}${encodeURIComponent(html)}`;
 
   const browser = await puppeteer.launch({
     args: chromium.args,
