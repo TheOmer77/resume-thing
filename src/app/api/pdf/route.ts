@@ -30,15 +30,12 @@ export const GET = async () => {
     headless: chromium.headless,
   });
   const page = await browser.newPage();
-  console.log('DEBUG | browser.newPage passed');
   await page.goto(dataUrl, { waitUntil: 'domcontentloaded' });
-  console.log('DEBUG | page.goTo passed');
 
   const pdf = await page.pdf({
     format: 'A4',
     margin: EXAMPLE_MARGINS,
   });
-  console.log('DEBUG | page.pdf passed');
   return new Response(pdf, {
     headers: {
       'content-type': 'application/pdf',
