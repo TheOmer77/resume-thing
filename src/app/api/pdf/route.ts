@@ -1,14 +1,8 @@
-import puppeteer, { type PDFMargin } from 'puppeteer-core';
+import puppeteer from 'puppeteer-core';
 import chromium from '@sparticuz/chromium';
 
 import { ExampleContent } from '@/components/example';
-
-const EXAMPLE_MARGINS = {
-  bottom: '0.4in',
-  left: '0.4in',
-  right: '0.4in',
-  top: '0.4in',
-} satisfies PDFMargin;
+import { EXAMPLE_MARGINS } from '@/constants/margins';
 
 export const GET = async () => {
   // Next.js complains when you import 'react-dom/server' directly
