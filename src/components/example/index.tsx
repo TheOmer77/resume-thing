@@ -139,7 +139,7 @@ export const ExampleContent = () => (
       usually looks better for the headings to be closer together than a
       paragraph followed by a heading should be.
     </p>
-    <h3>When a heading comes after a paragraph &mldr;</h3>
+    <h3>When a heading comes after a paragraph &#8230;</h3>
     <p>
       When a heading comes after a paragraph, we need a bit more space, like I
       already mentioned above. Now let&apos;s see what a more complex list would
