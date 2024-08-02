@@ -54,7 +54,7 @@ export const PDFViewer = ({ file, className, ...props }: PDFViewerProps) => {
         file={file}
         onLoadSuccess={onDocumentLoadSuccess}
         options={options}
-        className='flex grow flex-col items-center justify-center gap-8 selection:bg-slate-500/50 selection:text-transparent'
+        className='flex grow flex-col items-center justify-center gap-4 selection:bg-slate-500/50 selection:text-transparent'
         noData={loadingSpinner}
         loading={loadingSpinner}
       >
@@ -62,7 +62,7 @@ export const PDFViewer = ({ file, className, ...props }: PDFViewerProps) => {
           <Page
             key={`page_${index + 1}`}
             pageNumber={index + 1}
-            className='!bg-transparent [&>.react-pdf\_\_Page\_\_canvas]:shadow-md'
+            className='shadow-md'
             width={
               containerWidth ? Math.min(containerWidth, maxWidth) : maxWidth
             }
