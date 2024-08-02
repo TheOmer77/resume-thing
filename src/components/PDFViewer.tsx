@@ -6,6 +6,7 @@ import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 
 import { Spinner } from '@/components/ui/spinner';
+import { usePDFFile } from '@/hooks/usePDFFile';
 import { cn } from '@/lib/utils';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -16,13 +17,13 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 const options = { cMapUrl: '/cmaps/', standardFontDataUrl: '/standard_fonts/' };
 const maxWidth = 800;
 
-type PDFViewerProps = Omit<ComponentPropsWithoutRef<'div'>, 'children'> & {
-  file: DocumentProps['file'];
-};
+type PDFViewerProps = Omit<ComponentPropsWithoutRef<'div'>, 'children'>;
 
 const loadingSpinner = <Spinner className='size-8' key='loading-spinner' />;
 
-export const PDFViewer = ({ file, className, ...props }: PDFViewerProps) => {
+export const PDFViewer = ({ className, ...props }: PDFViewerProps) => {
+  const file = usePDFFile();
+
   const [numPages, setNumPages] = useState<number>();
   const [containerRef, setContainerRef] = useState<HTMLElement | null>(null);
   const [containerWidth, setContainerWidth] = useState<number>();
