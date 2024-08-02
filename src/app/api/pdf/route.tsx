@@ -19,9 +19,6 @@ export const GET = async () => {
       theme: { extend: { fontFamily: { sans: 'Inter, sans-serif' } } },
     }
   );
-  const dataUrl = `data:text/html,${encodeURIComponent(
-    `<style>${css}</style>`
-  )}${encodeURIComponent(html)}`;
 
   const browser = await puppeteer.launch({
     args: chromium.args,
@@ -30,7 +27,7 @@ export const GET = async () => {
     headless: chromium.headless,
   });
   const page = await browser.newPage();
-  await page.goto(dataUrl, { waitUntil: 'domcontentloaded' });
+  await page.setContent(`<style>${css}</style>${html}`);
 
   const pdf = await page.pdf({
     format: 'A4',
