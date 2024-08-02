@@ -10,7 +10,7 @@ export const GET = async () => {
   // Next.js complains when you import 'react-dom/server' directly
   const { renderToStaticMarkup } = await import('react-dom/server');
 
-  const html = renderToStaticMarkup(ExampleContent());
+  const html = renderToStaticMarkup(<ExampleContent />);
   const css = await generateTailwindCss(
     html,
     "@import url('https://rsms.me/inter/inter.css');",
