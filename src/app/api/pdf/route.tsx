@@ -16,7 +16,21 @@ export const GET = async () => {
     "@import url('https://rsms.me/inter/inter.css');",
     {
       plugins: [tailwindTypography],
-      theme: { extend: { fontFamily: { sans: 'Inter, sans-serif' } } },
+      theme: {
+        extend: {
+          fontFamily: { sans: 'Inter, sans-serif' },
+          typography: {
+            DEFAULT: {
+              css: {
+                pre: {
+                  'print-color-adjust': 'exact !important',
+                  '-webkit-print-color-adjust': 'exact !important',
+                },
+              },
+            },
+          },
+        },
+      },
     }
   );
 
