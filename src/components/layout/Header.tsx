@@ -1,4 +1,4 @@
-import { PDFDownloadButton } from './PDFDownloadButton';
+import { PDFDownloadButton } from '@/components/pdf/PDFDownloadButton';
 
 export const Header = () => (
   <header className='fixed top-0 z-50 w-full bg-background/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-background/60 print:hidden'>
