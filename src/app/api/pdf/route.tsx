@@ -4,7 +4,7 @@ import tailwindTypography from '@tailwindcss/typography';
 
 import { ExampleContent } from '@/components/example';
 import { generateTailwindCss } from '@/lib/generateTailwindCss';
-import { EXAMPLE_MARGINS } from '@/constants/margins';
+import { NO_MARGINS } from '@/constants/margins';
 import { interCss } from '@/constants/inter';
 
 /** Weird hack to fix some complex Tailwind classnames. */
@@ -49,7 +49,7 @@ export const GET = async () => {
   });
   const page = await browser.newPage();
   await page.setContent(`<style>${css}</style>${html}`);
-  const pdf = await page.pdf({ format: 'A4', margin: EXAMPLE_MARGINS });
+  const pdf = await page.pdf({ format: 'A4', margin: NO_MARGINS });
   await browser.close();
 
   return new Response(pdf, {

@@ -1,8 +1,8 @@
 import type { PDFMargin } from 'puppeteer-core';
 
-export const EXAMPLE_MARGINS = {
-  bottom: '0.4in',
-  left: '0.4in',
-  right: '0.4in',
-  top: '0.4in',
+export const NO_MARGINS = {
+  bottom: 0,
+  left: 0,
+  right: 0,
+  top: 0,
 } satisfies PDFMargin;
