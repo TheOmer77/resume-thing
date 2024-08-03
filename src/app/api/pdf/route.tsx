@@ -7,6 +7,7 @@ import { ResumeRoot } from '@/components/resume';
 import { generateTailwindCss } from '@/lib/generateTailwindCss';
 import { NO_MARGINS } from '@/constants/margins';
 import { interCss } from '@/constants/inter';
+import { resumeTheme } from '@/constants/resume/theme';
 
 /** Weird hack to fix some complex Tailwind classnames. */
 const fixTwClasses = (html: string) => {
@@ -25,21 +26,7 @@ export const GET = async () => {
   const html = fixTwClasses(renderToStaticMarkup(<ResumeRoot />));
   const css = await generateTailwindCss(html, interCss, {
     plugins: [tailwindTypography],
-    theme: {
-      extend: {
-        fontFamily: { sans: 'Inter, sans-serif' },
-        typography: {
-          DEFAULT: {
-            css: {
-              pre: {
-                'print-color-adjust': 'exact !important',
-                '-webkit-print-color-adjust': 'exact !important',
-              },
-            },
-          },
-        },
-      },
-    },
+    theme: resumeTheme,
   });
 
   if (process.env.DEBUG?.toLowerCase() === 'true') {
