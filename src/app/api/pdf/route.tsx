@@ -3,7 +3,7 @@ import chromium from '@sparticuz/chromium';
 import tailwindTypography from '@tailwindcss/typography';
 import { mkdir, writeFile } from 'fs/promises';
 
-import { ExampleContent } from '@/components/example';
+import { ResumeRoot } from '@/components/resume';
 import { generateTailwindCss } from '@/lib/generateTailwindCss';
 import { NO_MARGINS } from '@/constants/margins';
 import { interCss } from '@/constants/inter';
@@ -22,7 +22,7 @@ export const GET = async () => {
   // Next.js complains when you import 'react-dom/server' directly
   const { renderToStaticMarkup } = await import('react-dom/server');
 
-  const html = fixTwClasses(renderToStaticMarkup(<ExampleContent />));
+  const html = fixTwClasses(renderToStaticMarkup(<ResumeRoot />));
   const css = await generateTailwindCss(html, interCss, {
     plugins: [tailwindTypography],
     theme: {

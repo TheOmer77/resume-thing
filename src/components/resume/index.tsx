@@ -1,4 +1,4 @@
-export const ExampleContent = () => (
+export const ResumeRoot = () => (
   <div className='prose prose-sm prose-slate max-w-none'>
     <h1>Tailwind CSS Typography</h1>
     <p className='lead'>
