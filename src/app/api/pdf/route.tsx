@@ -7,11 +7,19 @@ import { generateTailwindCss } from '@/lib/generateTailwindCss';
 import { EXAMPLE_MARGINS } from '@/constants/margins';
 import { interCss } from '@/constants/inter';
 
+/** Weird hack to fix some complex Tailwind classnames. */
+const fixAmpTwClasses = (html: string) => {
+  return html.replace(/class="([^"]*?)"/g, (_, classNames: string) => {
+    const modifiedClassNames = classNames.replace(/&amp;/g, '&');
+    return `class="${modifiedClassNames}"`;
+  });
+};
+
 export const GET = async () => {
   // Next.js complains when you import 'react-dom/server' directly
   const { renderToStaticMarkup } = await import('react-dom/server');
 
-  const html = renderToStaticMarkup(<ExampleContent />);
+  const html = fixAmpTwClasses(renderToStaticMarkup(<ExampleContent />));
   const css = await generateTailwindCss(html, interCss, {
     plugins: [tailwindTypography],
     theme: {
