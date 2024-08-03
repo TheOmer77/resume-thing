@@ -39,11 +39,9 @@ export const GET = async () => {
   });
   const page = await browser.newPage();
   await page.setContent(`<style>${css}</style>${html}`);
+  const pdf = await page.pdf({ format: 'A4', margin: EXAMPLE_MARGINS });
+  await browser.close();
 
-  const pdf = await page.pdf({
-    format: 'A4',
-    margin: EXAMPLE_MARGINS,
-  });
   return new Response(pdf, {
     headers: {
       'content-type': 'application/pdf',
