@@ -29,7 +29,7 @@ export const GET = async () => {
     theme: resumeTheme,
   });
 
-  if (process.env.DEBUG?.toLowerCase() === 'true') {
+  if (process.env.PDF_DEBUG?.toLowerCase() === 'true') {
     await mkdir('./debug').catch(error => {
       if (!('code' in error && error.code === 'EEXIST')) throw error;
     });
