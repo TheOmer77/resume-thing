@@ -1,6 +1,7 @@
 import puppeteer from 'puppeteer-core';
 import chromium from '@sparticuz/chromium';
 import tailwindTypography from '@tailwindcss/typography';
+import { mkdir, writeFile } from 'fs/promises';
 
 import { ExampleContent } from '@/components/example';
 import { generateTailwindCss } from '@/lib/generateTailwindCss';
@@ -40,6 +41,17 @@ export const GET = async () => {
       },
     },
   });
+
+  if (process.env.DEBUG?.toLowerCase() === 'true') {
+    await mkdir('./debug').catch(error => {
+      if (!('code' in error && error.code === 'EEXIST')) throw error;
+    });
+    await writeFile(
+      './debug/index.html',
+      `<link rel="stylesheet" href="./index.css">${html}`
+    );
+    await writeFile('./debug/index.css', css);
+  }
 
   const browser = await puppeteer.launch({
     args: chromium.args,
