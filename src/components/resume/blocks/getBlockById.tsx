@@ -19,6 +19,8 @@ export const getBlockById = (blockId: string) => {
       return <ContactInfoBlock blockId={blockId} />;
     case 'experience':
       return <ExperienceBlock blockId={blockId} />;
+    case 'section':
+      return <SectionBlock blockId={blockId} />;
 
     default:
       return null;

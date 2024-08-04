@@ -2,8 +2,6 @@ export type BlockCore = {
   id: string;
 };
 
-/* TODO: Section block
-
 export type SectionBlockContent = {
   title: string;
   children: string[];
@@ -12,7 +10,6 @@ export type SectionBlockData = BlockCore & {
   type: 'section';
   content: SectionBlockContent;
 };
-*/
 
 export type TitleBlockContent = {
   title: string;
@@ -65,5 +62,8 @@ export type ExperienceBlockData = BlockCore & {
 };
 
 export type BlockData =
-  // SectionBlockData |
-  TextBlockData | TitleBlockData | ContactInfoBlockData | ExperienceBlockData;
+  | SectionBlockData
+  | TextBlockData
+  | TitleBlockData
+  | ContactInfoBlockData
+  | ExperienceBlockData;

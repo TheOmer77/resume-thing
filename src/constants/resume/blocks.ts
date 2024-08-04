@@ -49,6 +49,22 @@ export const resumeBlocks = [
 
   {
     id: 'dummy-exp',
+    type: 'section',
+    content: {
+      title: 'Experience',
+      /* Normally a section wouldn't include the same child multiple times,
+      but this is just a demo */
+      children: [
+        'dummy-exp-item',
+        'dummy-exp-item',
+        'dummy-exp-item',
+        'dummy-exp-item',
+        'dummy-exp-item',
+      ],
+    },
+  },
+  {
+    id: 'dummy-exp-item',
     type: 'experience',
     content: {
       title: 'Job Title',
@@ -57,8 +73,19 @@ export const resumeBlocks = [
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius orci a nisl suscipit, et molestie ligula semper. Cras in bibendum augue. Phasellus lacinia a turpis a ullamcorper.',
     },
   },
+
   {
     id: 'dummy-edu',
+    type: 'section',
+    content: {
+      title: 'Experience',
+      /* Normally a section wouldn't include the same child multiple times,
+      but this is just a demo */
+      children: ['dummy-edu-item', 'dummy-edu-item'],
+    },
+  },
+  {
+    id: 'dummy-edu-item',
     type: 'experience',
     content: {
       title: 'Course',
