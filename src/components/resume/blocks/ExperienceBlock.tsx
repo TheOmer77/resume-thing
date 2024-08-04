@@ -58,7 +58,7 @@ export const ExperienceBlock = ({
             .join(' – ')}
         </span>
       </div>
-      <MarkdownText className='[&>p:first-of-type]:mt-0'>
+      <MarkdownText className='leading-normal [&>p:first-of-type]:mt-0'>
         {block.content.text}
       </MarkdownText>
     </div>

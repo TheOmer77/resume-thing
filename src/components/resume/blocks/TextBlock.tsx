@@ -13,7 +13,10 @@ export const TextBlock = ({ TEMP_blockId }: TEMP_TextBlockProps) => {
 
   return (
     <MarkdownText
-      className={cn(block.content.lead && 'prose-base leading-normal')}
+      className={cn(
+        'leading-normal [&>p:first-of-type]:mt-0',
+        block.content.lead && 'prose-base'
+      )}
     >
       {block.content.text}
     </MarkdownText>
