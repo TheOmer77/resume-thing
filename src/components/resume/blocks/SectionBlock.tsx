@@ -14,7 +14,7 @@ export const SectionBlock = ({ blockId }: BlockProps) => {
   return (
     <div>
       <H1>{block.content.title}</H1>
-      {block.content.children.map(childId => getBlockById(childId))}
+      {(block.content.children || []).map(childId => getBlockById(childId))}
     </div>
   );
 };
