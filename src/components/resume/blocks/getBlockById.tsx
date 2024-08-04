@@ -12,15 +12,15 @@ export const getBlockById = (blockId: string) => {
 
   switch (block.type) {
     case 'text':
-      return <TextBlock blockId={blockId} />;
+      return <TextBlock key={blockId} blockId={blockId} />;
     case 'title':
-      return <TitleBlock blockId={blockId} />;
+      return <TitleBlock key={blockId} blockId={blockId} />;
     case 'contactInfo':
-      return <ContactInfoBlock blockId={blockId} />;
+      return <ContactInfoBlock key={blockId} blockId={blockId} />;
     case 'experience':
-      return <ExperienceBlock blockId={blockId} />;
+      return <ExperienceBlock key={blockId} blockId={blockId} />;
     case 'section':
-      return <SectionBlock blockId={blockId} />;
+      return <SectionBlock key={blockId} blockId={blockId} />;
 
     default:
       return null;
