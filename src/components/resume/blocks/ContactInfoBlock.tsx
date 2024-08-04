@@ -3,19 +3,15 @@ import { MailIcon, MapPinIcon, PhoneIcon } from 'lucide-react';
 import { resumeBlocks } from '@/constants/resume/blocks';
 import type { ContactInfoBlockData } from '@/types/blocks';
 
+import type { BlockProps } from './types';
+
 const icons = {
   mail: MailIcon,
   phone: PhoneIcon,
   address: MapPinIcon,
 };
 
-type ContactInfoBlockProps = {
-  blockId: string;
-};
-
-export const ContactInfoBlock = ({
-  blockId: blockId,
-}: ContactInfoBlockProps) => {
+export const ContactInfoBlock = ({ blockId }: BlockProps) => {
   const block = resumeBlocks.find(
     ({ id, type }) => id === blockId && type === 'contactInfo'
   ) as ContactInfoBlockData | undefined;

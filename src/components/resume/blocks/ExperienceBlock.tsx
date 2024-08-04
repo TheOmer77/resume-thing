@@ -3,12 +3,9 @@ import type { ExperienceBlockData } from '@/types/blocks';
 
 import { H2 } from '../headings';
 import { MarkdownText } from '../MarkdownText';
+import type { BlockProps } from './types';
 
-type ExperienceBlockProps = {
-  blockId: string;
-};
-
-export const ExperienceBlock = ({ blockId: blockId }: ExperienceBlockProps) => {
+export const ExperienceBlock = ({ blockId }: BlockProps) => {
   const block = resumeBlocks.find(
     ({ id, type }) => id === blockId && type === 'experience'
   ) as ExperienceBlockData | undefined;

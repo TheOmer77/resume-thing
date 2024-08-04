@@ -3,12 +3,9 @@ import { resumeBlocks } from '@/constants/resume/blocks';
 import type { TextBlockData } from '@/types/blocks';
 
 import { MarkdownText } from '../MarkdownText';
+import type { BlockProps } from './types';
 
-type TextBlockProps = {
-  blockId: string;
-};
-
-export const TextBlock = ({ blockId }: TextBlockProps) => {
+export const TextBlock = ({ blockId }: BlockProps) => {
   const block = resumeBlocks.find(
     ({ id, type }) => id === blockId && type === 'text'
   ) as TextBlockData | undefined;
