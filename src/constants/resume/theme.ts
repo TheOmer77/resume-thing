@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import type { Config } from 'tailwindcss';
 import type {
   RecursiveKeyValuePair,
@@ -88,10 +89,11 @@ export const resumeTheme = {
   extend: {
     colors,
     fontFamily: { sans: 'Inter, sans-serif' },
-    spacing: {
-      'page-margin': '0.4in',
-      'secondary-col-width': '3in',
-    },
     typography,
   },
 } satisfies Config['theme'];
+
+export const layout = {
+  '--page-margin': '0.4in',
+  '--secondary-col-width': '3in',
+} as CSSProperties;

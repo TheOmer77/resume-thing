@@ -1,3 +1,4 @@
+import { layout } from '@/constants/resume/theme';
 import { cn } from '@/lib/utils';
 
 import { PrimaryColumn } from './layout/PrimaryColumn';
@@ -8,11 +9,12 @@ import { Block } from './blocks';
 export const ResumeRoot = () => (
   <div
     className={cn(
-      'grid min-h-screen break-after-avoid grid-cols-[theme(spacing.secondary-col-width),1fr]',
-      'before:w-secondary-col-width grid-rows-[auto,1fr] before:fixed',
+      'grid min-h-screen break-after-avoid grid-cols-[var(--secondary-col-width),1fr]',
+      'grid-rows-[auto,1fr] before:fixed before:w-[--secondary-col-width]',
       'before:start-0 before:top-0 before:-z-10 before:h-full before:bg-primary',
       'print:[-webkit-print-color-adjust:exact] print:[print-color-adjust:exact]'
     )}
+    style={layout}
   >
     <SecondaryHeaderRow>
       <Block blockId='dummy-title' />
