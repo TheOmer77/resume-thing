@@ -19,16 +19,18 @@ export const ContactInfoBlock = ({ blockId }: BlockProps) => {
 
   return (
     <div className='pb-6'>
-      {block.content.items.map(({ text, icon }, idx) => {
+      {block.content.items.map(({ text, icon, url }, idx) => {
         const Icon = icons[icon as keyof typeof icons];
+        const Comp = url ? 'a' : 'span';
         return (
-          <div
+          <Comp
             key={`contactInfo-${idx}`}
-            className='flex flex-row items-center gap-2'
+            className='flex flex-row items-center gap-2 no-underline'
+            {...(url ? { href: url } : {})}
           >
             {Icon && <Icon className='size-[1.125rem]' />}
             <span>{text}</span>
-          </div>
+          </Comp>
         );
       })}
     </div>
