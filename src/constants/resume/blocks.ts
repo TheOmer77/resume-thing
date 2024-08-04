@@ -108,13 +108,13 @@ export const resumeBlocks = [
     type: 'text',
     content: {
       text: `
-User Research \\
-Design Sprints \\
-Concept Design \\
-Prototyping \\
-Usability Testing \\
-Design Systems \\
-Agile Practices`,
+- User Research
+- Design Sprints
+- Concept Design
+- Prototyping
+- Usability Testing
+- Design Systems
+- Agile Practices`,
     },
   },
 
@@ -131,14 +131,14 @@ Agile Practices`,
     type: 'text',
     content: {
       text: `
-Miro - FigJam \\
-Figma - Penpot \\
-Abstract \\
-Maze / Usertesting \\
-Webflow - Framer \\
-Notion / GDocs \\
-Zeroheight \\
-Jira / Taiga`,
+- Miro - FigJam
+- Figma - Penpot
+- Abstract
+- Maze / Usertesting
+- Webflow - Framer
+- Notion / GDocs
+- Zeroheight
+- Jira / Taiga`,
     },
   },
 
@@ -155,8 +155,8 @@ Jira / Taiga`,
     type: 'text',
     content: {
       text: `
-Spanish (Native) \\
-English (Fluent)`,
+- Spanish (Native)
+- English (Fluent)`,
     },
   },
 ] satisfies BlockData[];
