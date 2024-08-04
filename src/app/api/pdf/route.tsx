@@ -5,7 +5,6 @@ import { mkdir, writeFile } from 'fs/promises';
 
 import { ResumeRoot } from '@/components/resume';
 import { generateTailwindCss } from '@/lib/generateTailwindCss';
-import { NO_MARGINS } from '@/constants/margins';
 import { interCss } from '@/constants/inter';
 import { resumeTheme } from '@/constants/resume/theme';
 
@@ -27,7 +26,8 @@ export const GET = async () => {
   const css = await generateTailwindCss(
     html,
     { plugins: [tailwindTypography], theme: resumeTheme },
-    interCss
+    interCss,
+    '@page{size:A4;margin:0;}'
   );
 
   if (process.env.PDF_DEBUG?.toLowerCase() === 'true') {
@@ -49,7 +49,7 @@ export const GET = async () => {
   });
   const page = await browser.newPage();
   await page.setContent(`<style>${css}</style>${html}`);
-  const pdf = await page.pdf({ format: 'A4', margin: NO_MARGINS });
+  const pdf = await page.pdf({ format: 'A4' });
   await browser.close();
 
   return new Response(pdf, {
