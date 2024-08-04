@@ -11,7 +11,7 @@ export const H1 = ({
     {...props}
     className={cn(
       'text-heading my-4 text-lg font-bold leading-normal',
-      '[.secondary-col_&]:text-secondary-heading [.secondary-col_&]:my-1 [.secondary-col_&]:mt-0 [.secondary-col_&]:text-sm [.secondary-col_&]:font-semibold',
+      '[.secondary-col_&]:my-1 [.secondary-col_&]:mt-0 [.secondary-col_&]:text-sm [.secondary-col_&]:font-semibold',
       className
     )}
   >
