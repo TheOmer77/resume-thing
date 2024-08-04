@@ -25,10 +25,7 @@ export const ResumeRoot = () => (
     <PrimaryColumn>
       <Block blockId='dummy-summary' />
 
-      <H1>Experience</H1>
       <Block blockId='dummy-exp' />
-
-      <H1>Education</H1>
       <Block blockId='dummy-edu' />
     </PrimaryColumn>
   </div>
