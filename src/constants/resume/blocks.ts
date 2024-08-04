@@ -78,7 +78,7 @@ export const resumeBlocks = [
     id: 'dummy-edu',
     type: 'section',
     content: {
-      title: 'Experience',
+      title: 'Education',
       /* Normally a section wouldn't include the same child multiple times,
       but this is just a demo */
       children: ['dummy-edu-item', 'dummy-edu-item'],
