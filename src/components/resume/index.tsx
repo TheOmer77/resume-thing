@@ -29,15 +29,15 @@ export const ResumeRoot = () => (
       <TextBlock blockId='dummy-summary' />
 
       <H1>Experience</H1>
-      <ExperienceBlock TEMP_blockId='dummy-exp' />
-      <ExperienceBlock TEMP_blockId='dummy-exp' />
-      <ExperienceBlock TEMP_blockId='dummy-exp' />
-      <ExperienceBlock TEMP_blockId='dummy-exp' />
-      <ExperienceBlock TEMP_blockId='dummy-exp' />
+      <ExperienceBlock blockId='dummy-exp' />
+      <ExperienceBlock blockId='dummy-exp' />
+      <ExperienceBlock blockId='dummy-exp' />
+      <ExperienceBlock blockId='dummy-exp' />
+      <ExperienceBlock blockId='dummy-exp' />
 
       <H1>Education</H1>
-      <ExperienceBlock TEMP_blockId='dummy-edu' />
-      <ExperienceBlock TEMP_blockId='dummy-edu' />
+      <ExperienceBlock blockId='dummy-edu' />
+      <ExperienceBlock blockId='dummy-edu' />
     </PrimaryColumn>
   </div>
 );

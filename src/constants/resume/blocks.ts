@@ -37,6 +37,7 @@ export const resumeBlocks = [
       ],
     },
   },
+
   {
     id: 'dummy-summary',
     type: 'text',
@@ -45,6 +46,28 @@ export const resumeBlocks = [
       lead: true,
     },
   },
+
+  {
+    id: 'dummy-exp',
+    type: 'experience',
+    content: {
+      title: 'Job Title',
+      location: 'Company Name',
+      dates: ['2015-04', '2016-04'],
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius orci a nisl suscipit, et molestie ligula semper. Cras in bibendum augue. Phasellus lacinia a turpis a ullamcorper.',
+    },
+  },
+  {
+    id: 'dummy-edu',
+    type: 'experience',
+    content: {
+      title: 'Course',
+      location: 'Institution',
+      dates: ['2015-04', '2016-04'],
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius orci a nisl suscipit, et molestie ligula semper. Cras in bibendum augue. Phasellus lacinia a turpis a ullamcorper.',
+    },
+  },
+
   {
     id: 'dummy-skills',
     type: 'text',

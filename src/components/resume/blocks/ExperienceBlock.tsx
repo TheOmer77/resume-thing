@@ -1,40 +1,17 @@
+import { resumeBlocks } from '@/constants/resume/blocks';
 import type { ExperienceBlockData } from '@/types/blocks';
 
 import { H2 } from '../headings';
 import { MarkdownText } from '../MarkdownText';
 
-// TODO: Don't hardcode content
-const TEMP_EXP_BLOCKS = [
-  {
-    id: 'dummy-exp',
-    type: 'experience',
-    content: {
-      title: 'Job Title',
-      location: 'Company Name',
-      dates: ['2015-04', '2016-04'],
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius orci a nisl suscipit, et molestie ligula semper. Cras in bibendum augue. Phasellus lacinia a turpis a ullamcorper.',
-    },
-  },
-  {
-    id: 'dummy-edu',
-    type: 'experience',
-    content: {
-      title: 'Course',
-      location: 'Institution',
-      dates: ['2015-04', '2016-04'],
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius orci a nisl suscipit, et molestie ligula semper. Cras in bibendum augue. Phasellus lacinia a turpis a ullamcorper.',
-    },
-  },
-] satisfies ExperienceBlockData[];
-
-type TEMP_ExperienceBlockProps = {
-  TEMP_blockId: string;
+type ExperienceBlockProps = {
+  blockId: string;
 };
 
-export const ExperienceBlock = ({
-  TEMP_blockId,
-}: TEMP_ExperienceBlockProps) => {
-  const block = TEMP_EXP_BLOCKS.find(({ id }) => id === TEMP_blockId);
+export const ExperienceBlock = ({ blockId: blockId }: ExperienceBlockProps) => {
+  const block = resumeBlocks.find(
+    ({ id, type }) => id === blockId && type === 'experience'
+  ) as ExperienceBlockData | undefined;
   if (!block) return null;
 
   return (
