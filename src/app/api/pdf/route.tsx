@@ -27,7 +27,7 @@ export const GET = async () => {
     html,
     { plugins: [tailwindTypography], theme: resumeTheme },
     interCss,
-    '@page{size:A4;margin:0;}'
+    '@page{margin:0;}'
   );
 
   if (process.env.PDF_DEBUG?.toLowerCase() === 'true') {
