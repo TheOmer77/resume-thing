@@ -17,6 +17,7 @@ export const ResumeRoot = () => (
     <SecondaryHeaderRow>
       <Block blockId='dummy-title' />
       <Block blockId='dummy-contact' />
+      <Block blockId='dummy-links' />
     </SecondaryHeaderRow>
     <PrimaryColumn>
       <Block blockId='dummy-summary' />

@@ -37,6 +37,21 @@ export const resumeBlocks = [
       ],
     },
   },
+  {
+    id: 'dummy-links',
+    type: 'contactInfo',
+    content: {
+      orientation: 'horizontal',
+      items: [
+        {
+          icon: 'linkedin',
+          text: 'LinkedIn',
+          url: 'https://linkedin.com/in/example',
+        },
+        { icon: 'github', text: 'GitHub', url: 'https://github.com/ghost' },
+      ],
+    },
+  },
 
   {
     id: 'dummy-summary',
