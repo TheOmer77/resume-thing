@@ -10,8 +10,8 @@ export const H1 = ({
   <h2
     {...props}
     className={cn(
-      'text-heading mb-4 text-lg font-bold leading-normal',
-      '[.secondary-col_&]:text-secondary-heading [.secondary-col_&]:mb-1 [.secondary-col_&]:mt-0 [.secondary-col_&]:text-sm [.secondary-col_&]:font-semibold',
+      'text-heading my-4 text-lg font-bold leading-normal',
+      '[.secondary-col_&]:text-secondary-heading [.secondary-col_&]:my-1 [.secondary-col_&]:mt-0 [.secondary-col_&]:text-sm [.secondary-col_&]:font-semibold',
       className
     )}
   >
@@ -27,7 +27,7 @@ export const H2 = ({
   <h3
     {...props}
     className={cn(
-      'text-heading [.secondary-col_&]:text-secondary-heading mb-1 mt-0 text-sm font-semibold leading-normal',
+      'text-heading my-1 mt-0 text-sm font-semibold leading-normal',
       className
     )}
   >
