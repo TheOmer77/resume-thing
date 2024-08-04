@@ -27,6 +27,17 @@ export const resumeBlocks = [
     },
   },
   {
+    id: 'dummy-contact',
+    type: 'contactInfo',
+    content: {
+      items: [
+        { icon: 'mail', text: 'email@domain.com' },
+        { icon: 'phone', text: '(123) 456-7890' },
+        { icon: 'address', text: 'Some City, NY' },
+      ],
+    },
+  },
+  {
     id: 'dummy-summary',
     type: 'text',
     content: {

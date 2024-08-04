@@ -1,5 +1,6 @@
 import { MailIcon, MapPinIcon, PhoneIcon } from 'lucide-react';
 
+import { resumeBlocks } from '@/constants/resume/blocks';
 import type { ContactInfoBlockData } from '@/types/blocks';
 
 const icons = {
@@ -8,29 +9,16 @@ const icons = {
   address: MapPinIcon,
 };
 
-// TODO: Don't hardcode content
-const TEMP_CONTACT_INFO_BLOCKS = [
-  {
-    id: 'dummy-contact',
-    type: 'contactInfo',
-    content: {
-      items: [
-        { icon: 'mail', text: 'email@domain.com' },
-        { icon: 'phone', text: '(123) 456-7890' },
-        { icon: 'address', text: 'Some City, NY' },
-      ],
-    },
-  },
-] satisfies ContactInfoBlockData[];
-
-type TEMP_ContactInfoBlockProps = {
-  TEMP_blockId: string;
+type ContactInfoBlockProps = {
+  blockId: string;
 };
 
 export const ContactInfoBlock = ({
-  TEMP_blockId,
-}: TEMP_ContactInfoBlockProps) => {
-  const block = TEMP_CONTACT_INFO_BLOCKS.find(({ id }) => id === TEMP_blockId);
+  blockId: blockId,
+}: ContactInfoBlockProps) => {
+  const block = resumeBlocks.find(
+    ({ id, type }) => id === blockId && type === 'contactInfo'
+  ) as ContactInfoBlockData | undefined;
   if (!block) return null;
 
   return (
