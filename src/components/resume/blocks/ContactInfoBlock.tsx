@@ -1,4 +1,5 @@
 import { MailIcon, MapPinIcon, PhoneIcon } from 'lucide-react';
+import { SiGithub, SiLinkedin } from '@icons-pack/react-simple-icons';
 
 import { resumeBlocks } from '@/constants/resume/blocks';
 import type { ContactInfoBlockData } from '@/types/blocks';
@@ -9,6 +10,8 @@ const icons = {
   mail: MailIcon,
   phone: PhoneIcon,
   address: MapPinIcon,
+  linkedin: SiLinkedin,
+  github: SiGithub,
 };
 
 export const ContactInfoBlock = ({ blockId }: BlockProps) => {
