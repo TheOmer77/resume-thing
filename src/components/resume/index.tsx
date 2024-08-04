@@ -4,7 +4,7 @@ import { TitleBlock } from './blocks/TitleBlock';
 import { ContactInfoBlock } from './blocks/ContactInfoBlock';
 import { TextBlock } from './blocks/TextBlock';
 import { ExperienceBlock } from './blocks/ExperienceBlock';
-import { H1, H2 } from './headings';
+import { H1, H2 } from './primitives';
 
 export const ResumeRoot = () => (
   <div className='flex min-h-screen break-after-avoid flex-row text-sm print:[-webkit-print-color-adjust:exact] print:[print-color-adjust:exact]'>

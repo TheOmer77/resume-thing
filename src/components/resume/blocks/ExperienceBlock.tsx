@@ -1,8 +1,7 @@
 import { resumeBlocks } from '@/constants/resume/blocks';
 import type { ExperienceBlockData } from '@/types/blocks';
 
-import { H2 } from '../headings';
-import { MarkdownText } from '../MarkdownText';
+import { H2, MarkdownText } from '../primitives';
 import type { BlockProps } from './types';
 
 export const ExperienceBlock = ({ blockId }: BlockProps) => {

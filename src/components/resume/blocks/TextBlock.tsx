@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import { resumeBlocks } from '@/constants/resume/blocks';
 import type { TextBlockData } from '@/types/blocks';
 
-import { MarkdownText } from '../MarkdownText';
+import { MarkdownText } from '../primitives';
 import type { BlockProps } from './types';
 
 export const TextBlock = ({ blockId }: BlockProps) => {
