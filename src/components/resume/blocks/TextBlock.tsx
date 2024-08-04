@@ -3,12 +3,14 @@ import { resumeBlocks } from '@/constants/resume/blocks';
 
 import { MarkdownText } from '../MarkdownText';
 
-type TEMP_TextBlockProps = {
-  TEMP_blockId: string;
+type TextBlockProps = {
+  blockId: string;
 };
 
-export const TextBlock = ({ TEMP_blockId }: TEMP_TextBlockProps) => {
-  const block = resumeBlocks.find(({ id }) => id === TEMP_blockId);
+export const TextBlock = ({ blockId }: TextBlockProps) => {
+  const block = resumeBlocks.find(
+    ({ id, type }) => id === blockId && type === 'text'
+  );
   if (!block) return null;
 
   return (

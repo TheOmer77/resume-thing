@@ -14,19 +14,19 @@ export const ResumeRoot = () => (
 
       <div>
         <H2>Skills</H2>
-        <TextBlock TEMP_blockId='dummy-skills' />
+        <TextBlock blockId='dummy-skills' />
       </div>
       <div>
         <H2>Tools</H2>
-        <TextBlock TEMP_blockId='dummy-tools' />
+        <TextBlock blockId='dummy-tools' />
       </div>
       <div>
         <H2>Languages</H2>
-        <TextBlock TEMP_blockId='dummy-languages' />
+        <TextBlock blockId='dummy-languages' />
       </div>
     </SecondaryColumn>
     <PrimaryColumn>
-      <TextBlock TEMP_blockId='dummy-summary' />
+      <TextBlock blockId='dummy-summary' />
 
       <H1>Experience</H1>
       <ExperienceBlock TEMP_blockId='dummy-exp' />
