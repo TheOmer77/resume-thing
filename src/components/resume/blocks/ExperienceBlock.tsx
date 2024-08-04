@@ -1,3 +1,5 @@
+import type { ExperienceBlockData } from '@/types/blocks';
+
 import { H2 } from '../headings';
 import { MarkdownText } from '../MarkdownText';
 
@@ -5,6 +7,7 @@ import { MarkdownText } from '../MarkdownText';
 const TEMP_EXP_BLOCKS = [
   {
     id: 'dummy-exp',
+    type: 'experience',
     content: {
       title: 'Job Title',
       location: 'Company Name',
@@ -14,6 +17,7 @@ const TEMP_EXP_BLOCKS = [
   },
   {
     id: 'dummy-edu',
+    type: 'experience',
     content: {
       title: 'Course',
       location: 'Institution',
@@ -21,16 +25,7 @@ const TEMP_EXP_BLOCKS = [
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius orci a nisl suscipit, et molestie ligula semper. Cras in bibendum augue. Phasellus lacinia a turpis a ullamcorper.',
     },
   },
-] satisfies {
-  id: string;
-  content: {
-    title: string;
-    location: string;
-    /** Dates in format of 'yyyy-MM'; `null` = present.  */
-    dates: [string, string | null];
-    text: string;
-  };
-}[];
+] satisfies ExperienceBlockData[];
 
 type TEMP_ExperienceBlockProps = {
   TEMP_blockId: string;
@@ -45,14 +40,20 @@ export const ExperienceBlock = ({
   return (
     <div>
       <div className='mb-1 flex flex-row items-center'>
-        <H2 className='mb-0 flex-1'>{`${block.content.title} – ${block.content.location}`}</H2>
+        <H2 className='mb-0 flex-1'>
+          {[block.content.title, block.content.location]
+            .filter(Boolean)
+            .join(' – ')}
+        </H2>
         <span className='flex-shrink-0 text-xs text-muted'>
           {block.content.dates
             .map(date =>
-              new Date(date).toLocaleDateString('en-US', {
-                month: 'short',
-                year: 'numeric',
-              })
+              date === null
+                ? 'Present'
+                : new Date(date).toLocaleDateString('en-US', {
+                    month: 'short',
+                    year: 'numeric',
+                  })
             )
             .join(' – ')}
         </span>

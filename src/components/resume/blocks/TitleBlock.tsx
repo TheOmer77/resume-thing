@@ -1,13 +1,16 @@
+import type { TitleBlockData } from '@/types/blocks';
+
 // TODO: Don't hardcode content
 const TEMP_TITLE_BLOCKS = [
   {
     id: 'dummy-title',
+    type: 'title',
     content: {
       title: 'Name Lastname',
       subtitle: 'Job Title',
     },
   },
-];
+] satisfies TitleBlockData[];
 
 type TEMP_TitleBlockProps = {
   TEMP_blockId: string;

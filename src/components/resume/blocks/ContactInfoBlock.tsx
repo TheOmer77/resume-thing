@@ -1,21 +1,27 @@
-import { MailIcon, MapPinIcon, PhoneIcon, type Icon } from 'lucide-react';
+import { MailIcon, MapPinIcon, PhoneIcon } from 'lucide-react';
+
+import type { ContactInfoBlockData } from '@/types/blocks';
+
+const icons = {
+  mail: MailIcon,
+  phone: PhoneIcon,
+  address: MapPinIcon,
+};
 
 // TODO: Don't hardcode content
 const TEMP_CONTACT_INFO_BLOCKS = [
   {
     id: 'dummy-contact',
+    type: 'contactInfo',
     content: {
       items: [
-        { icon: MailIcon, content: 'email@domain.com' },
-        { icon: PhoneIcon, content: '(123) 456-7890' },
-        { icon: MapPinIcon, content: 'Some City, NY' },
+        { icon: 'mail', text: 'email@domain.com' },
+        { icon: 'phone', text: '(123) 456-7890' },
+        { icon: 'address', text: 'Some City, NY' },
       ],
     },
   },
-] satisfies {
-  id: string;
-  content: { items: { icon: typeof Icon; content: string }[] };
-}[];
+] satisfies ContactInfoBlockData[];
 
 type TEMP_ContactInfoBlockProps = {
   TEMP_blockId: string;
@@ -29,15 +35,18 @@ export const ContactInfoBlock = ({
 
   return (
     <div className='pb-6'>
-      {block.content.items.map(({ content, icon: Icon }, idx) => (
-        <div
-          key={`contactInfo-${idx}`}
-          className='flex flex-row items-center gap-2 leading-normal'
-        >
-          <Icon className='size-[1.125rem]' />
-          <span>{content}</span>
-        </div>
-      ))}
+      {block.content.items.map(({ text, icon }, idx) => {
+        const Icon = icons[icon as keyof typeof icons];
+        return (
+          <div
+            key={`contactInfo-${idx}`}
+            className='flex flex-row items-center gap-2 leading-normal'
+          >
+            {Icon && <Icon className='size-[1.125rem]' />}
+            <span>{text}</span>
+          </div>
+        );
+      })}
     </div>
   );
 };

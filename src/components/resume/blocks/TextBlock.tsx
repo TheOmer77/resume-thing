@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import type { TextBlockData } from '@/types/blocks';
 
 import { MarkdownText } from '../MarkdownText';
 
@@ -6,6 +7,7 @@ import { MarkdownText } from '../MarkdownText';
 const TEMP_TEXT_BLOCKS = [
   {
     id: 'md-test',
+    type: 'text',
     content: {
       text: `Regular. **Bold.** *Italic.* ***Bold AND italic!*** ~~Strike this.~~ **~~Strike and also bold.~~** [Link to Google](https://www.google.com/)
 
@@ -20,6 +22,7 @@ const TEMP_TEXT_BLOCKS = [
   },
   {
     id: 'dummy-summary',
+    type: 'text',
     content: {
       text: 'In dui lectus, molestie lacinia lectus et, elementum fringilla lorem. Morbi elementum massa a erat finibus commodo. Duis id porttitor tortor. Praesent mauris ipsum, mattis nec pretium nec, semper convallis nisl. Aliquam vulputate iaculis dui eu blandit. Class aptent taciti sociosqu ad litora torquent per conubia nostra.',
       lead: true,
@@ -27,6 +30,7 @@ const TEMP_TEXT_BLOCKS = [
   },
   {
     id: 'dummy-skills',
+    type: 'text',
     content: {
       text: `
 User Research \\
@@ -40,6 +44,7 @@ Agile Practices`,
   },
   {
     id: 'dummy-tools',
+    type: 'text',
     content: {
       text: `
 Miro - FigJam \\
@@ -54,16 +59,18 @@ Jira / Taiga`,
   },
   {
     id: 'dummy-languages',
+    type: 'text',
     content: {
       text: `
 Spanish (Native) \\
 English (Fluent)`,
     },
   },
-] satisfies { id: string; content: { text: string; lead?: boolean } }[];
+] satisfies TextBlockData[];
 
 type TEMP_TextBlockProps = {
   TEMP_blockId: string;
+  type: 'text';
 };
 
 export const TextBlock = ({ TEMP_blockId }: TEMP_TextBlockProps) => {
