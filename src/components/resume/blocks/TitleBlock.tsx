@@ -1,23 +1,11 @@
-import type { TitleBlockData } from '@/types/blocks';
+import { resumeBlocks } from '@/constants/resume/blocks';
 
-// TODO: Don't hardcode content
-const TEMP_TITLE_BLOCKS = [
-  {
-    id: 'dummy-title',
-    type: 'title',
-    content: {
-      title: 'Name Lastname',
-      subtitle: 'Job Title',
-    },
-  },
-] satisfies TitleBlockData[];
+type TitleBlockProps = { blockId: string };
 
-type TEMP_TitleBlockProps = {
-  TEMP_blockId: string;
-};
-
-export const TitleBlock = ({ TEMP_blockId }: TEMP_TitleBlockProps) => {
-  const block = TEMP_TITLE_BLOCKS.find(({ id }) => id === TEMP_blockId);
+export const TitleBlock = ({ blockId }: TitleBlockProps) => {
+  const block = resumeBlocks.find(
+    ({ id, type }) => id === blockId && type === 'title'
+  );
   if (!block) return null;
 
   return (

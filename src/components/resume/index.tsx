@@ -9,7 +9,7 @@ import { H1, H2 } from './headings';
 export const ResumeRoot = () => (
   <div className='flex min-h-screen break-after-avoid flex-row text-sm print:[-webkit-print-color-adjust:exact] print:[print-color-adjust:exact]'>
     <SecondaryColumn>
-      <TitleBlock TEMP_blockId='dummy-title' />
+      <TitleBlock blockId='dummy-title' />
       <ContactInfoBlock TEMP_blockId='dummy-contact' />
 
       <div>
