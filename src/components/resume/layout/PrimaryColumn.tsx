@@ -1,7 +1,7 @@
 import { type PropsWithChildren } from 'react';
 
 export const PrimaryColumn = ({ children }: PropsWithChildren) => (
-  <div className='text-body p-page-margin prose h-full max-w-none flex-1 space-y-4 bg-background ps-8'>
+  <main className='py-page-margin pe-page-margin prose row-span-2 max-w-none ps-8 [&>:first-child]:mt-0'>
     {children}
-  </div>
+  </main>
 );

@@ -87,7 +87,7 @@ export const resumeTheme = {
     fontFamily: { sans: 'Inter, sans-serif' },
     spacing: {
       'page-margin': '0.4in',
-      'secondary-column-width': '3in',
+      'secondary-col-width': '3in',
     },
     typography,
   },
