@@ -24,10 +24,11 @@ export const GET = async () => {
   const { renderToStaticMarkup } = await import('react-dom/server');
 
   const html = fixTwClasses(renderToStaticMarkup(<ResumeRoot />));
-  const css = await generateTailwindCss(html, interCss, {
-    plugins: [tailwindTypography],
-    theme: resumeTheme,
-  });
+  const css = await generateTailwindCss(
+    html,
+    { plugins: [tailwindTypography], theme: resumeTheme },
+    interCss
+  );
 
   if (process.env.PDF_DEBUG?.toLowerCase() === 'true') {
     await mkdir('./debug').catch(error => {

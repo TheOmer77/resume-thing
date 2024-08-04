@@ -4,12 +4,10 @@ import type { OptionalConfig } from 'tailwindcss/types/config';
 
 export const generateTailwindCss = async (
   html: string,
-  css: string,
-  config: Partial<OptionalConfig>
+  config: Partial<OptionalConfig>,
+  ...extraCss: string[]
 ) => {
-  const combinedCSS = `@tailwind base;@tailwind components;@tailwind utilities;${
-    css
-  }`;
+  const combinedCSS = `@tailwind base;@tailwind components;@tailwind utilities;${extraCss.join('')}`;
 
   const result = await postcss([
     tailwindcss({ content: [{ raw: html }], ...config }),
