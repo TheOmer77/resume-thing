@@ -97,6 +97,14 @@ export const resumeBlocks = [
 
   {
     id: 'dummy-skills',
+    type: 'section',
+    content: {
+      title: 'Skills',
+      children: ['dummy-skills-content'],
+    },
+  },
+  {
+    id: 'dummy-skills-content',
     type: 'text',
     content: {
       text: `
@@ -109,8 +117,17 @@ Design Systems \\
 Agile Practices`,
     },
   },
+
   {
     id: 'dummy-tools',
+    type: 'section',
+    content: {
+      title: 'Tools',
+      children: ['dummy-tools-content'],
+    },
+  },
+  {
+    id: 'dummy-tools-content',
     type: 'text',
     content: {
       text: `
@@ -124,8 +141,17 @@ Zeroheight \\
 Jira / Taiga`,
     },
   },
+
   {
     id: 'dummy-languages',
+    type: 'section',
+    content: {
+      title: 'Languages',
+      children: ['dummy-languages-content'],
+    },
+  },
+  {
+    id: 'dummy-languages-content',
     type: 'text',
     content: {
       text: `
