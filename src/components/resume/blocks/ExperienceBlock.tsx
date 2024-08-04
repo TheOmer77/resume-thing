@@ -4,6 +4,12 @@ import type { ExperienceBlockData } from '@/types/blocks';
 import { MarkdownText } from '../primitives';
 import type { BlockProps } from './types';
 
+const formatDate = (date: string) =>
+  new Date(date).toLocaleDateString('en-US', {
+    month: 'short',
+    year: 'numeric',
+  });
+
 export const ExperienceBlock = ({ blockId }: BlockProps) => {
   const block = resumeBlocks.find(
     ({ id, type }) => id === blockId && type === 'experience'
@@ -20,14 +26,7 @@ export const ExperienceBlock = ({ blockId }: BlockProps) => {
         </h3>
         <span className='caption flex-shrink-0'>
           {block.content.dates
-            .map(date =>
-              date === null
-                ? 'Present'
-                : new Date(date).toLocaleDateString('en-US', {
-                    month: 'short',
-                    year: 'numeric',
-                  })
-            )
+            .map(date => (date === null ? 'Present' : formatDate(date)))
             .join(' – ')}
         </span>
       </div>
