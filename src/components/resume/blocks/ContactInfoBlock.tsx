@@ -1,6 +1,7 @@
 import { MailIcon, MapPinIcon, PhoneIcon } from 'lucide-react';
 import { SiGithub, SiLinkedin } from '@icons-pack/react-simple-icons';
 
+import { cn } from '@/lib/utils';
 import { resumeBlocks } from '@/constants/resume/blocks';
 import type { ContactInfoBlockData } from '@/types/blocks';
 
@@ -21,7 +22,12 @@ export const ContactInfoBlock = ({ blockId }: BlockProps) => {
   if (!block) return null;
 
   return (
-    <div className='pb-6'>
+    <div
+      className={cn(
+        block.content.orientation === 'horizontal' &&
+          'flex flex-row flex-wrap gap-x-4 gap-y-1'
+      )}
+    >
       {block.content.items.map(({ text, icon, url }, idx) => {
         const Icon = icons[icon as keyof typeof icons];
         const Comp = url ? 'a' : 'span';
