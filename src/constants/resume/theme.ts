@@ -26,7 +26,7 @@ const resumeTypography = {
     css: {
       '--tw-prose-body': resumeColors.neutral[700],
       '--tw-prose-headings': resumeColors.neutral[900],
-      '--tw-prose-lead': resumeColors.neutral[600],
+      '--tw-prose-lead': resumeColors.neutral[700],
       '--tw-prose-links': resumeColors.neutral[900],
       '--tw-prose-bold': resumeColors.neutral[900],
       '--tw-prose-counters': resumeColors.neutral[500],
@@ -35,7 +35,7 @@ const resumeTypography = {
       '--tw-prose-code': resumeColors.neutral[900],
       '--tw-prose-invert-body': resumeColors.neutral[300],
       '--tw-prose-invert-headings': resumeColors.white,
-      '--tw-prose-invert-lead': resumeColors.neutral[400],
+      '--tw-prose-invert-lead': resumeColors.neutral[300],
       '--tw-prose-invert-links': resumeColors.white,
       '--tw-prose-invert-bold': resumeColors.white,
       '--tw-prose-invert-counters': resumeColors.neutral[400],
