@@ -10,11 +10,9 @@ export const TitleBlock = ({ blockId }: BlockProps) => {
   if (!block) return null;
 
   return (
-    <div className='space-y-2'>
-      <h1 className='text-secondary-heading text-title not-prose font-extrabold tracking-tight'>
-        {block.content.title}
-      </h1>
-      <p className='prose-base leading-none'>{block.content.subtitle}</p>
+    <div>
+      <h1>{block.content.title}</h1>
+      <p className='lead mb-4 mt-0'>{block.content.subtitle}</p>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { resumeBlocks } from '@/constants/resume/blocks';
 import type { ExperienceBlockData } from '@/types/blocks';
 
-import { H2, MarkdownText } from '../primitives';
+import { MarkdownText } from '../primitives';
 import type { BlockProps } from './types';
 
 export const ExperienceBlock = ({ blockId }: BlockProps) => {
@@ -13,12 +13,12 @@ export const ExperienceBlock = ({ blockId }: BlockProps) => {
   return (
     <div>
       <div className='mb-1 flex flex-row items-center'>
-        <H2 className='mb-0 flex-1'>
+        <h3 className='mb-0 flex-1'>
           {[block.content.title, block.content.location]
             .filter(Boolean)
             .join(' – ')}
-        </H2>
-        <span className='flex-shrink-0 text-xs text-muted'>
+        </h3>
+        <span className='caption flex-shrink-0'>
           {block.content.dates
             .map(date =>
               date === null
@@ -31,7 +31,7 @@ export const ExperienceBlock = ({ blockId }: BlockProps) => {
             .join(' – ')}
         </span>
       </div>
-      <MarkdownText className='leading-normal [&>p:first-of-type]:mt-0'>
+      <MarkdownText className='[&>p:first-of-type]:mt-0'>
         {block.content.text}
       </MarkdownText>
     </div>

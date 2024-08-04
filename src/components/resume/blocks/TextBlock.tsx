@@ -13,10 +13,7 @@ export const TextBlock = ({ blockId }: BlockProps) => {
 
   return (
     <MarkdownText
-      className={cn(
-        'leading-normal [&>p:first-of-type]:mt-0',
-        block.content.lead && 'prose-base'
-      )}
+      className={cn('[&>p:first-of-type]:mt-0', block.content.lead && 'lead')}
     >
       {block.content.text}
     </MarkdownText>

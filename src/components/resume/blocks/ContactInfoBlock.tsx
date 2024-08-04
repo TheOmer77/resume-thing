@@ -24,7 +24,7 @@ export const ContactInfoBlock = ({ blockId }: BlockProps) => {
         return (
           <div
             key={`contactInfo-${idx}`}
-            className='flex flex-row items-center gap-2 leading-normal'
+            className='flex flex-row items-center gap-2'
           >
             {Icon && <Icon className='size-[1.125rem]' />}
             <span>{text}</span>
