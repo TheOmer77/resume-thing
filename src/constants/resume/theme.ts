@@ -47,6 +47,7 @@ const typography = {
       h1: {
         fontSize: '2.5rem',
         fontWeight: 800,
+        letterSpacing: '-0.025em',
         lineHeight: 1,
         marginBottom: '0.5rem',
       },
