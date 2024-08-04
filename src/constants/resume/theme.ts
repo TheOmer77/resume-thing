@@ -77,6 +77,9 @@ const typography = {
         lineHeight: 1.5,
         color: 'var(--tw-prose-captions)',
       },
+      ul: { marginTop: 0 },
+      ol: { marginTop: 0 },
+      li: { marginTop: 0, marginBottom: 0 },
     },
   },
 };
