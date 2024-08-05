@@ -1,4 +1,4 @@
-import { resumeBlocks } from '@/constants/resume/blocks';
+import { resumeBlocks } from '@/constants/resume';
 import type { SectionBlockData } from '@/types/blocks';
 
 import { getBlockById } from './getBlockById';

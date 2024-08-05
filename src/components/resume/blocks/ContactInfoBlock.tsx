@@ -2,7 +2,7 @@ import { MailIcon, MapPinIcon, PhoneIcon } from 'lucide-react';
 import { SiGithub, SiLinkedin } from '@icons-pack/react-simple-icons';
 
 import { cn } from '@/lib/utils';
-import { resumeBlocks } from '@/constants/resume/blocks';
+import { resumeBlocks } from '@/constants/resume';
 import type { ContactInfoBlockData } from '@/types/blocks';
 
 import type { BlockProps } from './types';

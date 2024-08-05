@@ -6,7 +6,7 @@ import { mkdir, writeFile } from 'fs/promises';
 import { ResumeRoot } from '@/components/resume';
 import { generateTailwindCss } from '@/lib/generateTailwindCss';
 import { interCss } from '@/constants/inter';
-import { resumeTheme } from '@/constants/resume/theme';
+import { resumeTheme } from '@/constants/resume';
 
 /** Weird hack to fix some complex Tailwind classnames. */
 const fixTwClasses = (html: string) => {

@@ -1,4 +1,4 @@
-import { layout } from '@/constants/resume/theme';
+import { layout } from '@/constants/resume';
 import { cn } from '@/lib/utils';
 
 import { PrimaryColumn, SecondaryColumn, SecondaryHeaderRow } from './layout';

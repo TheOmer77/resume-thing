@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { resumeBlocks } from '@/constants/resume/blocks';
+import { resumeBlocks } from '@/constants/resume';
 import type { TextBlockData } from '@/types/blocks';
 
 import { MarkdownText } from '../primitives';

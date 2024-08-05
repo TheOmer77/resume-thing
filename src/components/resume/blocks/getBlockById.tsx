@@ -1,4 +1,4 @@
-import { resumeBlocks } from '@/constants/resume/blocks';
+import { resumeBlocks } from '@/constants/resume';
 
 import { TextBlock } from './TextBlock';
 import { TitleBlock } from './TitleBlock';
