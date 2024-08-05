@@ -13,7 +13,7 @@ export const ResumeRoot = () => (
       '[--inverted-radius:4rem] after:absolute after:start-[--secondary-col-width]',
       'after:top-0 after:h-full after:w-[--inverted-radius] after:rounded-bl-[calc(var(--inverted-radius)/2)]',
       'after:rounded-tl-[calc(var(--inverted-radius)/2)] after:shadow-[calc(var(--inverted-radius)/-2)_0_0_0_theme(colors.primary)]',
-      'print:[-webkit-print-color-adjust:exact] print:[print-color-adjust:exact]'
+      'after:-z-20 print:[-webkit-print-color-adjust:exact] print:[print-color-adjust:exact]'
     )}
     style={layout}
   >
