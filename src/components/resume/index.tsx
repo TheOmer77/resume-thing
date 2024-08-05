@@ -1,9 +1,7 @@
 import { layout } from '@/constants/resume/theme';
 import { cn } from '@/lib/utils';
 
-import { PrimaryColumn } from './layout/PrimaryColumn';
-import { SecondaryColumn } from './layout/SecondaryColumn';
-import { SecondaryHeaderRow } from './layout/SecondaryHeaderRow';
+import { PrimaryColumn, SecondaryColumn, SecondaryHeaderRow } from './layout';
 import { Block } from './blocks';
 
 export const ResumeRoot = () => (
