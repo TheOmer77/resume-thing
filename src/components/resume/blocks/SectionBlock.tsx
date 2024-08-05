@@ -1,7 +1,10 @@
 import { resumeBlocks } from '@/constants/resume';
 import type { SectionBlockData } from '@/types/blocks';
 
-import { getBlockById } from './getBlockById';
+import { TextBlock } from './TextBlock';
+import { TitleBlock } from './TitleBlock';
+import { ContactInfoBlock } from './ContactInfoBlock';
+import { ExperienceBlock } from './ExperienceBlock';
 import type { BlockProps } from './types';
 
 export const SectionBlock = ({ blockId }: BlockProps) => {
@@ -13,7 +16,25 @@ export const SectionBlock = ({ blockId }: BlockProps) => {
   return (
     <div>
       <h2>{block.content.title}</h2>
-      {(block.content.children || []).map(childId => getBlockById(childId))}
+      {(block.content.children || []).map(childId => {
+        const block = resumeBlocks.find(({ id }) => id === childId);
+        if (!block) return null;
+
+        switch (block.type) {
+          case 'text':
+            return <TextBlock key={childId} blockId={childId} />;
+          case 'title':
+            return <TitleBlock key={childId} blockId={childId} />;
+          case 'contactInfo':
+            return <ContactInfoBlock key={childId} blockId={childId} />;
+          case 'experience':
+            return <ExperienceBlock key={childId} blockId={childId} />;
+          // Sections cannot contain other sections
+
+          default:
+            return null;
+        }
+      })}
     </div>
   );
 };
