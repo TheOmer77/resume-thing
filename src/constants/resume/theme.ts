@@ -57,7 +57,7 @@ const typography = {
         fontWeight: 700,
         lineHeight: 1.5,
         marginTop: '1rem',
-        marginBottom: '1rem',
+        marginBottom: '0.5rem',
       },
       '.secondary-col h2': {
         fontSize: '10.5pt',
@@ -72,6 +72,7 @@ const typography = {
         marginTop: 0,
         marginBottom: '0.25rem',
       },
+      'h2 + h3': { marginTop: '1rem' },
       '[class~="lead"]': { fontSize: '12pt', lineHeight: 1.5 },
       '[class~="caption"]': {
         fontSize: '9pt',

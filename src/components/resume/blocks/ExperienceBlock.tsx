@@ -17,9 +17,9 @@ export const ExperienceBlock = ({ blockId }: BlockProps) => {
   if (!block) return null;
 
   return (
-    <div>
+    <div className='[h2+&]:mt-4'>
       <div className='mb-1 flex flex-row items-center'>
-        <h3 className='mb-0 flex-1'>
+        <h3 className='my-0 flex-1'>
           {[block.content.title, block.content.location]
             .filter(Boolean)
             .join(' – ')}
