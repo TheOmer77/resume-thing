@@ -17,7 +17,7 @@ export const ExperienceBlock = ({ blockId }: BlockProps) => {
   if (!block) return null;
 
   return (
-    <div className='[h2+&]:mt-4'>
+    <>
       <div className='mb-1 flex flex-row items-center'>
         <h3 className='my-0 flex-1'>
           {[block.content.title, block.content.location]
@@ -33,6 +33,6 @@ export const ExperienceBlock = ({ blockId }: BlockProps) => {
       <MarkdownText className='[&>p:first-of-type]:mt-0'>
         {block.content.text}
       </MarkdownText>
-    </div>
+    </>
   );
 };

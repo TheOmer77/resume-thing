@@ -34,7 +34,7 @@ export const ContactInfoBlock = ({ blockId }: BlockProps) => {
         return (
           <Comp
             key={`contactInfo-${idx}`}
-            className='flex flex-row items-center gap-2 no-underline'
+            className='flex flex-row items-center gap-2'
             {...(url ? { href: url } : {})}
           >
             {Icon && <Icon className='size-[1.125rem]' />}
