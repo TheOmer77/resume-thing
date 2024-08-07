@@ -1,23 +1,6 @@
 import type { BlockData } from '@/types/blocks';
 
 export const resumeBlocks = [
-  /** Test block, to be removed */
-  {
-    id: 'md-test',
-    type: 'text',
-    content: {
-      text: `Regular. **Bold.** *Italic.* ***Bold AND italic!*** ~~Strike this.~~ **~~Strike and also bold.~~** [Link to Google](https://www.google.com/)
-
-- One
-- Two
-- Three
-
-1. One
-2. Two
-3. Three`,
-    },
-  },
-
   {
     id: 'dummy-title',
     type: 'title',
