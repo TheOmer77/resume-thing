@@ -39,17 +39,6 @@ export const GET = async () => {
     await writeFile('./debug/index.css', css);
   }
 
-  if (process.env.PDF_DEBUG?.toLowerCase() === 'true') {
-    await mkdir('./debug').catch(error => {
-      if (!('code' in error && error.code === 'EEXIST')) throw error;
-    });
-    await writeFile(
-      './debug/index.html',
-      `<link rel="stylesheet" href="./index.css">${html}`
-    );
-    await writeFile('./debug/index.css', css);
-  }
-
   const browser = await puppeteer.launch({
     args: ['--disable-setuid-sandbox', '--no-sandbox', '--disable-gpu'],
     executablePath: '/usr/bin/chromium-browser',
