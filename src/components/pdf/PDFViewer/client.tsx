@@ -10,7 +10,7 @@ import { usePDFFile } from '@/hooks/usePDFFile';
 import { cn } from '@/lib/utils';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
+  'pdfjs-dist/legacy/build/pdf.worker.min.mjs',
   import.meta.url
 ).toString();
 
@@ -21,7 +21,7 @@ type PDFViewerProps = Omit<ComponentPropsWithoutRef<'div'>, 'children'>;
 
 const loadingSpinner = <Spinner className='size-8' key='loading-spinner' />;
 
-export const PDFViewer = ({ className, ...props }: PDFViewerProps) => {
+export const ClientPDFViewer = ({ className, ...props }: PDFViewerProps) => {
   const file = usePDFFile();
 
   const [numPages, setNumPages] = useState<number>();
