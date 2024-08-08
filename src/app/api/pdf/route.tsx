@@ -4,7 +4,7 @@ import { mkdir, writeFile } from 'fs/promises';
 
 import { ResumeRoot } from '@/components/resume';
 import { generateTailwindCss } from '@/lib/generateTailwindCss';
-import { interCss } from '@/constants/inter';
+import { interCdn } from '@/constants/inter';
 import { resumeTheme } from '@/constants/resume';
 
 /** Weird hack to fix some complex Tailwind classnames. */
@@ -21,11 +21,10 @@ export const GET = async () => {
   // Next.js complains when you import 'react-dom/server' directly
   const { renderToStaticMarkup } = await import('react-dom/server');
 
-  const html = fixTwClasses(renderToStaticMarkup(<ResumeRoot />));
+  const html = `${interCdn}${fixTwClasses(renderToStaticMarkup(<ResumeRoot />))}`;
   const css = await generateTailwindCss(
     html,
     { plugins: [tailwindTypography], theme: resumeTheme },
-    interCss,
     '@page{margin:0;}'
   );
 
