@@ -1,5 +1,4 @@
 import puppeteer from 'puppeteer-core';
-import chromium from '@sparticuz/chromium';
 import tailwindTypography from '@tailwindcss/typography';
 import { mkdir, writeFile } from 'fs/promises';
 
@@ -53,13 +52,13 @@ export const GET = async () => {
   }
 
   const browser = await puppeteer.launch({
-    args: chromium.args,
-    defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath(),
-    headless: chromium.headless,
+    args: ['--disable-setuid-sandbox', '--no-sandbox'],
+    executablePath: '/usr/bin/chromium',
   });
   const page = await browser.newPage();
-  await page.setContent(`<style>${css}</style>${html}`);
+  await page.setContent(`<style>${css}</style>${html}`, {
+    waitUntil: 'networkidle0',
+  });
   const pdf = await page.pdf({ format: 'A4' });
   await browser.close();
 
