@@ -1,0 +1,14 @@
+services:
+  app:
+    init: true
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - PDF_DEBUG=${PDF_DEBUG}
