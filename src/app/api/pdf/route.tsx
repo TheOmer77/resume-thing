@@ -51,8 +51,8 @@ export const GET = async () => {
   }
 
   const browser = await puppeteer.launch({
-    args: ['--disable-setuid-sandbox', '--no-sandbox'],
-    executablePath: '/usr/bin/chromium',
+    args: ['--disable-setuid-sandbox', '--no-sandbox', '--disable-gpu'],
+    executablePath: '/usr/bin/chromium-browser',
   });
   const page = await browser.newPage();
   await page.setContent(`<style>${css}</style>${html}`, {
