@@ -1,6 +1,7 @@
 services:
   app:
     init: true
+    image: resume-thing-app
     build:
       dockerfile: Dockerfile
       context: .
@@ -13,6 +14,18 @@ services:
       - /app/.next
     environment:
       - PDF_DEBUG=${PDF_DEBUG}
+
+  db-studio:
+    image: resume-thing-app
+    command: pnpm db:studio
+    restart: always
+    ports:
+      - 4983:4983
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - DB_URL=${DB_URL:?error}
 
   db:
     image: postgres:16.4-alpine3.20
