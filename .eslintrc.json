@@ -4,7 +4,6 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:@tanstack/eslint-plugin-query/recommended",
     "next/core-web-vitals",
-    "next/typescript",
     "prettier"
   ]
 }
