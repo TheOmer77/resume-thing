@@ -6,6 +6,8 @@ const nextConfig = {
     config.resolve.alias.canvas = false;
     return config;
   },
+  // https://github.com/wojtekmaj/react-pdf/issues/1822#issuecomment-2172868407
+  swcMinify: false,
 };
 
 export default nextConfig;
