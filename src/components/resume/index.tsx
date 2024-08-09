@@ -1,5 +1,5 @@
 import { layout } from '@/constants/resume';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/cn';
 
 import { PrimaryColumn, SecondaryColumn, SecondaryHeaderRow } from './layout';
 import { Block } from './blocks';

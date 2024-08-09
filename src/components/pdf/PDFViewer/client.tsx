@@ -7,7 +7,7 @@ import 'react-pdf/dist/esm/Page/TextLayer.css';
 
 import { Spinner } from '@/components/ui/spinner';
 import { usePDFFile } from '@/hooks/usePDFFile';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/cn';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.mjs',

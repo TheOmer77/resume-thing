@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/cn';
 import { resumeBlocks } from '@/constants/resume';
 import type { TextBlockData } from '@/types/blocks';
 
