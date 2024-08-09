@@ -7,6 +7,8 @@ import { generateTailwindCss } from '@/lib/generateTailwindCss';
 import { interCdn } from '@/constants/inter';
 import { resumeTheme } from '@/constants/resume';
 
+export const dynamic = 'force-dynamic';
+
 /** Weird hack to fix some complex Tailwind classnames. */
 const fixTwClasses = (html: string) => {
   return html.replace(/class="([^"]*?)"/g, (_, classNames: string) => {
