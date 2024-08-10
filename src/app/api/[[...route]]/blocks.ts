@@ -1,3 +1,4 @@
+import { Hono } from 'hono';
 import { eq, isNotNull, or, sql } from 'drizzle-orm';
 
 import { db } from '@/db';
@@ -36,7 +37,7 @@ const queryMap = [
   },
 ];
 
-export const GET = async () => {
+export const blocksRouter = new Hono().get('/', async ctx => {
   const result = (await db
     .select({
       id: block.id,
@@ -72,5 +73,5 @@ export const GET = async () => {
       or(...queryMap.map(({ schema }) => isNotNull(schema.blockId)))
     )) as BlockData[];
 
-  return Response.json(result);
-};
+  return ctx.json(result);
+});
