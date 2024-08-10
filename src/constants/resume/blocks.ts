@@ -16,7 +16,7 @@ export const resumeBlocks = [
       items: [
         { icon: 'mail', text: 'email@domain.com' },
         { icon: 'phone', text: '(123) 456-7890' },
-        { icon: 'address', text: 'Some City, NY' },
+        { icon: 'location', text: 'Some City, NY' },
       ],
     },
   },

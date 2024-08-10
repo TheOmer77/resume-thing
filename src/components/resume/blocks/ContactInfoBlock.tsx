@@ -10,7 +10,7 @@ import type { BlockProps } from './types';
 const icons = {
   mail: MailIcon,
   phone: PhoneIcon,
-  address: MapPinIcon,
+  location: MapPinIcon,
   linkedin: SiLinkedin,
   github: SiGithub,
 };
