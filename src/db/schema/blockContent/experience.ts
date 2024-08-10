@@ -1,13 +1,10 @@
 import { pgTable, text } from 'drizzle-orm/pg-core';
-import { createId } from '@paralleldrive/cuid2';
 
 import { block } from '../block';
 
 export const blockContentExperience = pgTable('block_content_experience', {
-  id: text('id').primaryKey().$default(createId),
   blockId: text('block_id')
-    .unique()
-    .notNull()
+    .primaryKey()
     .references(() => block.id, { onDelete: 'cascade' }),
 
   title: text('title').notNull(),
