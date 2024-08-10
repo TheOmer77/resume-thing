@@ -1,3 +1,4 @@
+import { Hono } from 'hono';
 import puppeteer from 'puppeteer-core';
 import tailwindTypography from '@tailwindcss/typography';
 import { mkdir, writeFile } from 'fs/promises';
@@ -6,8 +7,6 @@ import { ResumeRoot } from '@/components/resume';
 import { generateTailwindCss } from '@/lib/generateTailwindCss';
 import { interCdn } from '@/constants/inter';
 import { resumeTheme } from '@/constants/resume';
-
-export const dynamic = 'force-dynamic';
 
 /** Weird hack to fix some complex Tailwind classnames. */
 const fixTwClasses = (html: string) => {
@@ -19,7 +18,7 @@ const fixTwClasses = (html: string) => {
   });
 };
 
-export const GET = async () => {
+export const pdfRouter = new Hono().get('/', async () => {
   // Next.js complains when you import 'react-dom/server' directly
   const { renderToStaticMarkup } = await import('react-dom/server');
 
@@ -58,4 +57,4 @@ export const GET = async () => {
       'content-disposition': 'attachment; filename="thing.pdf"',
     },
   });
-};
+});
