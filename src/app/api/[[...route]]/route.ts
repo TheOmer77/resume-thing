@@ -1,9 +1,9 @@
 import { Hono } from 'hono';
 import { handle } from 'hono/vercel';
 
-const app = new Hono()
-  .basePath('/api')
-  .get('/hello', c => c.json({ message: 'Hello from Hono!' }));
+import { pdfRouter } from './pdf';
+
+const app = new Hono().basePath('/api').route('/pdf', pdfRouter);
 
 export const GET = handle(app);
 
