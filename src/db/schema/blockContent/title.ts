@@ -11,5 +11,5 @@ export const blockContentTitle = pgTable('block_content_title', {
     .references(() => block.id, { onDelete: 'cascade' }),
 
   title: text('title').notNull(),
-  subtitle: text('subtitle').notNull(),
+  subtitle: text('subtitle'),
 });
