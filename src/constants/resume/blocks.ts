@@ -14,9 +14,9 @@ export const resumeBlocks = [
     type: 'contactInfo',
     content: {
       items: [
-        { icon: 'mail', text: 'email@domain.com' },
-        { icon: 'phone', text: '(123) 456-7890' },
-        { icon: 'location', text: 'Some City, NY' },
+        { type: 'mail', text: 'email@domain.com' },
+        { type: 'phone', text: '(123) 456-7890' },
+        { type: 'location', text: 'Some City, NY' },
       ],
     },
   },
@@ -27,11 +27,11 @@ export const resumeBlocks = [
       orientation: 'horizontal',
       items: [
         {
-          icon: 'linkedin',
+          type: 'linkedin',
           text: 'LinkedIn',
           url: 'https://linkedin.com/in/example',
         },
-        { icon: 'github', text: 'GitHub', url: 'https://github.com/ghost' },
+        { type: 'github', text: 'GitHub', url: 'https://github.com/ghost' },
       ],
     },
   },
