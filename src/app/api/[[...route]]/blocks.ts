@@ -1,16 +1,18 @@
 import { Hono } from 'hono';
-import { eq, isNotNull, or, sql } from 'drizzle-orm';
-import type { PgTable } from 'drizzle-orm/pg-core';
+import { asc, eq, isNotNull, or, SQL, sql } from 'drizzle-orm';
+import type { PgColumn, PgTable } from 'drizzle-orm/pg-core';
 
 import { db } from '@/db';
 import {
   block,
+  blockContentContact,
+  blockContentContactItem,
   blockContentExperience,
   blockContentText,
   blockContentTitle,
 } from '@/db/schema';
 import type { BlockData } from '@/types/blocks';
-import { jsonBuildObject } from '@/lib/drizzle';
+import { jsonAgg, jsonBuildObject } from '@/lib/drizzle';
 
 type SchemaColumn<TSchema extends PgTable> = keyof TSchema['_']['columns'];
 type QueryMapItem<TSchema extends PgTable> = {
@@ -39,7 +41,7 @@ const queryMap = [
     properties: {
       text: blockContentText.text,
       lead: blockContentText.lead,
-  },
+    },
   } satisfies QueryMapItem<typeof blockContentText>,
   {
     schema: blockContentExperience,
@@ -52,7 +54,35 @@ const queryMap = [
       text: blockContentExperience.text,
     },
   } satisfies QueryMapItem<typeof blockContentExperience>,
+  {
+    schema: blockContentContact,
+    type: 'contactInfo',
+    properties: {
+      orientation: blockContentContact.orientation,
+      items: jsonAgg(
+        jsonBuildObject({
+          order: blockContentContactItem.order,
+          type: blockContentContactItem.type,
+          text: blockContentContactItem.text,
+          url: blockContentContactItem.url,
+        }),
+        asc(blockContentContactItem.order)
+      ),
+    },
+  } satisfies QueryMapItem<typeof blockContentContact>,
 ];
+
+/** Required for contact info blocks with items to be fetched properly. */
+const groupBy = queryMap
+  .reduce(
+    (arr, { schema, properties }) => [
+      ...arr,
+      schema.blockId,
+      ...Object.values(properties).filter(value => !(value instanceof SQL)),
+    ],
+    [] as PgColumn[]
+  )
+  .flat();
 
 export const blocksRouter = new Hono().get('/', async ctx => {
   const result = (await db
@@ -82,9 +112,13 @@ export const blocksRouter = new Hono().get('/', async ctx => {
       blockContentExperience,
       eq(block.id, blockContentExperience.blockId)
     )
-    .where(
-      or(...queryMap.map(({ schema }) => isNotNull(schema.blockId)))
-    )) as BlockData[];
+    .leftJoin(blockContentContact, eq(block.id, blockContentContact.blockId))
+    .leftJoin(
+      blockContentContactItem,
+      eq(block.id, blockContentContactItem.blockId)
+    )
+    .where(or(...queryMap.map(({ schema }) => isNotNull(schema.blockId))))
+    .groupBy(block.id, ...groupBy)) as BlockData[];
 
   return ctx.json(result);
 });
