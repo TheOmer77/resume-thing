@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
 import { eq, isNotNull, or, sql } from 'drizzle-orm';
+import type { PgTable } from 'drizzle-orm/pg-core';
 
 import { db } from '@/db';
 import {
@@ -10,31 +11,46 @@ import {
 } from '@/db/schema';
 import type { BlockData } from '@/types/blocks';
 
+type SchemaColumn<TSchema extends PgTable> = keyof TSchema['_']['columns'];
+type QueryMapItem<TSchema extends PgTable> = {
+  schema: TSchema;
+  type: string;
+  properties: Partial<
+    Record<
+      SchemaColumn<TSchema> | (NonNullable<unknown> & string),
+      TSchema['_']['columns'][SchemaColumn<TSchema>] | SQL<unknown>
+    >
+  >;
+};
+
 const queryMap = [
   {
     schema: blockContentTitle,
     type: 'title',
-    properties: [
-      'title',
-      'subtitle',
-    ] satisfies (keyof typeof blockContentTitle)[],
-  },
+    properties: {
+      title: blockContentTitle.title,
+      subtitle: blockContentTitle.subtitle,
+    },
+  } satisfies QueryMapItem<typeof blockContentTitle>,
   {
     schema: blockContentText,
     type: 'text',
-    properties: ['text', 'lead'] satisfies (keyof typeof blockContentText)[],
+    properties: {
+      text: blockContentText.text,
+      lead: blockContentText.lead,
   },
+  } satisfies QueryMapItem<typeof blockContentText>,
   {
     schema: blockContentExperience,
     type: 'experience',
-    properties: [
-      'title',
-      'location',
-      'startDate',
-      'endDate',
-      'text',
-    ] satisfies (keyof typeof blockContentExperience)[],
-  },
+    properties: {
+      title: blockContentExperience.title,
+      location: blockContentExperience.location,
+      startDate: blockContentExperience.startDate,
+      endDate: blockContentExperience.endDate,
+      text: blockContentExperience.text,
+    },
+  } satisfies QueryMapItem<typeof blockContentExperience>,
 ];
 
 export const blocksRouter = new Hono().get('/', async ctx => {
