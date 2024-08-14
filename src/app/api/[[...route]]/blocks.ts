@@ -17,6 +17,7 @@ import { jsonAgg, jsonBuildObject } from '@/lib/drizzle';
 type SchemaColumn<TSchema extends PgTable> = keyof TSchema['_']['columns'];
 type QueryMapItem<TSchema extends PgTable> = {
   schema: TSchema;
+  childSchema?: PgTable;
   type: string;
   properties: Partial<
     Record<
@@ -56,6 +57,7 @@ const queryMap = [
   } satisfies QueryMapItem<typeof blockContentExperience>,
   {
     schema: blockContentContact,
+    childSchema: blockContentContactItem,
     type: 'contactInfo',
     properties: {
       orientation: blockContentContact.orientation,
@@ -74,18 +76,17 @@ const queryMap = [
 
 /** Required for contact info blocks with items to be fetched properly. */
 const groupBy = queryMap
-  .reduce(
-    (arr, { schema, properties }) => [
+  .reduce<PgColumn[]>((arr, { schema, properties }) => {
+    return [
       ...arr,
       schema.blockId,
       ...Object.values(properties).filter(value => !(value instanceof SQL)),
-    ],
-    [] as PgColumn[]
-  )
+    ];
+  }, [])
   .flat();
 
 export const blocksRouter = new Hono().get('/', async ctx => {
-  const result = (await db
+  const initialQuery = db
     .select({
       id: block.id,
       type: sql`CASE ${sql.join(
@@ -105,18 +106,18 @@ export const blocksRouter = new Hono().get('/', async ctx => {
         sql.raw(' ')
       )} ELSE NULL END`.as('content'),
     })
-    .from(block)
-    .leftJoin(blockContentTitle, eq(block.id, blockContentTitle.blockId))
-    .leftJoin(blockContentText, eq(block.id, blockContentText.blockId))
-    .leftJoin(
-      blockContentExperience,
-      eq(block.id, blockContentExperience.blockId)
-    )
-    .leftJoin(blockContentContact, eq(block.id, blockContentContact.blockId))
-    .leftJoin(
-      blockContentContactItem,
-      eq(block.id, blockContentContactItem.blockId)
-    )
+    .from(block);
+
+  const queryWithJoins = queryMap.reduce<
+    ReturnType<typeof initialQuery.leftJoin>
+  >((curr, { schema, childSchema }) => {
+    const joinedQuery = curr.leftJoin(schema, eq(block.id, schema.blockId));
+    return childSchema
+      ? joinedQuery.leftJoin(childSchema, eq(block.id, childSchema.blockId))
+      : joinedQuery;
+  }, initialQuery);
+
+  const result = (await queryWithJoins
     .where(or(...queryMap.map(({ schema }) => isNotNull(schema.blockId))))
     .groupBy(block.id, ...groupBy)) as BlockData[];
 
