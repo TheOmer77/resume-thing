@@ -10,6 +10,7 @@ import {
   blockContentTitle,
 } from '@/db/schema';
 import type { BlockData } from '@/types/blocks';
+import { jsonBuildObject } from '@/lib/drizzle';
 
 type SchemaColumn<TSchema extends PgTable> = keyof TSchema['_']['columns'];
 type QueryMapItem<TSchema extends PgTable> = {
@@ -67,13 +68,9 @@ export const blocksRouter = new Hono().get('/', async ctx => {
       content: sql`CASE ${sql.join(
         queryMap.map(
           ({ schema, properties }) =>
-            sql`WHEN ${isNotNull(schema.blockId)} THEN json_build_object(${sql.join(
-              properties.map(
-                prop =>
-                  sql`'${sql.raw(prop)}', ${schema[prop as keyof typeof schema]}`
-              ),
-              sql.raw(', ')
-            )})`
+            sql`WHEN ${isNotNull(schema.blockId)} THEN ${jsonBuildObject(
+              properties
+            )}`
         ),
         sql.raw(' ')
       )} ELSE NULL END`.as('content'),
