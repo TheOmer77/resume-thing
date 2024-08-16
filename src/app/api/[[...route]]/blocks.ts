@@ -8,11 +8,13 @@ import {
   blockContentContact,
   blockContentContactItem,
   blockContentExperience,
+  blockContentSection,
+  blockContentSectionChild,
   blockContentText,
   blockContentTitle,
 } from '@/db/schema';
 import type { BlockData } from '@/types/blocks';
-import { jsonAgg, jsonBuildObject } from '@/lib/drizzle';
+import { arrayAgg, jsonAgg, jsonBuildObject } from '@/lib/drizzle';
 
 type SchemaColumn<TSchema extends PgTable> = keyof TSchema['_']['columns'];
 type QueryMapItem<TSchema extends PgTable> = {
@@ -72,6 +74,18 @@ const queryMap = [
       ),
     },
   } satisfies QueryMapItem<typeof blockContentContact>,
+  {
+    schema: blockContentSection,
+    childSchema: blockContentSectionChild,
+    type: 'section',
+    properties: {
+      title: blockContentSection.title,
+      children: arrayAgg(
+        blockContentSectionChild.childId,
+        asc(blockContentSectionChild.order)
+      ),
+    },
+  } satisfies QueryMapItem<typeof blockContentSection>,
 ];
 
 /** Required for contact info blocks with items to be fetched properly. */
