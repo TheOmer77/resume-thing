@@ -88,6 +88,7 @@ const queryMap = [
   } satisfies QueryMapItem<typeof blockContentSection>,
 ];
 
+const where = or(...queryMap.map(({ schema }) => isNotNull(schema.blockId)));
 /** Required for contact info blocks with items to be fetched properly. */
 const groupBy = queryMap
   .reduce<PgColumn[]>((arr, { schema, properties }) => {
@@ -132,7 +133,7 @@ export const blocksRouter = new Hono().get('/', async ctx => {
   }, initialQuery);
 
   const result = (await queryWithJoins
-    .where(or(...queryMap.map(({ schema }) => isNotNull(schema.blockId))))
+    .where(where)
     .groupBy(block.id, ...groupBy)) as BlockData[];
 
   return ctx.json(result);
