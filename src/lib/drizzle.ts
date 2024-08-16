@@ -14,7 +14,7 @@ export const jsonAgg = (aggSql: SQL, orderBy?: SQL) =>
   )})`;
 
 export const arrayAgg = (aggColumn: PgColumn, orderBy?: SQL) =>
-  sql`array_agg(${sql.join(
+  sql`array_remove(array_agg(${sql.join(
     [aggColumn, orderBy && sql`ORDER BY ${orderBy}`].filter(Boolean),
     sql.raw(' ')
-  )})`;
+  )}), NULL)`;
