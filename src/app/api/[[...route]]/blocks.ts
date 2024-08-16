@@ -65,7 +65,6 @@ const queryMap = [
       orientation: blockContentContact.orientation,
       items: jsonAgg(
         jsonBuildObject({
-          order: blockContentContactItem.order,
           type: blockContentContactItem.type,
           text: blockContentContactItem.text,
           url: blockContentContactItem.url,
