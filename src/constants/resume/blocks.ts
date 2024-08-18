@@ -50,50 +50,46 @@ export const resumeBlocks = [
     type: 'section',
     content: {
       title: 'Experience',
-      /* Normally a section wouldn't include the same child multiple times,
-      but this is just a demo */
-      children: [
-        'dummy-exp-item',
-        'dummy-exp-item',
-        'dummy-exp-item',
-        'dummy-exp-item',
-        'dummy-exp-item',
-      ],
+      children: [...Array(5).keys()].map(key => `dummy-exp-item-${key}`),
     },
   },
-  {
-    id: 'dummy-exp-item',
-    type: 'experience',
-    content: {
-      title: 'Job Title',
-      location: 'Company Name',
-      startDate: '2015-04',
-      endDate: '2016-04',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius orci a nisl suscipit, et molestie ligula semper. Cras in bibendum augue. Phasellus lacinia a turpis a ullamcorper.',
-    },
-  },
+  ...[...Array(5).keys()].map(
+    (key, _, arr) =>
+      ({
+        id: `dummy-exp-item-${key}`,
+        type: 'experience',
+        content: {
+          title: 'Job Title',
+          location: `Company ${arr.length - key}`,
+          startDate: `${2020 + (arr.length - key - 1)}-12`,
+          endDate: `${2021 + (arr.length - key - 1)}-12`,
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius orci a nisl suscipit, et molestie ligula semper. Cras in bibendum augue. Phasellus lacinia a turpis a ullamcorper.',
+        },
+      }) satisfies BlockData
+  ),
 
   {
     id: 'dummy-edu',
     type: 'section',
     content: {
       title: 'Education',
-      /* Normally a section wouldn't include the same child multiple times,
-      but this is just a demo */
-      children: ['dummy-edu-item', 'dummy-edu-item'],
+      children: [...Array(2).keys()].map(key => `dummy-edu-item-${key}`),
     },
   },
-  {
-    id: 'dummy-edu-item',
-    type: 'experience',
-    content: {
-      title: 'Course',
-      location: 'Institution',
-      startDate: '2015-04',
-      endDate: '2016-04',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius orci a nisl suscipit, et molestie ligula semper. Cras in bibendum augue. Phasellus lacinia a turpis a ullamcorper.',
-    },
-  },
+  ...[...Array(2).keys()].map(
+    (key, _, arr) =>
+      ({
+        id: `dummy-edu-item-${key}`,
+        type: 'experience',
+        content: {
+          title: `Course ${arr.length - key}`,
+          location: 'Institution',
+          startDate: `${2018 + (arr.length - key - 1)}-05`,
+          endDate: `${2019 + (arr.length - key - 1)}-05`,
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius orci a nisl suscipit, et molestie ligula semper. Cras in bibendum augue. Phasellus lacinia a turpis a ullamcorper.',
+        },
+      }) satisfies BlockData
+  ),
 
   {
     id: 'dummy-skills',
