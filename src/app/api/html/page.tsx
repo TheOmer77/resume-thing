@@ -4,14 +4,14 @@ import {
   SecondaryColumn,
   SecondaryHeaderRow,
 } from '@/components/resume/layout';
+import { getBlocks } from '@/db/queries/blocks';
 import { cn } from '@/lib/cn';
-import { layout, resumeBlocks } from '@/constants/resume';
+import { layout } from '@/constants/resume';
 
 import { BlocksProvider } from './context';
 
 const ResumeHtmlPage = async () => {
-  // TODO: await getBlocks();
-  const blocks = resumeBlocks;
+  const blocks = await getBlocks();
   return (
     <BlocksProvider value={blocks}>
       <div
