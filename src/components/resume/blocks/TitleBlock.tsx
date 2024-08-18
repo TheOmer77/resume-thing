@@ -1,9 +1,10 @@
-import { resumeBlocks } from '@/constants/resume';
+import { useBlocks } from '@/app/api/html/context';
 import type { TitleBlockData } from '@/types/blocks';
 
 import type { BlockProps } from './types';
 
 export const TitleBlock = ({ blockId }: BlockProps) => {
+  const resumeBlocks = useBlocks();
   const block = resumeBlocks.find(
     ({ id, type }) => id === blockId && type === 'title'
   ) as TitleBlockData | undefined;

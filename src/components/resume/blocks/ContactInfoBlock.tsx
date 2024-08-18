@@ -1,8 +1,8 @@
 import { MailIcon, MapPinIcon, PhoneIcon } from 'lucide-react';
 import { SiGithub, SiLinkedin } from '@icons-pack/react-simple-icons';
 
+import { useBlocks } from '@/app/api/html/context';
 import { cn } from '@/lib/cn';
-import { resumeBlocks } from '@/constants/resume';
 import type { ContactInfoBlockData } from '@/types/blocks';
 
 import type { BlockProps } from './types';
@@ -16,6 +16,7 @@ const typeIcons = {
 };
 
 export const ContactInfoBlock = ({ blockId }: BlockProps) => {
+  const resumeBlocks = useBlocks();
   const block = resumeBlocks.find(
     ({ id, type }) => id === blockId && type === 'contactInfo'
   ) as ContactInfoBlockData | undefined;

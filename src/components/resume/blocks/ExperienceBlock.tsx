@@ -1,4 +1,4 @@
-import { resumeBlocks } from '@/constants/resume';
+import { useBlocks } from '@/app/api/html/context';
 import type { ExperienceBlockData } from '@/types/blocks';
 
 import { MarkdownText } from '../primitives';
@@ -11,6 +11,7 @@ const formatDate = (date: string) =>
   });
 
 export const ExperienceBlock = ({ blockId }: BlockProps) => {
+  const resumeBlocks = useBlocks();
   const block = resumeBlocks.find(
     ({ id, type }) => id === blockId && type === 'experience'
   ) as ExperienceBlockData | undefined;
