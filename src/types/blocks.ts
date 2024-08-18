@@ -33,7 +33,7 @@ export type TextBlockData = BlockCore & {
 };
 
 export type ContactInfoItem = {
-  type?: string;
+  type: string;
   /** If present, this item is a link. */
   url?: string;
   text: string;
