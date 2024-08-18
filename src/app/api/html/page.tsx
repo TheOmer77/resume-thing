@@ -1,13 +1,13 @@
-import { Block } from '@/components/resume/blocks';
-import {
-  PrimaryColumn,
-  SecondaryColumn,
-  SecondaryHeaderRow,
-} from '@/components/resume/layout';
 import { getBlocks } from '@/db/queries/blocks';
 import { cn } from '@/lib/cn';
 import { layout } from '@/constants/resume';
 
+import { Block } from './_components/blocks';
+import {
+  PrimaryColumn,
+  SecondaryColumn,
+  SecondaryHeaderRow,
+} from './_components/layout';
 import { BlocksProvider } from './context';
 
 const ResumeHtmlPage = async () => {
