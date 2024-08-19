@@ -9,7 +9,7 @@ import type { BlockData } from '@/types/blocks';
 
 export const getBlocks = async () => {
   const where = or(...queryMap.map(({ schema }) => isNotNull(schema.blockId)));
-  /** Required for contact info blocks with items to be fetched properly. */
+  /** Required for child schemas to be fetched properly. */
   const groupBy = queryMap
     .reduce<PgColumn[]>((arr, { schema, properties }) => {
       return [
