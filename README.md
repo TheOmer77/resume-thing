@@ -1,6 +1,6 @@
 # Resume Thing
 
-Hello! This project will be some sort of resume builder in the future, but unfortunately it's not finished yet. For now, this app just generates a resume PDF file from existing data, which you can modify manually, and lets you view and download that PDF.
+Hello! This project will be some sort of resume builder in the future, but unfortunately **it's not finished yet.** For now, this app just generates a resume PDF file from existing data, which you can modify manually, and lets you view and download that PDF.
 
 ## Getting started
 
