@@ -1,7 +1,7 @@
-import { useBlocks } from '@/app/api/html/context';
 import type { ExperienceBlockData } from '@/types/blocks';
 
 import { MarkdownText } from '../primitives';
+import { useBlocks } from '../../context';
 import type { BlockProps } from './types';
 
 const formatDate = (date: string) =>

@@ -1,12 +1,11 @@
 'use client';
 
-import { useBlocks } from '@/app/api/html/context';
-
 import { TextBlock } from './TextBlock';
 import { TitleBlock } from './TitleBlock';
 import { ContactInfoBlock } from './ContactInfoBlock';
 import { ExperienceBlock } from './ExperienceBlock';
 import { SectionBlock } from './SectionBlock';
+import { useBlocks } from '../../context';
 import type { BlockProps } from './types';
 
 export const Block = ({ blockId }: BlockProps) => {

@@ -1,10 +1,10 @@
 import { MailIcon, MapPinIcon, PhoneIcon } from 'lucide-react';
 import { SiGithub, SiLinkedin } from '@icons-pack/react-simple-icons';
 
-import { useBlocks } from '@/app/api/html/context';
 import { cn } from '@/lib/cn';
 import type { ContactInfoBlockData } from '@/types/blocks';
 
+import { useBlocks } from '../../context';
 import type { BlockProps } from './types';
 
 const typeIcons = {

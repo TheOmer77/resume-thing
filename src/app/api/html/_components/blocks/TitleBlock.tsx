@@ -1,6 +1,6 @@
-import { useBlocks } from '@/app/api/html/context';
 import type { TitleBlockData } from '@/types/blocks';
 
+import { useBlocks } from '../../context';
 import type { BlockProps } from './types';
 
 export const TitleBlock = ({ blockId }: BlockProps) => {

@@ -1,10 +1,10 @@
-import { useBlocks } from '@/app/api/html/context';
 import type { SectionBlockData } from '@/types/blocks';
 
 import { TextBlock } from './TextBlock';
 import { TitleBlock } from './TitleBlock';
 import { ContactInfoBlock } from './ContactInfoBlock';
 import { ExperienceBlock } from './ExperienceBlock';
+import { useBlocks } from '../../context';
 import type { BlockProps } from './types';
 
 export const SectionBlock = ({ blockId }: BlockProps) => {

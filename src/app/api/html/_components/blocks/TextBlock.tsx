@@ -1,8 +1,8 @@
-import { useBlocks } from '@/app/api/html/context';
 import { cn } from '@/lib/cn';
 import type { TextBlockData } from '@/types/blocks';
 
 import { MarkdownText } from '../primitives';
+import { useBlocks } from '../../context';
 import type { BlockProps } from './types';
 
 export const TextBlock = ({ blockId }: BlockProps) => {
