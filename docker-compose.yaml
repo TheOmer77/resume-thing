@@ -19,7 +19,6 @@ services:
   db-studio:
     image: resume-thing-app
     command: pnpm db:studio
-    restart: always
     ports:
       - 4983:4983
     volumes:
