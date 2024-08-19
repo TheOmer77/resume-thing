@@ -33,7 +33,7 @@ export type TextBlockData = BlockCore & {
 };
 
 export type ContactInfoItem = {
-  icon?: string;
+  type: string;
   /** If present, this item is a link. */
   url?: string;
   text: string;
@@ -50,8 +50,10 @@ export type ContactInfoBlockData = BlockCore & {
 export type ExperienceBlockContent = {
   title: string;
   location: string;
-  /** Dates in format of 'yyyy-MM'; `null` = present.  */
-  dates: [string, string | null];
+  /** Date in format of 'yyyy-MM'.  */
+  startDate: string;
+  /** Date in format of 'yyyy-MM'; `null` = present.  */
+  endDate: string | null;
   /** Text with limited markdown support - bold, italic, strikethrough, links,
    * unordered lists, ordered lists. */
   text: string;

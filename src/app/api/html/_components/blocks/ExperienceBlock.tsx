@@ -1,7 +1,7 @@
-import { resumeBlocks } from '@/constants/resume';
 import type { ExperienceBlockData } from '@/types/blocks';
 
 import { MarkdownText } from '../primitives';
+import { useBlocks } from '../../context';
 import type { BlockProps } from './types';
 
 const formatDate = (date: string) =>
@@ -11,6 +11,7 @@ const formatDate = (date: string) =>
   });
 
 export const ExperienceBlock = ({ blockId }: BlockProps) => {
+  const resumeBlocks = useBlocks();
   const block = resumeBlocks.find(
     ({ id, type }) => id === blockId && type === 'experience'
   ) as ExperienceBlockData | undefined;
@@ -25,9 +26,11 @@ export const ExperienceBlock = ({ blockId }: BlockProps) => {
             .join(' – ')}
         </h3>
         <span className='caption flex-shrink-0'>
-          {block.content.dates
-            .map(date => (date === null ? 'Present' : formatDate(date)))
-            .join(' – ')}
+          {`${formatDate(block.content.startDate)} – ${
+            block.content.endDate === null
+              ? 'Present'
+              : formatDate(block.content.endDate)
+          }`}
         </span>
       </div>
       <MarkdownText className='[&>p:first-of-type]:mt-0'>

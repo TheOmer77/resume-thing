@@ -1,13 +1,15 @@
-import { resumeBlocks } from '@/constants/resume';
+'use client';
 
 import { TextBlock } from './TextBlock';
 import { TitleBlock } from './TitleBlock';
 import { ContactInfoBlock } from './ContactInfoBlock';
 import { ExperienceBlock } from './ExperienceBlock';
 import { SectionBlock } from './SectionBlock';
+import { useBlocks } from '../../context';
 import type { BlockProps } from './types';
 
 export const Block = ({ blockId }: BlockProps) => {
+  const resumeBlocks = useBlocks();
   const block = resumeBlocks.find(({ id }) => id === blockId);
   if (!block) return null;
 

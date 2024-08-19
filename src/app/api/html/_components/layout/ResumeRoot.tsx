@@ -1,10 +1,9 @@
+import type { PropsWithChildren } from 'react';
+
 import { layout } from '@/constants/resume';
 import { cn } from '@/lib/cn';
 
-import { PrimaryColumn, SecondaryColumn, SecondaryHeaderRow } from './layout';
-import { Block } from './blocks';
-
-export const ResumeRoot = () => (
+export const ResumeRoot = ({ children }: PropsWithChildren) => (
   <div
     className={cn(
       'grid min-h-screen break-after-avoid grid-cols-[var(--secondary-col-width),1fr]',
@@ -17,20 +16,6 @@ export const ResumeRoot = () => (
     )}
     style={layout}
   >
-    <SecondaryHeaderRow>
-      <Block blockId='dummy-title' />
-      <Block blockId='dummy-contact' />
-      <Block blockId='dummy-links' />
-    </SecondaryHeaderRow>
-    <PrimaryColumn>
-      <Block blockId='dummy-summary' />
-      <Block blockId='dummy-exp' />
-      <Block blockId='dummy-edu' />
-    </PrimaryColumn>
-    <SecondaryColumn>
-      <Block blockId='dummy-skills' />
-      <Block blockId='dummy-tools' />
-      <Block blockId='dummy-languages' />
-    </SecondaryColumn>
+    {children}
   </div>
 );

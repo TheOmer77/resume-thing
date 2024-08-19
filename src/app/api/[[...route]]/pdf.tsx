@@ -1,9 +1,9 @@
-import { Hono } from 'hono';
+import { Hono, type Context } from 'hono';
 import puppeteer from 'puppeteer-core';
 import tailwindTypography from '@tailwindcss/typography';
 import { mkdir, writeFile } from 'fs/promises';
 
-import { ResumeRoot } from '@/components/resume';
+import { extractHtmlBodyContent } from '@/lib/extractHtmlContent';
 import { generateTailwindCss } from '@/lib/generateTailwindCss';
 import { interCdn } from '@/constants/inter';
 import { resumeTheme } from '@/constants/resume';
@@ -18,38 +18,47 @@ const fixTwClasses = (html: string) => {
   });
 };
 
-export const pdfRouter = new Hono().get('/', async () => {
-  // Next.js complains when you import 'react-dom/server' directly
-  const { renderToStaticMarkup } = await import('react-dom/server');
-
-  const html = `${interCdn}${fixTwClasses(renderToStaticMarkup(<ResumeRoot />))}`;
+/** Temporary hack: Render a page in a separate Next.js route. */
+const getHtml = async (ctx: Context) => {
+  const res = await fetch(
+      `${ctx.req.header('x-forwarded-proto')}://${ctx.req.header(
+        'x-forwarded-host'
+      )}/api/html`
+    ),
+    fullHtml = await res.text();
+  const bodyContent = fixTwClasses(extractHtmlBodyContent(fullHtml));
   const css = await generateTailwindCss(
-    html,
+    bodyContent,
     { plugins: [tailwindTypography], theme: resumeTheme },
     '@page{margin:0;}'
   );
+
+  return `<!doctype html><html><head>${interCdn}<style>${
+    css
+  }</style></head><body>${bodyContent}</body></html>`;
+};
+
+export const pdfRouter = new Hono().get('/', async ctx => {
+  const [html, page] = await Promise.all([
+    await getHtml(ctx),
+    await (
+      await puppeteer.launch({
+        args: ['--disable-setuid-sandbox', '--no-sandbox', '--disable-gpu'],
+        executablePath: '/usr/bin/chromium-browser',
+      })
+    ).newPage(),
+  ]);
 
   if (process.env.PDF_DEBUG?.toLowerCase() === 'true') {
     await mkdir('./debug').catch(error => {
       if (!('code' in error && error.code === 'EEXIST')) throw error;
     });
-    await writeFile(
-      './debug/index.html',
-      `<link rel="stylesheet" href="./index.css">${html}`
-    );
-    await writeFile('./debug/index.css', css);
+    await writeFile('./debug/index.html', html);
   }
 
-  const browser = await puppeteer.launch({
-    args: ['--disable-setuid-sandbox', '--no-sandbox', '--disable-gpu'],
-    executablePath: '/usr/bin/chromium-browser',
-  });
-  const page = await browser.newPage();
-  await page.setContent(`<style>${css}</style>${html}`, {
-    waitUntil: 'networkidle0',
-  });
+  await page.setContent(html, { waitUntil: 'networkidle0' });
   const pdf = await page.pdf({ format: 'A4' });
-  await browser.close();
+  await page.browser().close();
 
   return new Response(pdf, {
     headers: {
