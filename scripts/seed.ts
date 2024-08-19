@@ -19,20 +19,19 @@ import type {
 } from '@/types/blocks';
 
 const main = async () => {
-  const { contactInfo, experience, section, text, title } =
-    resumeBlocks.reduce<{
-      contactInfo: ContactInfoBlockData[];
-      experience: ExperienceBlockData[];
-      section: SectionBlockData[];
-      text: TextBlockData[];
-      title: TitleBlockData[];
-    }>(
-      (obj, curr) => ({
-        ...obj,
-        [curr.type]: [...obj[curr.type], curr],
-      }),
-      { contactInfo: [], experience: [], section: [], text: [], title: [] }
-    );
+  const dummyData = resumeBlocks.reduce<{
+    contactInfo: ContactInfoBlockData[];
+    experience: ExperienceBlockData[];
+    section: SectionBlockData[];
+    text: TextBlockData[];
+    title: TitleBlockData[];
+  }>(
+    (obj, curr) => ({
+      ...obj,
+      [curr.type]: [...obj[curr.type], curr],
+    }),
+    { contactInfo: [], experience: [], section: [], text: [], title: [] }
+  );
 
   await db.transaction(async tx => {
     try {
@@ -46,7 +45,7 @@ const main = async () => {
       await tx
         .insert(blockContentContact)
         .values(
-          contactInfo.map(({ content, id }) => ({
+          dummyData.contactInfo.map(({ content, id }) => ({
             blockId: id,
             orientation: content.orientation,
           }))
@@ -55,7 +54,7 @@ const main = async () => {
       await tx
         .insert(blockContentContactItem)
         .values(
-          contactInfo
+          dummyData.contactInfo
             .map(({ content, id }) =>
               content.items.map((value, order) => ({
                 blockId: id,
@@ -70,7 +69,7 @@ const main = async () => {
       await tx
         .insert(blockContentSection)
         .values(
-          section.map(({ content, id }) => ({
+          dummyData.section.map(({ content, id }) => ({
             blockId: id,
             title: content.title,
           }))
@@ -79,7 +78,7 @@ const main = async () => {
       await tx
         .insert(blockContentSectionChild)
         .values(
-          section
+          dummyData.section
             .map(({ content, id }) =>
               content.children.map((value, order) => ({
                 blockId: id,
@@ -94,18 +93,28 @@ const main = async () => {
       await tx
         .insert(blockContentExperience)
         .values(
-          experience.map(({ content, id }) => ({ blockId: id, ...content }))
+          dummyData.experience.map(({ content, id }) => ({
+            blockId: id,
+            ...content,
+          }))
         )
         .execute();
 
       await tx
         .insert(blockContentText)
-        .values(text.map(({ content, id }) => ({ blockId: id, ...content })))
+        .values(
+          dummyData.text.map(({ content, id }) => ({ blockId: id, ...content }))
+        )
         .execute();
 
       await tx
         .insert(blockContentTitle)
-        .values(title.map(({ content, id }) => ({ blockId: id, ...content })))
+        .values(
+          dummyData.title.map(({ content, id }) => ({
+            blockId: id,
+            ...content,
+          }))
+        )
         .execute();
 
       console.log('\x1b[32m', '✔️ DB Seed successful.');
