@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 
-import { getBlocks } from '@/db/queries/blocks';
+import { getBlocks } from '@/db/queries/block';
 
 export const blocksRouter = new Hono().get('/', async ctx => {
   const result = await getBlocks();
