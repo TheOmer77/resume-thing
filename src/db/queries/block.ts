@@ -1,14 +1,16 @@
-import { eq, isNotNull, or, SQL, sql } from 'drizzle-orm';
+import { and, asc, eq, isNotNull, or, SQL, sql } from 'drizzle-orm';
 import type { PgColumn } from 'drizzle-orm/pg-core';
 
 import { db } from '@/db';
 import { block } from '@/db/schema';
 import { jsonBuildObject } from '@/lib/drizzle';
-import { queryMap } from '@/constants/queries/blocks';
+import { queryMap } from '@/constants/queries/block';
 import type { BlockData } from '@/types/blocks';
 
-export const getBlocks = async () => {
-  const where = or(...queryMap.map(({ schema }) => isNotNull(schema.blockId)));
+export const getBlocks = async ({ resumeId }: { resumeId?: string } = {}) => {
+  const blockContentWhere = or(
+    ...queryMap.map(({ schema }) => isNotNull(schema.blockId))
+  );
   /** Required for child schemas to be fetched properly. */
   const groupBy = queryMap
     .reduce<PgColumn[]>((arr, { schema, properties }) => {
@@ -52,8 +54,13 @@ export const getBlocks = async () => {
   }, initialQuery);
 
   const result = (await queryWithJoins
-    .where(where)
-    .groupBy(block.id, ...groupBy)) as BlockData[];
+    .where(
+      resumeId
+        ? and(blockContentWhere, eq(block.resumeId, resumeId))
+        : blockContentWhere
+    )
+    .groupBy(block.id, ...groupBy)
+    .orderBy(asc(block.order))) as BlockData[];
 
   return result;
 };
