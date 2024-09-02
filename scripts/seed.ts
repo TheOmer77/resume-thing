@@ -8,9 +8,12 @@ import {
   blockContentSectionChild,
   blockContentText,
   blockContentTitle,
+  resume,
 } from '@/db/schema';
-import { resumeBlocks } from '@/constants/seed/blocks';
+import { seedBlocks } from '@/constants/seed/blocks';
+import { seedResumes } from '@/constants/seed/resumes';
 import type {
+  BlockData,
   ContactInfoBlockData,
   ExperienceBlockData,
   SectionBlockData,
@@ -18,8 +21,11 @@ import type {
   TitleBlockData,
 } from '@/types/blocks';
 
+const isBlockInSection = (block: BlockData) =>
+  ['-item', '-content'].some(suffix => block.id.includes(suffix));
+
 const main = async () => {
-  const dummyData = resumeBlocks.reduce<{
+  const dummyData = seedBlocks.reduce<{
     contactInfo: ContactInfoBlockData[];
     experience: ExperienceBlockData[];
     section: SectionBlockData[];
@@ -35,11 +41,23 @@ const main = async () => {
 
   await db.transaction(async tx => {
     try {
+      await tx.delete(resume).execute();
       await tx.delete(block).execute();
+
+      await tx.insert(resume).values(seedResumes);
 
       await tx
         .insert(block)
-        .values(resumeBlocks.map(({ id }) => ({ id })))
+        .values(
+          [...seedBlocks]
+            .reverse()
+            .sort(block => (isBlockInSection(block) ? 1 : -1))
+            .map((block, idx) => ({
+              id: block.id,
+              resumeId: seedResumes[0].id,
+              order: isBlockInSection(block) ? null : idx,
+            }))
+        )
         .execute();
 
       await tx

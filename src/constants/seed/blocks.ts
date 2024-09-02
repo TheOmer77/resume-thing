@@ -1,6 +1,6 @@
 import type { BlockData } from '@/types/blocks';
 
-export const resumeBlocks = [
+export const seedBlocks = [
   {
     id: 'dummy-title',
     type: 'title',
