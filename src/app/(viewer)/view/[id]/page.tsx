@@ -14,7 +14,7 @@ const ResumeViewPage = async ({ params: { id } }: ResumeViewPageProps) => {
   return (
     <div className='flex min-h-dvh w-full flex-col items-center justify-center'>
       <Header title={resume.title}>
-        <PDFDownloadButton resumeId={id} />
+        <PDFDownloadButton resumeId={id} title={resume.title} />
       </Header>
       <PDFViewer resumeId={id} />
     </div>
