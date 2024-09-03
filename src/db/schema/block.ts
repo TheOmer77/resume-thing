@@ -12,4 +12,4 @@ export const block = pgTable(
   table => ({ uniqueOrderPerResume: unique().on(table.resumeId, table.order) })
 );
 
-export type Block = InferSelectModel<typeof block>;
+export type BlockBase = InferSelectModel<typeof block>;

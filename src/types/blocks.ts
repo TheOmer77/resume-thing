@@ -1,66 +1,38 @@
-export type BlockCore = {
-  id: string;
-};
+import type {
+  BlockBase,
+  ContactInfoBlockContent,
+  ContactInfoItem,
+  ExperienceBlockContent,
+  SectionBlockContent,
+  TextBlockContent,
+  TitleBlockContent,
+} from '@/db/schema';
 
-export type SectionBlockContent = {
-  title: string;
-  children: string[];
-};
-export type SectionBlockData = BlockCore & {
-  type: 'section';
-  content: SectionBlockContent;
-};
-
-export type TitleBlockContent = {
-  title: string;
-  subtitle?: string;
-};
-export type TitleBlockData = BlockCore & {
+export type TitleBlockData = BlockBase & {
   type: 'title';
-  content: TitleBlockContent;
+  content: Omit<TitleBlockContent, 'blockId'>;
 };
 
-export type TextBlockContent = {
-  /** Text with limited markdown support - bold, italic, strikethrough, links,
-   * unordered lists, ordered lists. */
-  text: string;
-  /** Whether or not this is lead text. */
-  lead?: boolean;
-};
-export type TextBlockData = BlockCore & {
+export type TextBlockData = BlockBase & {
   type: 'text';
-  content: TextBlockContent;
+  content: Omit<TextBlockContent, 'blockId'>;
 };
 
-export type ContactInfoItem = {
-  type: string;
-  /** If present, this item is a link. */
-  url?: string;
-  text: string;
-};
-export type ContactInfoBlockContent = {
-  orientation?: 'horizontal' | 'vertical';
-  items: ContactInfoItem[];
-};
-export type ContactInfoBlockData = BlockCore & {
-  type: 'contactInfo';
-  content: ContactInfoBlockContent;
-};
-
-export type ExperienceBlockContent = {
-  title: string;
-  location: string;
-  /** Date in format of 'yyyy-MM'.  */
-  startDate: string;
-  /** Date in format of 'yyyy-MM'; `null` = present.  */
-  endDate: string | null;
-  /** Text with limited markdown support - bold, italic, strikethrough, links,
-   * unordered lists, ordered lists. */
-  text: string;
-};
-export type ExperienceBlockData = BlockCore & {
+export type ExperienceBlockData = BlockBase & {
   type: 'experience';
-  content: ExperienceBlockContent;
+  content: Omit<ExperienceBlockContent, 'blockId'>;
+};
+
+export type ContactInfoBlockData = BlockBase & {
+  type: 'contactInfo';
+  content: Omit<ContactInfoBlockContent, 'blockId'> & {
+    items: Omit<ContactInfoItem, 'blockId' | 'order'>[];
+  };
+};
+
+export type SectionBlockData = BlockBase & {
+  type: 'section';
+  content: Omit<SectionBlockContent, 'blockId'> & { children: string[] };
 };
 
 export type BlockData =
