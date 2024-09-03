@@ -12,5 +12,8 @@ export const block = pgTable(
   table => ({ uniqueOrderPerResume: unique().on(table.resumeId, table.order) })
 );
 
-export type BlockBase = Omit<InferSelectModel<typeof block>, 'order'> &
-  Pick<InferInsertModel<typeof block>, 'order'>;
+export type BlockBase = Pick<
+  InferSelectModel<typeof block>,
+  'id' | 'resumeId'
+> &
+  Omit<InferInsertModel<typeof block>, 'id' | 'resumeId'>;
