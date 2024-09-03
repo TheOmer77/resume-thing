@@ -1,5 +1,5 @@
 import { pgTable, smallint, text, unique } from 'drizzle-orm/pg-core';
-import type { InferSelectModel } from 'drizzle-orm';
+import type { InferInsertModel, InferSelectModel } from 'drizzle-orm';
 import { createId } from '@paralleldrive/cuid2';
 
 export const block = pgTable(
@@ -12,4 +12,5 @@ export const block = pgTable(
   table => ({ uniqueOrderPerResume: unique().on(table.resumeId, table.order) })
 );
 
-export type BlockBase = InferSelectModel<typeof block>;
+export type BlockBase = Omit<InferSelectModel<typeof block>, 'order'> &
+  Pick<InferInsertModel<typeof block>, 'order'>;
