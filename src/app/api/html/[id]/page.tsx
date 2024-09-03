@@ -13,20 +13,39 @@ type ResumeHtmlPageProps = { params: { id: string } };
 
 const ResumeHtmlPage = async ({ params: { id } }: ResumeHtmlPageProps) => {
   const blocks = await getBlocks({ resumeId: id });
+  const renderedBlocks = blocks.filter(
+    ({ order }) => typeof order === 'number'
+  );
+
+  // TODO: primaryHeaderBlocks
+  const primaryColBlocks = renderedBlocks.filter(
+      ({ inHeaderRow, inSecondaryCol }) => !inHeaderRow && !inSecondaryCol
+    ),
+    secondaryHeaderBlocks = renderedBlocks.filter(
+      ({ inHeaderRow, inSecondaryCol }) => inHeaderRow && inSecondaryCol
+    ),
+    secondaryColBlocks = renderedBlocks.filter(
+      ({ inHeaderRow, inSecondaryCol }) => !inHeaderRow && inSecondaryCol
+    );
+
   return (
     <BlocksProvider value={blocks}>
       <ResumeRoot>
         <SecondaryHeaderRow>
-          {/* TODO: Secondary header row blocks */}
+          {secondaryHeaderBlocks.map(({ id }) => (
+            <Block key={id} blockId={id} />
+          ))}
         </SecondaryHeaderRow>
         <PrimaryColumn>
-          {blocks
-            .filter(({ order }) => typeof order === 'number')
-            .map(({ id }) => (
-              <Block key={id} blockId={id} />
-            ))}
+          {primaryColBlocks.map(({ id }) => (
+            <Block key={id} blockId={id} />
+          ))}
         </PrimaryColumn>
-        <SecondaryColumn>{/* TODO: Secondary column blocks */}</SecondaryColumn>
+        <SecondaryColumn>
+          {secondaryColBlocks.map(({ id }) => (
+            <Block key={id} blockId={id} />
+          ))}
+        </SecondaryColumn>
       </ResumeRoot>
     </BlocksProvider>
   );
