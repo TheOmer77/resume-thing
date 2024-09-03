@@ -1,5 +1,5 @@
 import { pgEnum, pgTable, text } from 'drizzle-orm/pg-core';
-import type { InferSelectModel } from 'drizzle-orm';
+import type { InferInsertModel } from 'drizzle-orm';
 
 import { block } from '../block';
 
@@ -16,6 +16,6 @@ export const blockContentContact = pgTable('block_content_contact', {
   orientation: blockContentContactOrientation('orientation'),
 });
 
-export type ContactInfoBlockContent = InferSelectModel<
+export type ContactInfoBlockContent = InferInsertModel<
   typeof blockContentContact
 >;

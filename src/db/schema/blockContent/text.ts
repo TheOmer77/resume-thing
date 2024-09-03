@@ -1,5 +1,5 @@
 import { boolean, pgTable, text } from 'drizzle-orm/pg-core';
-import type { InferSelectModel } from 'drizzle-orm';
+import type { InferInsertModel } from 'drizzle-orm';
 
 import { block } from '../block';
 
@@ -12,4 +12,4 @@ export const blockContentText = pgTable('block_content_text', {
   lead: boolean('lead').notNull().default(false),
 });
 
-export type TextBlockContent = InferSelectModel<typeof blockContentText>;
+export type TextBlockContent = InferInsertModel<typeof blockContentText>;

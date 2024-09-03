@@ -1,5 +1,5 @@
 import { pgTable, text } from 'drizzle-orm/pg-core';
-import type { InferSelectModel } from 'drizzle-orm';
+import type { InferInsertModel } from 'drizzle-orm';
 
 import { block } from '../block';
 
@@ -15,6 +15,6 @@ export const blockContentExperience = pgTable('block_content_experience', {
   text: text('text').notNull(),
 });
 
-export type ExperienceBlockContent = InferSelectModel<
+export type ExperienceBlockContent = InferInsertModel<
   typeof blockContentExperience
 >;
