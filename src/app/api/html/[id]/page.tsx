@@ -20,9 +20,11 @@ const ResumeHtmlPage = async ({ params: { id } }: ResumeHtmlPageProps) => {
           {/* TODO: Secondary header row blocks */}
         </SecondaryHeaderRow>
         <PrimaryColumn>
-          {blocks.map(({ id }) => (
-            <Block key={id} blockId={id} />
-          ))}
+          {blocks
+            .filter(({ order }) => typeof order === 'number')
+            .map(({ id }) => (
+              <Block key={id} blockId={id} />
+            ))}
         </PrimaryColumn>
         <SecondaryColumn>{/* TODO: Secondary column blocks */}</SecondaryColumn>
       </ResumeRoot>
