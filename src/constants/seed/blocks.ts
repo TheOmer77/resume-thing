@@ -9,6 +9,8 @@ export const seedBlocks = [
     id: 'dummy-title',
     resumeId,
     order: 0,
+    inHeaderRow: true,
+    inSecondaryCol: true,
     type: 'title',
     content: {
       title: 'Name Lastname',
@@ -19,6 +21,8 @@ export const seedBlocks = [
     id: 'dummy-contact',
     resumeId,
     order: 1,
+    inHeaderRow: true,
+    inSecondaryCol: true,
     type: 'contactInfo',
     content: {
       items: [
@@ -32,6 +36,8 @@ export const seedBlocks = [
     id: 'dummy-links',
     resumeId,
     order: 2,
+    inHeaderRow: true,
+    inSecondaryCol: true,
     type: 'contactInfo',
     content: {
       orientation: 'horizontal',
@@ -49,7 +55,7 @@ export const seedBlocks = [
   {
     id: 'dummy-summary',
     resumeId,
-    order: 3,
+    order: 0,
     type: 'text',
     content: {
       text: 'In dui lectus, molestie lacinia lectus et, elementum fringilla lorem. Morbi elementum massa a erat finibus commodo. Duis id porttitor tortor. Praesent mauris ipsum, mattis nec pretium nec, semper convallis nisl. Aliquam vulputate iaculis dui eu blandit. Class aptent taciti sociosqu ad litora torquent per conubia nostra.',
@@ -60,7 +66,7 @@ export const seedBlocks = [
   {
     id: 'dummy-exp',
     resumeId,
-    order: 4,
+    order: 1,
     type: 'section',
     content: {
       title: 'Experience',
@@ -86,7 +92,7 @@ export const seedBlocks = [
   {
     id: 'dummy-edu',
     resumeId,
-    order: 5,
+    order: 2,
     type: 'section',
     content: {
       title: 'Education',
@@ -112,7 +118,8 @@ export const seedBlocks = [
   {
     id: 'dummy-skills',
     resumeId,
-    order: 6,
+    order: 0,
+    inSecondaryCol: true,
     type: 'section',
     content: {
       title: 'Skills',
@@ -138,7 +145,8 @@ export const seedBlocks = [
   {
     id: 'dummy-tools',
     resumeId,
-    order: 7,
+    order: 1,
+    inSecondaryCol: true,
     type: 'section',
     content: {
       title: 'Tools',
@@ -165,7 +173,8 @@ export const seedBlocks = [
   {
     id: 'dummy-languages',
     resumeId,
-    order: 8,
+    order: 2,
+    inSecondaryCol: true,
     type: 'section',
     content: {
       title: 'Languages',
