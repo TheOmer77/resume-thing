@@ -25,6 +25,8 @@ export const getBlocks = async ({ resumeId }: { resumeId?: string } = {}) => {
   const initialQuery = db
     .select({
       id: block.id,
+      resumeId: block.resumeId,
+      order: block.order,
       type: sql`CASE ${sql.join(
         queryMap.map(
           ({ schema, type }) =>
