@@ -2,11 +2,15 @@ import { boolean, pgTable, smallint, text, unique } from 'drizzle-orm/pg-core';
 import type { InferInsertModel, InferSelectModel } from 'drizzle-orm';
 import { createId } from '@paralleldrive/cuid2';
 
+import { resume } from './resume';
+
 export const block = pgTable(
   'block',
   {
     id: text('id').primaryKey().$default(createId),
-    resumeId: text('resume_id').notNull(),
+    resumeId: text('resume_id')
+      .notNull()
+      .references(() => resume.id, { onDelete: 'cascade' }),
     order: smallint('order'),
     inHeaderRow: boolean('in_header_row').notNull().default(false),
     inSecondaryCol: boolean('in_secondary_col').notNull().default(false),
