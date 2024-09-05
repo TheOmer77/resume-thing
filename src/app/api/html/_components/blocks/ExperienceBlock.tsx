@@ -27,7 +27,8 @@ export const ExperienceBlock = ({ blockId }: BlockProps) => {
         </h3>
         <span className='caption flex-shrink-0'>
           {`${formatDate(block.content.startDate)} – ${
-            block.content.endDate === null
+            block.content.endDate === null ||
+            typeof block.content.endDate === 'undefined'
               ? 'Present'
               : formatDate(block.content.endDate)
           }`}
