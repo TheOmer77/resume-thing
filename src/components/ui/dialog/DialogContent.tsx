@@ -5,9 +5,11 @@ import {
   type ComponentPropsWithoutRef,
   type ElementRef,
 } from 'react';
-import { Content, DialogOverlay, Portal } from '@radix-ui/react-dialog';
+import { Content, Portal } from '@radix-ui/react-dialog';
 
 import { cn } from '@/lib/cn';
+
+import { DialogOverlay } from './DialogOverlay';
 
 export const DialogContent = forwardRef<
   ElementRef<typeof Content>,
