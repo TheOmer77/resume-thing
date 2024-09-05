@@ -27,7 +27,7 @@ export const DialogContent = forwardRef<
     >
       {children}
       <Close asChild className='absolute end-4 top-4'>
-        <Button variant='ghost' size='icon'>
+        <Button variant='flat' size='icon'>
           <XIcon className='size-4' />
           <span className='sr-only'>Close</span>
         </Button>

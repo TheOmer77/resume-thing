@@ -8,7 +8,7 @@ export const ResumeListItem = ({ resume }: { resume: Resume }) => (
   <li className='relative w-full'>
     <Button
       asChild
-      variant='ghost'
+      variant='flat'
       className='h-auto w-full flex-col items-start'
     >
       <Link href={`/view/${resume.id}`}>
@@ -24,7 +24,7 @@ export const ResumeListItem = ({ resume }: { resume: Resume }) => (
       </Link>
     </Button>
     <Button
-      variant='ghost'
+      variant='flat'
       size='icon'
       className='absolute end-2 top-1/2 -translate-y-1/2'
     >
