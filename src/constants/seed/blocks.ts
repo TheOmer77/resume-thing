@@ -1,8 +1,16 @@
 import type { BlockData } from '@/types/blocks';
 
-export const resumeBlocks = [
+import { seedResumes } from './resumes';
+
+const resumeId = seedResumes[0].id;
+
+export const seedBlocks = [
   {
     id: 'dummy-title',
+    resumeId,
+    order: 0,
+    inHeaderRow: true,
+    inSecondaryCol: true,
     type: 'title',
     content: {
       title: 'Name Lastname',
@@ -11,6 +19,10 @@ export const resumeBlocks = [
   },
   {
     id: 'dummy-contact',
+    resumeId,
+    order: 1,
+    inHeaderRow: true,
+    inSecondaryCol: true,
     type: 'contactInfo',
     content: {
       items: [
@@ -22,6 +34,10 @@ export const resumeBlocks = [
   },
   {
     id: 'dummy-links',
+    resumeId,
+    order: 2,
+    inHeaderRow: true,
+    inSecondaryCol: true,
     type: 'contactInfo',
     content: {
       orientation: 'horizontal',
@@ -38,6 +54,8 @@ export const resumeBlocks = [
 
   {
     id: 'dummy-summary',
+    resumeId,
+    order: 0,
     type: 'text',
     content: {
       text: 'In dui lectus, molestie lacinia lectus et, elementum fringilla lorem. Morbi elementum massa a erat finibus commodo. Duis id porttitor tortor. Praesent mauris ipsum, mattis nec pretium nec, semper convallis nisl. Aliquam vulputate iaculis dui eu blandit. Class aptent taciti sociosqu ad litora torquent per conubia nostra.',
@@ -47,6 +65,8 @@ export const resumeBlocks = [
 
   {
     id: 'dummy-exp',
+    resumeId,
+    order: 1,
     type: 'section',
     content: {
       title: 'Experience',
@@ -57,6 +77,7 @@ export const resumeBlocks = [
     (key, _, arr) =>
       ({
         id: `dummy-exp-item-${key}`,
+        resumeId,
         type: 'experience',
         content: {
           title: 'Job Title',
@@ -65,11 +86,13 @@ export const resumeBlocks = [
           endDate: `${2021 + (arr.length - key - 1)}-12`,
           text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius orci a nisl suscipit, et molestie ligula semper. Cras in bibendum augue. Phasellus lacinia a turpis a ullamcorper.',
         },
-      }) satisfies BlockData
+      }) as const satisfies BlockData
   ),
 
   {
     id: 'dummy-edu',
+    resumeId,
+    order: 2,
     type: 'section',
     content: {
       title: 'Education',
@@ -81,6 +104,7 @@ export const resumeBlocks = [
       ({
         id: `dummy-edu-item-${key}`,
         type: 'experience',
+        resumeId,
         content: {
           title: `Course ${arr.length - key}`,
           location: 'Institution',
@@ -88,11 +112,14 @@ export const resumeBlocks = [
           endDate: `${2019 + (arr.length - key - 1)}-05`,
           text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius orci a nisl suscipit, et molestie ligula semper. Cras in bibendum augue. Phasellus lacinia a turpis a ullamcorper.',
         },
-      }) satisfies BlockData
+      }) as const satisfies BlockData
   ),
 
   {
     id: 'dummy-skills',
+    resumeId,
+    order: 0,
+    inSecondaryCol: true,
     type: 'section',
     content: {
       title: 'Skills',
@@ -101,6 +128,7 @@ export const resumeBlocks = [
   },
   {
     id: 'dummy-skills-content',
+    resumeId,
     type: 'text',
     content: {
       text: `
@@ -116,6 +144,9 @@ export const resumeBlocks = [
 
   {
     id: 'dummy-tools',
+    resumeId,
+    order: 1,
+    inSecondaryCol: true,
     type: 'section',
     content: {
       title: 'Tools',
@@ -124,6 +155,7 @@ export const resumeBlocks = [
   },
   {
     id: 'dummy-tools-content',
+    resumeId,
     type: 'text',
     content: {
       text: `
@@ -140,6 +172,9 @@ export const resumeBlocks = [
 
   {
     id: 'dummy-languages',
+    resumeId,
+    order: 2,
+    inSecondaryCol: true,
     type: 'section',
     content: {
       title: 'Languages',
@@ -148,6 +183,7 @@ export const resumeBlocks = [
   },
   {
     id: 'dummy-languages-content',
+    resumeId,
     type: 'text',
     content: {
       text: `
@@ -155,4 +191,4 @@ export const resumeBlocks = [
 - English (Fluent)`,
     },
   },
-] satisfies BlockData[];
+] as const satisfies BlockData[];

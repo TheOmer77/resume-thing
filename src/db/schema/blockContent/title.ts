@@ -1,4 +1,5 @@
 import { pgTable, text } from 'drizzle-orm/pg-core';
+import type { InferInsertModel } from 'drizzle-orm';
 
 import { block } from '../block';
 
@@ -10,3 +11,5 @@ export const blockContentTitle = pgTable('block_content_title', {
   title: text('title').notNull(),
   subtitle: text('subtitle'),
 });
+
+export type TitleBlockContent = InferInsertModel<typeof blockContentTitle>;

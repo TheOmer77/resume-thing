@@ -15,7 +15,7 @@ export const SectionBlock = ({ blockId }: BlockProps) => {
   if (!block) return null;
 
   return (
-    <div>
+    <>
       <h2>{block.content.title}</h2>
       {(block.content.children || []).map(childId => {
         const block = resumeBlocks.find(({ id }) => id === childId);
@@ -36,6 +36,6 @@ export const SectionBlock = ({ blockId }: BlockProps) => {
             return null;
         }
       })}
-    </div>
+    </>
   );
 };

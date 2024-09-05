@@ -1,4 +1,5 @@
 import { pgTable, primaryKey, smallint, text } from 'drizzle-orm/pg-core';
+import type { InferInsertModel } from 'drizzle-orm';
 
 import { block } from '../block';
 
@@ -16,3 +17,5 @@ export const blockContentContactItem = pgTable(
   },
   table => ({ pk: primaryKey({ columns: [table.blockId, table.order] }) })
 );
+
+export type ContactInfoItem = InferInsertModel<typeof blockContentContactItem>;

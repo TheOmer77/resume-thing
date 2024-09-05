@@ -5,9 +5,15 @@ import { DownloadIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { usePDFFile } from '@/hooks/usePDFFile';
+import type { PDFViewerProps } from '@/types/pdf';
 
-export const PDFDownloadButton = () => {
-  const file = usePDFFile();
+type PDFDownloadButtonProps = PDFViewerProps & { title?: string };
+
+export const PDFDownloadButton = ({
+  resumeId,
+  title = 'Resume',
+}: PDFDownloadButtonProps) => {
+  const file = usePDFFile(resumeId);
 
   const handleClick = useCallback(() => {
     if (!file) return;
@@ -15,10 +21,10 @@ export const PDFDownloadButton = () => {
     const a = document.createElement('a');
     const url = window.URL.createObjectURL(file);
     a.href = url;
-    a.download = 'thing.pdf';
+    a.download = `${title}.pdf`;
     a.click();
     window.URL.revokeObjectURL(url);
-  }, [file]);
+  }, [file, title]);
 
   if (!file) return null;
   return (

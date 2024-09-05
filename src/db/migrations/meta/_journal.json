@@ -8,6 +8,13 @@
       "when": 1724057905353,
       "tag": "0000_windy_firestar",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1725527407441,
+      "tag": "0001_neat_iron_monger",
+      "breakpoints": true
     }
   ]
 }

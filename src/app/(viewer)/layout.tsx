@@ -12,7 +12,7 @@ const font = Figtree({
 });
 
 export const metadata: Metadata = {
-  title: 'PDF Thing',
+  title: 'Resume Thing',
   description: 'This description will be changed later',
 };
 

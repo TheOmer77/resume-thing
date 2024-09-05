@@ -8,8 +8,10 @@ import {
   blockContentSectionChild,
   blockContentText,
   blockContentTitle,
+  resume,
 } from '@/db/schema';
-import { resumeBlocks } from '@/constants/seed/blocks';
+import { seedBlocks } from '@/constants/seed/blocks';
+import { seedResumes } from '@/constants/seed/resumes';
 import type {
   ContactInfoBlockData,
   ExperienceBlockData,
@@ -19,7 +21,7 @@ import type {
 } from '@/types/blocks';
 
 const main = async () => {
-  const dummyData = resumeBlocks.reduce<{
+  const dummyData = seedBlocks.reduce<{
     contactInfo: ContactInfoBlockData[];
     experience: ExperienceBlockData[];
     section: SectionBlockData[];
@@ -35,12 +37,12 @@ const main = async () => {
 
   await db.transaction(async tx => {
     try {
-      await tx.delete(block).execute();
+      await tx.delete(resume).execute();
+      await tx.delete(block).execute(); // Also deletes block contents
 
-      await tx
-        .insert(block)
-        .values(resumeBlocks.map(({ id }) => ({ id })))
-        .execute();
+      await tx.insert(resume).values(seedResumes).execute();
+
+      await tx.insert(block).values(seedBlocks).execute();
 
       await tx
         .insert(blockContentContact)

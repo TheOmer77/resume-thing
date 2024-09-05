@@ -2,6 +2,7 @@ import { Hono, type Context } from 'hono';
 import puppeteer from 'puppeteer-core';
 import tailwindTypography from '@tailwindcss/typography';
 import { mkdir, writeFile } from 'fs/promises';
+import type { BlankEnv, BlankInput } from 'hono/types';
 
 import { extractHtmlBodyContent } from '@/lib/extractHtmlContent';
 import { generateTailwindCss } from '@/lib/generateTailwindCss';
@@ -19,11 +20,11 @@ const fixTwClasses = (html: string) => {
 };
 
 /** Temporary hack: Render a page in a separate Next.js route. */
-const getHtml = async (ctx: Context) => {
+const getHtml = async (ctx: Context<BlankEnv, '/:id', BlankInput>) => {
   const res = await fetch(
       `${ctx.req.header('x-forwarded-proto')}://${ctx.req.header(
         'x-forwarded-host'
-      )}/api/html`
+      )}/api/html/${ctx.req.param('id')}`
     ),
     fullHtml = await res.text();
   const bodyContent = fixTwClasses(extractHtmlBodyContent(fullHtml));
@@ -38,7 +39,7 @@ const getHtml = async (ctx: Context) => {
   }</style></head><body>${bodyContent}</body></html>`;
 };
 
-export const pdfRouter = new Hono().get('/', async ctx => {
+export const pdfRouter = new Hono().get('/:id', async ctx => {
   const [html, page] = await Promise.all([
     await getHtml(ctx),
     await (
