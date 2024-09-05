@@ -1,10 +1,11 @@
 import Link from 'next/link';
+import { MoreVerticalIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import type { Resume } from '@/db/schema';
 
 export const ResumeListItem = ({ resume }: { resume: Resume }) => (
-  <li className='w-full'>
+  <li className='relative w-full'>
     <Button
       asChild
       variant='ghost'
@@ -21,6 +22,13 @@ export const ResumeListItem = ({ resume }: { resume: Resume }) => (
           })}
         </span>
       </Link>
+    </Button>
+    <Button
+      variant='ghost'
+      size='icon'
+      className='absolute end-2 top-1/2 -translate-y-1/2'
+    >
+      <MoreVerticalIcon className='size-4' />
     </Button>
   </li>
 );
