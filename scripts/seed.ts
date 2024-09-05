@@ -40,7 +40,7 @@ const main = async () => {
       await tx.delete(resume).execute();
       await tx.delete(block).execute(); // Also deletes block contents
 
-      await tx.insert(resume).values(seedResumes);
+      await tx.insert(resume).values(seedResumes).execute();
 
       await tx.insert(block).values(seedBlocks).execute();
 
