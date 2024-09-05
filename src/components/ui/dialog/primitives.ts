@@ -1,1 +1,1 @@
-export { Dialog, DialogTrigger, DialogClose } from '@radix-ui/react-dialog';
+export { Dialog, DialogTrigger } from '@radix-ui/react-dialog';

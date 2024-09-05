@@ -5,10 +5,8 @@ import {
   type ComponentPropsWithoutRef,
   type ElementRef,
 } from 'react';
-import { Close, Content, DialogOverlay, Portal } from '@radix-ui/react-dialog';
-import { XIcon } from 'lucide-react';
+import { Content, DialogOverlay, Portal } from '@radix-ui/react-dialog';
 
-import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/cn';
 
 export const DialogContent = forwardRef<
@@ -26,12 +24,6 @@ export const DialogContent = forwardRef<
       {...props}
     >
       {children}
-      <Close asChild className='absolute end-4 top-4'>
-        <Button variant='flat' size='icon'>
-          <XIcon className='size-4' />
-          <span className='sr-only'>Close</span>
-        </Button>
-      </Close>
     </Content>
   </Portal>
 ));
