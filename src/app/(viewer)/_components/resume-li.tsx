@@ -9,7 +9,7 @@ export const ResumeListItem = ({ resume }: { resume: Resume }) => (
     <Button
       asChild
       variant='flat'
-      className='h-auto w-full flex-col items-start'
+      className='h-auto w-full flex-col items-start py-2'
     >
       <Link href={`/view/${resume.id}`}>
         <span className='text-lg font-semibold'>{resume.title}</span>
