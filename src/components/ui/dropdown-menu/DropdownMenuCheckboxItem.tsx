@@ -6,7 +6,7 @@ import {
   type ElementRef,
 } from 'react';
 import { CheckboxItem, ItemIndicator } from '@radix-ui/react-dropdown-menu';
-import { Check } from 'lucide-react';
+import { CheckIcon } from 'lucide-react';
 
 import { cn } from '@/lib/cn';
 
@@ -25,7 +25,7 @@ export const DropdownMenuCheckboxItem = forwardRef<
   >
     <span className='absolute left-2 flex h-3.5 w-3.5 items-center justify-center'>
       <ItemIndicator>
-        <Check className='h-4 w-4' />
+        <CheckIcon className='size-4' />
       </ItemIndicator>
     </span>
     {children}

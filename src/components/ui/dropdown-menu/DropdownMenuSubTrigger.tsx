@@ -6,7 +6,7 @@ import {
   type ElementRef,
 } from 'react';
 import { SubTrigger } from '@radix-ui/react-dropdown-menu';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRightIcon } from 'lucide-react';
 
 import { cn } from '@/lib/cn';
 
@@ -26,7 +26,7 @@ export const DropdownMenuSubTrigger = forwardRef<
     {...props}
   >
     {children}
-    <ChevronRight className='ms-auto h-4 w-4' />
+    <ChevronRightIcon className='ms-auto size-4' />
   </SubTrigger>
 ));
 DropdownMenuSubTrigger.displayName = SubTrigger.displayName;
