@@ -39,7 +39,7 @@ export const useConfirm = ({
 
   const ConfirmDialog = () => (
     <Dialog open={promise !== null}>
-      <DialogContent className='[&>[data-dialog-close]]:hidden'>
+      <DialogContent>
         <DialogHeader>
           {title && <DialogTitle>{title}</DialogTitle>}
           <DialogDescription>{message}</DialogDescription>
