@@ -14,15 +14,15 @@ import { useConfirm } from '@/hooks/useConfirm';
 import type { Resume } from '@/db/schema';
 
 export const ResumeListItem = ({ resume }: { resume: Resume }) => {
-  const [DeleteDialog, confirmDelete] = useConfirm({
-    title: 'Delete this resume?',
-    message: `The resume "${resume.title}" will be deleted.`,
-    confirmLabel: 'Delete',
-    destructive: true,
-  });
+  const [confirmDelete] = useConfirm();
 
   const handleDelete = async () => {
-    const confirmed = await confirmDelete();
+    const confirmed = await confirmDelete({
+      title: 'Delete this resume?',
+      description: `The resume "${resume.title}" will be deleted.`,
+      confirmLabel: 'Delete',
+      destructive: true,
+    });
     if (!confirmed) return;
 
     // TODO: Send request to delete this resume
@@ -61,8 +61,6 @@ export const ResumeListItem = ({ resume }: { resume: Resume }) => {
           <DropdownMenuItem onClick={handleDelete}>Delete</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-
-      <DeleteDialog />
     </li>
   );
 };

@@ -1,7 +1,10 @@
 import type { PropsWithChildren } from 'react';
 
 import { QueryProvider } from './QueryProvider';
+import { ConfirmProvider } from './ConfirmProvider';
 
 export const Provider = ({ children }: PropsWithChildren) => (
-  <QueryProvider>{children}</QueryProvider>
+  <QueryProvider>
+    <ConfirmProvider>{children}</ConfirmProvider>
+  </QueryProvider>
 );
