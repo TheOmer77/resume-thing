@@ -2,7 +2,7 @@ import type { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 import { Figtree } from 'next/font/google';
 
-import { QueryProvider } from '@/components/providers/QueryProvider';
+import { Provider } from '@/components/providers';
 import '@/styles/index.css';
 
 const font = Figtree({
@@ -17,11 +17,11 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = ({ children }: PropsWithChildren) => (
-  <QueryProvider>
+  <Provider>
     <html lang='en' className={font.variable}>
       <body>{children}</body>
     </html>
-  </QueryProvider>
+  </Provider>
 );
 
 export default RootLayout;
