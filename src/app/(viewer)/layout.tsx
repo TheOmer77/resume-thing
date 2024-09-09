@@ -2,6 +2,7 @@ import type { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 import { Figtree } from 'next/font/google';
 
+import { Toaster } from '@/components/ui/toast';
 import { Provider } from '@/components/providers';
 import '@/styles/index.css';
 
@@ -19,7 +20,10 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: PropsWithChildren) => (
   <Provider>
     <html lang='en' className={font.variable}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Toaster />
+      </body>
     </html>
   </Provider>
 );
