@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { InferResponseType } from 'hono';
 
 import { client } from '@/lib/hono';
+import { toast } from '@/lib/toast';
 
 export const useResumeById = (id: string, { enabled = true } = {}) => {
   const queryClient = useQueryClient();
@@ -14,13 +15,12 @@ export const useResumeById = (id: string, { enabled = true } = {}) => {
       const res = await client.api.resumes[':id'].$delete({ param: { id } });
       return await res.json();
     },
-    // TODO: Toast on success and error
     onSuccess: () => {
-      // toast.success('Resume deleted.');
+      toast.success('Resume deleted.');
       queryClient.invalidateQueries({ queryKey: ['resumes'] });
       queryClient.invalidateQueries({ queryKey: ['resume', { id }] });
     },
-    // onError: () => toast.error("We couldn't delete this resume."),
+    onError: () => toast.error("We couldn't delete this resume."),
   });
 
   const getQuery = useQuery({
