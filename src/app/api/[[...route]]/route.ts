@@ -12,5 +12,7 @@ const app = new Hono()
   .route('/pdf', pdfRouter);
 
 export const GET = handle(app);
+export const POST = handle(app);
+export const DELETE = handle(app);
 
 export type ApiRoutes = typeof app;
