@@ -22,7 +22,7 @@ export const DropdownMenuRadioItem = forwardRef<
     )}
     {...props}
   >
-    <span className='absolute left-2 flex h-3.5 w-3.5 items-center justify-center'>
+    <span className='absolute start-2 flex h-3.5 w-3.5 items-center justify-center'>
       <ItemIndicator>
         <CircleIcon className='size-2 fill-current' />
       </ItemIndicator>
