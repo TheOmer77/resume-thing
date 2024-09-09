@@ -29,6 +29,7 @@ export const PDFDownloadButton = ({
   if (!file) return null;
   return (
     <Button
+      variant='primary'
       className='size-10 p-0 sm:w-auto sm:px-4 sm:py-2'
       onClick={handleClick}
     >
