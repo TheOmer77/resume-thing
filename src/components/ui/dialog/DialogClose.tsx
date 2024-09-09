@@ -6,9 +6,9 @@ import React, {
   type ElementRef,
 } from 'react';
 import { Close } from '@radix-ui/react-dialog';
+import { XIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { XIcon } from 'lucide-react';
 import { cn } from '@/lib/cn';
 
 export const DialogClose = forwardRef<
