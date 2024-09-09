@@ -11,9 +11,15 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useConfirm } from '@/hooks/useConfirm';
+import { useResumeById } from '@/hooks/useResumeById';
 import type { Resume } from '@/db/schema';
+import { cn } from '@/lib/cn';
 
 export const ResumeListItem = ({ resume }: { resume: Resume }) => {
+  const { deleteResume, deleteResumePending } = useResumeById(resume.id, {
+    // No need to get data here, its already passed as a prop
+    enabled: false,
+  });
   const [confirmDelete] = useConfirm();
 
   const handleDelete = async () => {
@@ -25,11 +31,16 @@ export const ResumeListItem = ({ resume }: { resume: Resume }) => {
     });
     if (!confirmed) return;
 
-    // TODO: Send request to delete this resume
+    deleteResume();
   };
 
   return (
-    <li className='relative w-full'>
+    <li
+      className={cn(
+        'relative w-full',
+        deleteResumePending && 'pointer-events-none opacity-50'
+      )}
+    >
       <Button
         asChild
         variant='flat'
