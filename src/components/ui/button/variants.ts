@@ -13,12 +13,12 @@ export const buttonVariants = cva(
         flat: 'shadow-none hover:bg-accent hover:text-accent-foreground',
       },
       size: {
-        default: 'h-10 px-4',
         sm: 'h-9 px-3',
+        md: 'h-10 px-4',
         lg: 'h-11 px-8',
         icon: 'size-10',
       },
     },
-    defaultVariants: { variant: 'default', size: 'default' },
+    defaultVariants: { variant: 'default', size: 'md' },
   }
 );
