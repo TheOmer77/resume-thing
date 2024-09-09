@@ -1,7 +1,7 @@
 import { Header } from '@/components/layout/Header';
 import { getResumes } from '@/db/queries/resume';
 
-import { ResumeListItem } from './_components/resume-li';
+import { ResumeListItem } from './_components/resume-list-item';
 
 const HomePage = async () => {
   const resumes = await getResumes();
