@@ -6,9 +6,6 @@ export const DialogHeader = ({
   className,
   ...props
 }: ComponentPropsWithoutRef<'div'>) => (
-  <div
-    className={cn('flex flex-col space-y-1.5 sm:text-left', className)}
-    {...props}
-  />
+  <div className={cn('flex flex-col space-y-1.5', className)} {...props} />
 );
 DialogHeader.displayName = 'DialogHeader';
