@@ -20,10 +20,20 @@ export const ResumeListItem = ({ resume }: { resume: Resume }) => {
     // No need to get data here, its already passed as a prop
     enabled: false,
   });
-  const [confirmDelete] = useConfirm();
+  const [confirm] = useConfirm();
+
+  const handleDuplicate = async () => {
+    // TODO: Call duplicate API
+    confirm({
+      title: 'Not implemented yet',
+      description: '',
+      confirmLabel: 'OK',
+      cancelLabel: "Don't click this",
+    });
+  };
 
   const handleDelete = async () => {
-    const confirmed = await confirmDelete({
+    const confirmed = await confirm({
       title: 'Delete this resume?',
       description: `The resume "${resume.title}" will be deleted.`,
       confirmLabel: 'Delete',
@@ -58,6 +68,7 @@ export const ResumeListItem = ({ resume }: { resume: Resume }) => {
           </span>
         </Link>
       </Button>
+
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
@@ -68,7 +79,11 @@ export const ResumeListItem = ({ resume }: { resume: Resume }) => {
             <MoreVerticalIcon className='size-4' />
           </Button>
         </DropdownMenuTrigger>
+
         <DropdownMenuContent align='end'>
+          <DropdownMenuItem onClick={handleDuplicate}>
+            Duplicate
+          </DropdownMenuItem>
           <DropdownMenuItem onClick={handleDelete}>Delete</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
