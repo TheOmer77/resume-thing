@@ -11,12 +11,13 @@ import {
   blockContentTitle,
 } from '@/db/schema';
 import { arrayAgg, jsonAgg, jsonBuildObject } from '@/lib/drizzle';
+import type { BlockType } from '@/types/blocks';
 
 type SchemaColumn<TSchema extends PgTable> = keyof TSchema['_']['columns'];
 type QueryMapItem<TSchema extends PgTable> = {
   schema: TSchema;
   childSchema?: PgTable;
-  type: string;
+  type: BlockType;
   properties: Partial<
     Record<
       SchemaColumn<TSchema> | (NonNullable<unknown> & string),
