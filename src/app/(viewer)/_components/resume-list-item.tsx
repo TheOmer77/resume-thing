@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useConfirm } from '@/hooks/useConfirm';
+import { useModal } from '@/hooks/useModal';
 import { useResumeById } from '@/hooks/useResumeById';
 import type { Resume } from '@/db/schema';
 import { cn } from '@/lib/cn';
@@ -23,8 +24,7 @@ export const ResumeListItem = ({ resume }: { resume: Resume }) => {
     { enabled: false }
   );
   const [confirm] = useConfirm();
-
-  const handleDuplicate = () => duplicateResume();
+  const { openModal } = useModal();
 
   const handleDelete = async () => {
     const confirmed = await confirm({
@@ -74,8 +74,13 @@ export const ResumeListItem = ({ resume }: { resume: Resume }) => {
         </DropdownMenuTrigger>
 
         <DropdownMenuContent align='end'>
-          <DropdownMenuItem onClick={handleDuplicate}>
+          <DropdownMenuItem onClick={() => duplicateResume()}>
             Duplicate
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => openModal(`resume-rename-${resume.id}`)}
+          >
+            Rename
           </DropdownMenuItem>
           <DropdownMenuItem onClick={handleDelete}>Delete</DropdownMenuItem>
         </DropdownMenuContent>

@@ -3,7 +3,7 @@ import { useSearchParams } from 'next/navigation';
 
 const MODAL_SEARCH_KEY = 'modal';
 
-type ModalValue = null | 'confirm';
+type ModalValue = null | 'confirm' | `resume-rename-${string}`;
 
 export const useModal = () => {
   const searchParams = useSearchParams(),
