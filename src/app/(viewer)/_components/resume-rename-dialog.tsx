@@ -18,44 +18,40 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Spinner } from '@/components/ui/spinner';
 import { useModal } from '@/hooks/useModal';
-import type { Resume } from '@/db/schema';
-import { toast } from '@/lib/toast';
-
-const formSchema = z.object({
-  title: z.string().min(1, 'Title cannot be empty.'),
-});
+import { useResumeById } from '@/hooks/useResumeById';
+import { renameResumeSchema, type Resume } from '@/db/schema';
+import { cn } from '@/lib/cn';
 
 export const ResumeRenameDialog = ({ resume }: { resume: Resume }) => {
   const { currentModal, closeModal } = useModal();
+  const open = currentModal === `resume-rename-${resume.id}`;
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: { title: resume.title },
+  const { updateResume, updateResumePending } = useResumeById(resume.id, {
+    enabled: false,
   });
 
+  const form = useForm<z.infer<typeof renameResumeSchema>>({
+    resolver: zodResolver(renameResumeSchema),
+    defaultValues: { title: resume.title },
+    disabled: updateResumePending,
+  });
+  const hasErrors =
+    Object.values(form.formState.errors).filter(Boolean).length > 0;
+
   const handleOpenChange = (open: boolean) => {
-    if (open || !currentModal || form.formState.disabled) return;
+    if (open || !currentModal || updateResumePending) return;
     setTimeout(form.reset, 200);
     closeModal();
   };
 
-  const handleSubmit = (values: z.infer<typeof formSchema>) => {
-    handleOpenChange(false);
-
-    // TODO: Submit to rename route
-    toast.error('Not implemented yet.');
-    console.log(values);
+  const handleSubmit = (values: z.infer<typeof renameResumeSchema>) => {
+    updateResume(values, { onSuccess: () => handleOpenChange(false) });
   };
 
-  const hasErrors =
-    Object.values(form.formState.errors).filter(Boolean).length > 0;
-
   return (
-    <Dialog
-      open={currentModal === `resume-rename-${resume.id}`}
-      onOpenChange={handleOpenChange}
-    >
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent aria-describedby={undefined}>
         <DialogHeader>
           <DialogTitle>Rename resume</DialogTitle>
@@ -89,9 +85,18 @@ export const ResumeRenameDialog = ({ resume }: { resume: Resume }) => {
               <Button
                 variant='primary'
                 type='submit'
+                className='relative'
                 disabled={form.formState.disabled || hasErrors}
               >
-                Rename
+                <span className={cn(updateResumePending && 'invisible')}>
+                  Rename
+                </span>
+                <Spinner
+                  className={cn(
+                    'absolute size-5 text-inherit',
+                    !updateResumePending && 'hidden'
+                  )}
+                />
               </Button>
             </DialogFooter>
           </form>

@@ -88,7 +88,7 @@ export const ResumeListItem = ({ resume }: { resume: Resume }) => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <ResumeRenameDialog resume={resume} />
+      <ResumeRenameDialog key={resume.title} resume={resume} />
     </li>
   );
 };
