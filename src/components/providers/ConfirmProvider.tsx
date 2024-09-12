@@ -45,11 +45,15 @@ export const ConfirmProvider = ({ children }: PropsWithChildren) => {
     return new Promise<boolean>(resolve => setPromise({ resolve }));
   };
 
-  const handleOpenChange = (open: boolean) => !open && closeModal();
+  const handleOpenChange = (open: boolean) => {
+    if (open || !currentModal) return;
+    closeModal();
+  };
 
   const handleAction = (value: boolean) => {
     promise?.resolve(value);
     setPromise(null);
+    closeModal();
   };
 
   return (
