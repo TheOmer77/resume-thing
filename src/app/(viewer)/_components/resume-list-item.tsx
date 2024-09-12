@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { MoreVerticalIcon } from 'lucide-react';
+import { format } from 'timeago.js';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -54,12 +55,11 @@ export const ResumeListItem = ({ resume }: { resume: Resume }) => {
         <Link href={`/view/${resume.id}`}>
           <span className='text-lg font-semibold'>{resume.title}</span>
           <span className='text-sm text-muted-foreground'>
-            Last updated{' '}
-            {resume.updatedAt.toLocaleDateString('en-US', {
-              day: 'numeric',
-              month: 'short',
-              year: 'numeric',
-            })}
+            {`${
+              resume.createdAt.valueOf() === resume.updatedAt.valueOf()
+                ? 'Created'
+                : 'Last updated'
+            } ${format(resume.updatedAt, 'en_US')}`}
           </span>
         </Link>
       </Button>
