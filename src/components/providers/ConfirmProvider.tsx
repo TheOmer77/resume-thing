@@ -11,6 +11,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { useModal } from '@/hooks/useModal';
 
 type ConfirmDialogData = {
   title: string;
@@ -36,11 +37,15 @@ export const ConfirmContext = createContext<ConfirmContextValue>(initialValue);
 export const ConfirmProvider = ({ children }: PropsWithChildren) => {
   const [promise, setPromise] = useState<ConfirmContextValue['promise']>(null),
     [data, setData] = useState<ConfirmDialogData | null>(null);
+  const { currentModal, openModal, closeModal } = useModal();
 
   const confirm = (data: ConfirmDialogData) => {
     setData(data);
+    openModal('confirm');
     return new Promise<boolean>(resolve => setPromise({ resolve }));
   };
+
+  const handleOpenChange = (open: boolean) => !open && closeModal();
 
   const handleAction = (value: boolean) => {
     promise?.resolve(value);
@@ -50,7 +55,10 @@ export const ConfirmProvider = ({ children }: PropsWithChildren) => {
   return (
     <ConfirmContext.Provider value={{ promise, confirm }}>
       {children}
-      <Dialog open={promise !== null}>
+      <Dialog
+        open={promise !== null && currentModal === 'confirm'}
+        onOpenChange={handleOpenChange}
+      >
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{data?.title}</DialogTitle>
