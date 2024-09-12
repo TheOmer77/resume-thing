@@ -16,21 +16,16 @@ import type { Resume } from '@/db/schema';
 import { cn } from '@/lib/cn';
 
 export const ResumeListItem = ({ resume }: { resume: Resume }) => {
-  const { deleteResume, deleteResumePending } = useResumeById(resume.id, {
-    // No need to get data here, its already passed as a prop
-    enabled: false,
-  });
+  const { deleteResume, deleteResumePending, duplicateResume } = useResumeById(
+    resume.id,
+    {
+      // No need to get data here, its already passed as a prop
+      enabled: false,
+    }
+  );
   const [confirm] = useConfirm();
 
-  const handleDuplicate = async () => {
-    // TODO: Call duplicate API
-    confirm({
-      title: 'Not implemented yet',
-      description: '',
-      confirmLabel: 'OK',
-      cancelLabel: "Don't click this",
-    });
-  };
+  const handleDuplicate = () => duplicateResume();
 
   const handleDelete = async () => {
     const confirmed = await confirm({
