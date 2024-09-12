@@ -27,7 +27,7 @@ export const Toaster = ({ ...props }: ToasterProps) => (
           'group-[.toast]:bg-primary group-[.toast]:text-primary-foreground',
         cancelButton:
           'group-[.toast]:bg-muted group-[.toast]:text-muted-foreground',
-        icon: 'size-5 [&_svg]:size-5',
+        icon: 'group-[.toast]:size-5 group-[.toast]:[&_svg]:size-5',
       },
     }}
     icons={{
