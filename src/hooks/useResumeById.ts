@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import type { InferResponseType } from 'hono';
+import type { InferRequestType, InferResponseType } from 'hono';
 
 import { useToastMutation } from '@/hooks/useToastMutation';
 import { client } from '@/lib/hono';
@@ -25,6 +25,28 @@ export const useResumeById = (id: string, { enabled = true } = {}) => {
       loading: 'Duplicating resume...',
       success: 'Resume duplicated.',
       error: "We couldn't duplicate this resume.",
+    },
+  });
+
+  const updateMutation = useToastMutation<
+    InferResponseType<(typeof client.api.resumes)[':id']['$patch']>,
+    Error,
+    InferRequestType<(typeof client.api.resumes)[':id']['$patch']>['json']
+  >({
+    mutationFn: async json => {
+      const res = await client.api.resumes[':id'].$patch({
+        param: { id },
+        json,
+      });
+      return await res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['resumes'] });
+      queryClient.invalidateQueries({ queryKey: ['resume', { id }] });
+    },
+    toastOptions: {
+      success: 'Resume updated.',
+      error: "We couldn't update this resume.",
     },
   });
 
@@ -69,6 +91,8 @@ export const useResumeById = (id: string, { enabled = true } = {}) => {
     resumeFetching: getQuery.isFetching,
     duplicateResume: duplicateMutation.mutate,
     duplicateResumePending: duplicateMutation.isPending,
+    updateResume: updateMutation.mutate,
+    updateResumePending: updateMutation.isPending,
     deleteResume: deleteMutation.mutate,
     deleteResumePending: deleteMutation.isPending,
   };
