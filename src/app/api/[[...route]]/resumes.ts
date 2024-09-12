@@ -48,7 +48,7 @@ export const resumesRouter = new Hono()
         )[0]?.id;
         if (!dupId) throw new Error("We couldn't duplicate this resume.");
 
-        const originalBlocks = await getBlocks({ resumeId: id }),
+        const originalBlocks = await getBlocks(id, tx),
           duplicateBlocks = createDuplicateBlocks(
             originalBlocks.map(block => ({ ...block, resumeId: dupId }))
           );

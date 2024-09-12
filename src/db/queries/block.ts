@@ -58,8 +58,15 @@ const groupBy = queryMap
     asc(block.order),
   ];
 
-export const getBlocks = async ({ resumeId }: { resumeId?: string } = {}) => {
-  const initialQuery = db
+export const getBlocks = async <
+  TQueryResult extends PgQueryResultHKT,
+  TFullSchema extends Record<string, unknown> = Record<string, never>,
+  TSchema extends TablesRelationalConfig = Record<string, never>,
+>(
+  resumeId?: string,
+  transaction?: PgTransaction<TQueryResult, TFullSchema, TSchema>
+) => {
+  const initialQuery = (transaction || db)
     .select({
       id: block.id,
       resumeId: block.resumeId,
