@@ -12,7 +12,7 @@ import { BlocksProvider } from '../context';
 type ResumeHtmlPageProps = { params: { id: string } };
 
 const ResumeHtmlPage = async ({ params: { id } }: ResumeHtmlPageProps) => {
-  const blocks = await getBlocks({ resumeId: id });
+  const blocks = await getBlocks(id);
   const renderedBlocks = blocks.filter(
     ({ order }) => typeof order === 'number'
   );

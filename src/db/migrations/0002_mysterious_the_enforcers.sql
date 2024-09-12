@@ -1,0 +1,1 @@
+ALTER TABLE "resume" RENAME COLUMN "userId" TO "user_id";

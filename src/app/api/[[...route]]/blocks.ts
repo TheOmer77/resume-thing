@@ -8,6 +8,6 @@ export const blocksRouter = new Hono()
     return ctx.json(result);
   })
   .get('/:id', async ctx => {
-    const result = await getBlocks({ resumeId: ctx.req.param('id') });
+    const result = await getBlocks(ctx.req.param('id'));
     return ctx.json(result);
   });

@@ -41,3 +41,5 @@ export type BlockData =
   | TitleBlockData
   | ContactInfoBlockData
   | ExperienceBlockData;
+
+export type BlockType = BlockData['type'];

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { MoreVerticalIcon } from 'lucide-react';
+import { format } from 'timeago.js';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -16,14 +17,17 @@ import type { Resume } from '@/db/schema';
 import { cn } from '@/lib/cn';
 
 export const ResumeListItem = ({ resume }: { resume: Resume }) => {
-  const { deleteResume, deleteResumePending } = useResumeById(resume.id, {
+  const { deleteResume, deleteResumePending, duplicateResume } = useResumeById(
+    resume.id,
     // No need to get data here, its already passed as a prop
-    enabled: false,
-  });
-  const [confirmDelete] = useConfirm();
+    { enabled: false }
+  );
+  const [confirm] = useConfirm();
+
+  const handleDuplicate = () => duplicateResume();
 
   const handleDelete = async () => {
-    const confirmed = await confirmDelete({
+    const confirmed = await confirm({
       title: 'Delete this resume?',
       description: `The resume "${resume.title}" will be deleted.`,
       confirmLabel: 'Delete',
@@ -44,20 +48,20 @@ export const ResumeListItem = ({ resume }: { resume: Resume }) => {
       <Button
         asChild
         variant='flat'
-        className='h-auto w-full flex-col items-start py-2'
+        className='h-auto w-full flex-col items-start py-2 font-normal'
       >
         <Link href={`/view/${resume.id}`}>
           <span className='text-lg font-semibold'>{resume.title}</span>
           <span className='text-sm text-muted-foreground'>
-            Last updated{' '}
-            {resume.updatedAt.toLocaleDateString('en-US', {
-              day: 'numeric',
-              month: 'short',
-              year: 'numeric',
-            })}
+            {`${
+              resume.createdAt.valueOf() === resume.updatedAt.valueOf()
+                ? 'Created'
+                : 'Last updated'
+            } ${format(resume.updatedAt, 'en_US')}`}
           </span>
         </Link>
       </Button>
+
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
@@ -68,7 +72,11 @@ export const ResumeListItem = ({ resume }: { resume: Resume }) => {
             <MoreVerticalIcon className='size-4' />
           </Button>
         </DropdownMenuTrigger>
+
         <DropdownMenuContent align='end'>
+          <DropdownMenuItem onClick={handleDuplicate}>
+            Duplicate
+          </DropdownMenuItem>
           <DropdownMenuItem onClick={handleDelete}>Delete</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

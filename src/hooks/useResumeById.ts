@@ -1,13 +1,34 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import type { InferResponseType } from 'hono';
 
+import { useToastMutation } from '@/hooks/useToastMutation';
 import { client } from '@/lib/hono';
-import { toast } from '@/lib/toast';
 
 export const useResumeById = (id: string, { enabled = true } = {}) => {
   const queryClient = useQueryClient();
 
-  const deleteMutation = useMutation<
+  const duplicateMutation = useToastMutation<
+    InferResponseType<(typeof client.api.resumes.duplicate)[':id']['$post']>,
+    Error
+  >({
+    mutationFn: async () => {
+      const res = await client.api.resumes.duplicate[':id'].$post({
+        param: { id },
+      });
+      return await res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['resumes'] });
+      queryClient.invalidateQueries({ queryKey: ['resume', { id }] });
+    },
+    toastOptions: {
+      loading: 'Duplicating resume...',
+      success: 'Resume duplicated.',
+      error: "We couldn't duplicate this resume.",
+    },
+  });
+
+  const deleteMutation = useToastMutation<
     InferResponseType<(typeof client.api.resumes)[':id']['$delete']>,
     Error
   >({
@@ -16,11 +37,14 @@ export const useResumeById = (id: string, { enabled = true } = {}) => {
       return await res.json();
     },
     onSuccess: () => {
-      toast.success('Resume deleted.');
       queryClient.invalidateQueries({ queryKey: ['resumes'] });
       queryClient.invalidateQueries({ queryKey: ['resume', { id }] });
     },
-    onError: () => toast.error("We couldn't delete this resume."),
+    toastOptions: {
+      loading: 'Deleting resume...',
+      success: 'Resume deleted.',
+      error: "We couldn't delete this resume.",
+    },
   });
 
   const getQuery = useQuery({
@@ -43,6 +67,8 @@ export const useResumeById = (id: string, { enabled = true } = {}) => {
   return {
     resume: getQuery.data,
     resumeFetching: getQuery.isFetching,
+    duplicateResume: duplicateMutation.mutate,
+    duplicateResumePending: duplicateMutation.isPending,
     deleteResume: deleteMutation.mutate,
     deleteResumePending: deleteMutation.isPending,
   };
