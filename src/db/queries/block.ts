@@ -132,62 +132,64 @@ export const insertBlocks = async <
     try {
       const newBlocks = await tx.insert(block).values(blocks).returning();
 
-      await tx.insert(blockContentTitle).values(
-        blocksByType.title.map(({ content, id }) => ({
-          blockId: id,
-          ...content,
-        }))
-      );
+      await Promise.all([
+        tx.insert(blockContentTitle).values(
+          blocksByType.title.map(({ content, id }) => ({
+            blockId: id,
+            ...content,
+          }))
+        ),
 
-      await tx.insert(blockContentText).values(
-        blocksByType.text.map(({ content, id }) => ({
-          blockId: id,
-          ...content,
-        }))
-      );
+        tx.insert(blockContentText).values(
+          blocksByType.text.map(({ content, id }) => ({
+            blockId: id,
+            ...content,
+          }))
+        ),
 
-      await tx.insert(blockContentExperience).values(
-        blocksByType.experience.map(({ content, id }) => ({
-          blockId: id,
-          ...content,
-        }))
-      );
+        tx.insert(blockContentExperience).values(
+          blocksByType.experience.map(({ content, id }) => ({
+            blockId: id,
+            ...content,
+          }))
+        ),
 
-      await tx.insert(blockContentContact).values(
-        blocksByType.contactInfo.map(({ content, id }) => ({
-          blockId: id,
-          orientation: content.orientation,
-        }))
-      );
-      await tx.insert(blockContentContactItem).values(
-        blocksByType.contactInfo
-          .map(({ content, id }) =>
-            content.items.map((value, order) => ({
-              blockId: id,
-              order,
-              ...value,
-            }))
-          )
-          .flat()
-      );
+        tx.insert(blockContentContact).values(
+          blocksByType.contactInfo.map(({ content, id }) => ({
+            blockId: id,
+            orientation: content.orientation,
+          }))
+        ),
+        tx.insert(blockContentContactItem).values(
+          blocksByType.contactInfo
+            .map(({ content, id }) =>
+              content.items.map((value, order) => ({
+                blockId: id,
+                order,
+                ...value,
+              }))
+            )
+            .flat()
+        ),
 
-      await tx.insert(blockContentSection).values(
-        blocksByType.section.map(({ content, id }) => ({
-          blockId: id,
-          title: content.title,
-        }))
-      );
-      await tx.insert(blockContentSectionChild).values(
-        blocksByType.section
-          .map(({ content, id }) =>
-            content.children.map((value, order) => ({
-              blockId: id,
-              order,
-              childId: value,
-            }))
-          )
-          .flat()
-      );
+        tx.insert(blockContentSection).values(
+          blocksByType.section.map(({ content, id }) => ({
+            blockId: id,
+            title: content.title,
+          }))
+        ),
+        tx.insert(blockContentSectionChild).values(
+          blocksByType.section
+            .map(({ content, id }) =>
+              content.children.map((value, order) => ({
+                blockId: id,
+                order,
+                childId: value,
+              }))
+            )
+            .flat()
+        ),
+      ]);
 
       return newBlocks.map(({ id }) => id);
     } catch (error) {
