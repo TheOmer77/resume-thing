@@ -17,6 +17,8 @@ import { useResumeById } from '@/hooks/useResumeById';
 import type { Resume } from '@/db/schema';
 import { cn } from '@/lib/cn';
 
+import { ResumeRenameDialog } from './resume-rename-dialog';
+
 export const ResumeListItem = ({ resume }: { resume: Resume }) => {
   const { deleteResume, deleteResumePending, duplicateResume } = useResumeById(
     resume.id,
@@ -85,6 +87,8 @@ export const ResumeListItem = ({ resume }: { resume: Resume }) => {
           <DropdownMenuItem onClick={handleDelete}>Delete</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+
+      <ResumeRenameDialog resume={resume} />
     </li>
   );
 };
