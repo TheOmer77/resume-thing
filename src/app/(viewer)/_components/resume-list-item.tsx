@@ -19,10 +19,8 @@ import { cn } from '@/lib/cn';
 export const ResumeListItem = ({ resume }: { resume: Resume }) => {
   const { deleteResume, deleteResumePending, duplicateResume } = useResumeById(
     resume.id,
-    {
-      // No need to get data here, its already passed as a prop
-      enabled: false,
-    }
+    // No need to get data here, its already passed as a prop
+    { enabled: false }
   );
   const [confirm] = useConfirm();
 
