@@ -7,6 +7,24 @@ import { toast } from '@/lib/toast';
 export const useResumeById = (id: string, { enabled = true } = {}) => {
   const queryClient = useQueryClient();
 
+  const duplicateMutation = useMutation<
+    InferResponseType<(typeof client.api.resumes.duplicate)[':id']['$post']>,
+    Error
+  >({
+    mutationFn: async () => {
+      const res = await client.api.resumes.duplicate[':id'].$post({
+        param: { id },
+      });
+      return await res.json();
+    },
+    onSuccess: () => {
+      toast.success('Resume duplicated.');
+      queryClient.invalidateQueries({ queryKey: ['resumes'] });
+      queryClient.invalidateQueries({ queryKey: ['resume', { id }] });
+    },
+    onError: () => toast.error("We couldn't duplicate this resume."),
+  });
+
   const deleteMutation = useMutation<
     InferResponseType<(typeof client.api.resumes)[':id']['$delete']>,
     Error
@@ -43,6 +61,8 @@ export const useResumeById = (id: string, { enabled = true } = {}) => {
   return {
     resume: getQuery.data,
     resumeFetching: getQuery.isFetching,
+    duplicateResume: duplicateMutation.mutate,
+    duplicateResumePending: duplicateMutation.isPending,
     deleteResume: deleteMutation.mutate,
     deleteResumePending: deleteMutation.isPending,
   };
