@@ -8,6 +8,8 @@ import {
 } from '@/db/queries/resume';
 import { db } from '@/db';
 import { resume } from '@/db/schema';
+import { getBlocks, insertBlocks } from '@/db/queries/block';
+import { createDuplicateBlocks } from '@/lib/blocks';
 import { getDuplicateName } from '@/lib/getDuplicateName';
 
 export const resumesRouter = new Hono()
@@ -50,9 +52,13 @@ export const resumesRouter = new Hono()
             .values({ title: getDuplicateName(title), ...duplicateData })
             .returning({ id: resume.id })
         )[0]?.id;
+        if (!dupId) throw new Error("We couldn't duplicate this resume.");
 
-        // TODO: Duplicate blocks, resumeId = duplicateId
-        // TODO: Link block content for each block, maybe use getBlocks util?
+        const originalBlocks = await getBlocks({ resumeId: id }),
+          duplicateBlocks = createDuplicateBlocks(
+            originalBlocks.map(block => ({ ...block, resumeId: dupId }))
+          );
+        await insertBlocks(duplicateBlocks, tx);
 
         return dupId;
       } catch (error) {
