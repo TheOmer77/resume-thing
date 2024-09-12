@@ -36,20 +36,14 @@ export const resumesRouter = new Hono()
         message: `Resume with ID '${id}' was not found.`,
       });
 
-    const { title, ...duplicateData } = Object.entries(data).reduce(
-      (obj, [key, value]) =>
-        ['id', 'createdAt', 'updatedAt'].includes(key)
-          ? obj
-          : { ...obj, [key]: value },
-      {} as Omit<typeof data, 'id' | 'createdAt' | 'updatedAt'>
-    );
+    const { title, author, userId } = data;
 
     const duplicateId = await db.transaction(async tx => {
       try {
         const dupId = (
           await tx
             .insert(resume)
-            .values({ title: getDuplicateName(title), ...duplicateData })
+            .values({ title: getDuplicateName(title), author, userId })
             .returning({ id: resume.id })
         )[0]?.id;
         if (!dupId) throw new Error("We couldn't duplicate this resume.");
