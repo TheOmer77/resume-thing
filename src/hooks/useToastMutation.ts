@@ -28,7 +28,7 @@ export const useToastMutation = <
   TContext = unknown,
 >(
   options: UseMutationOptions<TData, TError, TVariables, TContext> & {
-    toastOptions: { loading: string; success: string; error: string };
+    toastOptions: { loading?: string; success: string; error: string };
   },
   queryClient?: QueryClient
 ) => {
@@ -39,21 +39,28 @@ export const useToastMutation = <
     {
       ...options,
       onMutate: variables => {
-        setToastId(toast.loading(toastOptions.loading, LOADING_TOAST_OPTIONS));
+        if (toastOptions.loading)
+          setToastId(
+            toast.loading(toastOptions.loading, LOADING_TOAST_OPTIONS)
+          );
         return onMutate?.(variables);
       },
       onSuccess: (data, variables, context) => {
-        toast.success(toastOptions.success, {
-          ...RESULT_TOAST_OPTIONS,
-          id: toastId,
-        });
+        toast.success(
+          toastOptions.success,
+          toastId
+            ? { ...RESULT_TOAST_OPTIONS, id: toastId }
+            : RESULT_TOAST_OPTIONS
+        );
         return onSuccess?.(data, variables, context);
       },
       onError: (error, variables, context) => {
-        toast.error(toastOptions.error, {
-          ...RESULT_TOAST_OPTIONS,
-          id: toastId,
-        });
+        toast.error(
+          toastOptions.error,
+          toastId
+            ? { ...RESULT_TOAST_OPTIONS, id: toastId }
+            : RESULT_TOAST_OPTIONS
+        );
         return onError?.(error, variables, context);
       },
     },
