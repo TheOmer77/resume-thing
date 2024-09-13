@@ -2,6 +2,7 @@
 
 import {
   createContext,
+  useCallback,
   useEffect,
   useState,
   type PropsWithChildren,
@@ -9,13 +10,13 @@ import {
 
 import {
   Dialog,
+  DialogAction,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
 import { MODAL_SEARCH_KEY, useModal } from '@/hooks/useModal';
 
 type ConfirmDialogData = {
@@ -55,14 +56,15 @@ export const ConfirmProvider = ({ children }: PropsWithChildren) => {
     closeModal();
   };
 
-  const handleAction = (value: boolean) => {
-    promise?.resolve(value);
-    setPromise(null);
-    closeModal();
-  };
+  const handleAction = useCallback(
+    (value: boolean) => {
+      promise?.resolve(value);
+      setPromise(null);
+    },
+    [promise]
+  );
 
-  /* Resolve promise when clicking outside on dialog overlay or using back button, not
-  by choosing a dialog action */
+  /* Resolve promise when using the browser back button (counts as cancel) */
   useEffect(() => {
     if (!promise) return;
 
@@ -72,18 +74,18 @@ export const ConfirmProvider = ({ children }: PropsWithChildren) => {
         MODAL_SEARCH_KEY
       );
       if (newModal !== null) return;
-      promise.resolve(false);
-      setPromise(null);
+      handleAction(false);
     };
 
     window.addEventListener('popstate', listener);
     return () => window.removeEventListener('popstate', listener);
-  }, [promise]);
+  }, [handleAction, promise]);
 
   return (
     <ConfirmContext.Provider value={{ promise, confirm }}>
       {children}
       <Dialog
+        type='alert'
         open={promise !== null && currentModal === 'confirm'}
         onOpenChange={handleOpenChange}
       >
@@ -93,15 +95,15 @@ export const ConfirmProvider = ({ children }: PropsWithChildren) => {
             <DialogDescription>{data?.description}</DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button onClick={() => handleAction(false)}>
+            <DialogAction onClick={() => handleAction(false)}>
               {data?.cancelLabel || 'Cancel'}
-            </Button>
-            <Button
+            </DialogAction>
+            <DialogAction
               variant={data?.destructive ? 'destructive' : 'primary'}
               onClick={() => handleAction(true)}
             >
               {data?.confirmLabel || 'Confirm'}
-            </Button>
+            </DialogAction>
           </DialogFooter>
         </DialogContent>
       </Dialog>
