@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-const MODAL_SEARCH_KEY = 'modal';
+export const MODAL_SEARCH_KEY = 'modal';
 
 type ModalValue = null | 'confirm' | `resume-rename-${string}`;
 

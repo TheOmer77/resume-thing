@@ -1,6 +1,11 @@
 'use client';
 
-import { createContext, useState, type PropsWithChildren } from 'react';
+import {
+  createContext,
+  useEffect,
+  useState,
+  type PropsWithChildren,
+} from 'react';
 
 import {
   Dialog,
@@ -11,7 +16,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { useModal } from '@/hooks/useModal';
+import { MODAL_SEARCH_KEY, useModal } from '@/hooks/useModal';
 
 type ConfirmDialogData = {
   title: string;
@@ -55,6 +60,25 @@ export const ConfirmProvider = ({ children }: PropsWithChildren) => {
     setPromise(null);
     closeModal();
   };
+
+  /* Resolve promise when clicking outside on dialog overlay or using back button, not
+  by choosing a dialog action */
+  useEffect(() => {
+    if (!promise) return;
+
+    const listener = () => {
+      /** Modal at the time this event is called (not the same as currentModal) */
+      const newModal = new URLSearchParams(window.location.search).get(
+        MODAL_SEARCH_KEY
+      );
+      if (newModal !== null) return;
+      promise.resolve(false);
+      setPromise(null);
+    };
+
+    window.addEventListener('popstate', listener);
+    return () => window.removeEventListener('popstate', listener);
+  }, [promise]);
 
   return (
     <ConfirmContext.Provider value={{ promise, confirm }}>
