@@ -1,5 +1,3 @@
-'use client';
-
 import type { ComponentPropsWithoutRef } from 'react';
 import { Trigger } from '@radix-ui/react-dialog';
 import { AlertDialogTrigger } from '@radix-ui/react-alert-dialog';
