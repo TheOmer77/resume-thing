@@ -15,7 +15,7 @@ type ToasterProps = ComponentPropsWithoutRef<typeof Sonner>;
 
 export const Toaster = ({ ...props }: ToasterProps) => (
   <Sonner
-    className='toaster group'
+    className='toaster group max-w-[calc(100%-var(--mobile-offset)*2)]'
     theme='system'
     toastOptions={{
       unstyled: true,

@@ -1,16 +1,23 @@
 'use client';
 
-import { createContext, useState, type PropsWithChildren } from 'react';
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useState,
+  type PropsWithChildren,
+} from 'react';
 
 import {
   Dialog,
+  DialogAction,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+import { MODAL_SEARCH_KEY, useModal } from '@/hooks/useModal';
 
 type ConfirmDialogData = {
   title: string;
@@ -36,36 +43,67 @@ export const ConfirmContext = createContext<ConfirmContextValue>(initialValue);
 export const ConfirmProvider = ({ children }: PropsWithChildren) => {
   const [promise, setPromise] = useState<ConfirmContextValue['promise']>(null),
     [data, setData] = useState<ConfirmDialogData | null>(null);
+  const { currentModal, openModal, closeModal } = useModal();
 
   const confirm = (data: ConfirmDialogData) => {
     setData(data);
+    openModal('confirm');
     return new Promise<boolean>(resolve => setPromise({ resolve }));
   };
 
-  const handleAction = (value: boolean) => {
-    promise?.resolve(value);
-    setPromise(null);
+  const handleOpenChange = (open: boolean) => {
+    if (open || !currentModal) return;
+    closeModal();
   };
+
+  const handleAction = useCallback(
+    (value: boolean) => {
+      promise?.resolve(value);
+      setPromise(null);
+    },
+    [promise]
+  );
+
+  /* Resolve promise when using the browser back button (counts as cancel) */
+  useEffect(() => {
+    if (!promise) return;
+
+    const listener = () => {
+      /** Modal at the time this event is called (not the same as currentModal) */
+      const newModal = new URLSearchParams(window.location.search).get(
+        MODAL_SEARCH_KEY
+      );
+      if (newModal !== null) return;
+      handleAction(false);
+    };
+
+    window.addEventListener('popstate', listener);
+    return () => window.removeEventListener('popstate', listener);
+  }, [handleAction, promise]);
 
   return (
     <ConfirmContext.Provider value={{ promise, confirm }}>
       {children}
-      <Dialog open={promise !== null}>
+      <Dialog
+        type='alert'
+        open={promise !== null && currentModal === 'confirm'}
+        onOpenChange={handleOpenChange}
+      >
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{data?.title}</DialogTitle>
             <DialogDescription>{data?.description}</DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button onClick={() => handleAction(false)}>
+            <DialogAction onClick={() => handleAction(false)}>
               {data?.cancelLabel || 'Cancel'}
-            </Button>
-            <Button
+            </DialogAction>
+            <DialogAction
               variant={data?.destructive ? 'destructive' : 'primary'}
               onClick={() => handleAction(true)}
             >
               {data?.confirmLabel || 'Confirm'}
-            </Button>
+            </DialogAction>
           </DialogFooter>
         </DialogContent>
       </Dialog>

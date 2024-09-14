@@ -1,5 +1,6 @@
 import { pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 import type { InferSelectModel } from 'drizzle-orm';
+import { createInsertSchema } from 'drizzle-zod';
 import { createId } from '@paralleldrive/cuid2';
 
 export const resume = pgTable('resume', {
@@ -13,5 +14,9 @@ export const resume = pgTable('resume', {
     .defaultNow()
     .$onUpdate(() => new Date()),
 });
+
+export const renameResumeSchema = createInsertSchema(resume, {
+  title: schema => schema.title.min(1, 'Title cannot be empty.').trim(),
+}).pick({ title: true });
 
 export type Resume = InferSelectModel<typeof resume>;
