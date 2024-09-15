@@ -3,7 +3,7 @@ services:
     init: true
     image: resume-thing-app
     build:
-      dockerfile: Dockerfile
+      dockerfile: ./services/app/Dockerfile
       context: .
       target: dev
     ports:
@@ -11,19 +11,21 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-      - /app/.next
+      - /app/services/app/node_modules
+      - /app/services/app/.next
     environment:
       - DB_URL=${DB_URL:-postgresql://postgres:postgres@db:5432/postgres}
       - PDF_DEBUG=${PDF_DEBUG}
 
   db-studio:
     image: resume-thing-app
-    command: pnpm db:studio
+    command: pnpm -F app db:studio
     ports:
       - 4983:4983
     volumes:
       - .:/app
       - /app/node_modules
+      - /app/services/app/node_modules
     environment:
       - DB_URL=${DB_URL:-postgresql://postgres:postgres@db:5432/postgres}
 
