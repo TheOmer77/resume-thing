@@ -1,0 +1,7 @@
+{
+  "name": "@resume-thing/tsconfig",
+  "private": true,
+  "publishConfig": {
+    "access": "public"
+  }
+}
