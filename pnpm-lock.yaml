@@ -114,6 +114,12 @@ importers:
         specifier: ^3.23.8
         version: 3.23.8
     devDependencies:
+      '@resume-thing/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
+      '@resume-thing/tsconfig':
+        specifier: workspace:*
+        version: link:../../packages/tsconfig
       '@tailwindcss/typography':
         specifier: ^0.5.15
         version: 0.5.15(tailwindcss@3.4.11)
