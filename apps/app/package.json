@@ -5,6 +5,7 @@
     "dev": "next dev",
     "build": "next build",
     "lint": "tsc --noEmit && eslint --max-warnings 0 src",
+    "clean": "rm -rf .next",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:seed": "tsx ./scripts/seed.ts",
