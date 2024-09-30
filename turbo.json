@@ -1,6 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalEnv": ["APP_NAME", "PORT", "BACKEND_URL"],
+  "globalEnv": ["APP_NAME", "BACKEND_URL", "DB_URL", "PORT"],
   "tasks": {
     "dev": { "persistent": true, "cache": false },
     "build": {
