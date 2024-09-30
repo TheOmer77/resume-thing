@@ -1,71 +1,55 @@
-
-ARG SERVICE_NAME=app
-ARG NEXT_TELEMETRY_DISABLED=1
-
 FROM node:20.17.0-alpine3.20 AS base
-
-# Install dependencies
-FROM base AS deps
+ENV APP_NAME=app
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+ENV TURBO_TELEMETRY_DISABLED=1
+ENV NEXT_TELEMETRY_DISABLED=1
 WORKDIR /app
-ARG SERVICE_NAME
-ENV SERVICE_NAME ${SERVICE_NAME}
 
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-COPY services/$SERVICE_NAME/package.json ./services/$SERVICE_NAME/
-RUN apk add --no-cache gcompat && \
-  corepack enable pnpm && pnpm i --frozen-lockfile
+RUN apk add --no-cache gcompat dumb-init && corepack enable pnpm
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+
+# Install just turbo and generate partial monorepo with a pruned lockfile
+FROM base AS prune
+
+COPY package.json pnpm-lock.yaml ./
+RUN apk add --no-cache yq && \
+  TURBO_VERSION=$(yq e '.packages | keys | .[] | select(. == "turbo@*")' \
+  pnpm-lock.yaml | cut -d '@' -f 2) && \
+  pnpm install -D turbo@$TURBO_VERSION 
+COPY . .
+RUN pnpm turbo prune $APP_NAME --docker
 
 # Development image - will get the actual project files from bind mount
 FROM base AS dev
-WORKDIR /app
-ARG SERVICE_NAME
-ENV SERVICE_NAME ${SERVICE_NAME}
-ARG NEXT_TELEMETRY_DISABLED
-ENV NEXT_TELEMETRY_DISABLED=${NEXT_TELEMETRY_DISABLED}
 
-COPY --from=deps /app/package.json /app/pnpm-lock.yaml /app/pnpm-workspace.yaml ./
-COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/services/$SERVICE_NAME/package.json ./services/$SERVICE_NAME/
-COPY --from=deps /app/services/$SERVICE_NAME/node_modules ./services/$SERVICE_NAME/node_modules
-RUN apk add --no-cache \
-  chromium nss freetype harfbuzz ca-certificates ttf-freefont && \
-  corepack enable pnpm && \
-  mkdir -p /app/services/$SERVICE_NAME/.next && \
-  chown -R node:node /app/services/$SERVICE_NAME/.next
+COPY --from=prune /app/out/json/package.json \
+  /app/out/json/pnpm-lock.yaml ./
+RUN pnpm fetch
+COPY --from=prune /app/out/json/ .
+RUN pnpm install -r --offline && \
+  mkdir /app/apps/$APP_NAME/.next && \
+  chown -R node:node /app/apps/$APP_NAME/.next
 
 USER node
-EXPOSE 3000
-ENV PORT=3000
-CMD pnpm -F ${SERVICE_NAME} run dev
+CMD ["sh", "-c", "pnpm turbo dev -F $APP_NAME --color"]
 
-# Build the source code for production
-FROM base AS builder
-WORKDIR /app
-ARG SERVICE_NAME
-ENV SERVICE_NAME ${SERVICE_NAME}
-ARG NEXT_TELEMETRY_DISABLED
-ENV NEXT_TELEMETRY_DISABLED=${NEXT_TELEMETRY_DISABLED}
+# Production build - install deps & build
+FROM base AS build
 
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-RUN corepack enable pnpm && pnpm -F ${SERVICE_NAME} run build; 
+COPY --from=prune /app/out/json/package.json \
+  /app/out/json/pnpm-lock.yaml ./
+RUN pnpm fetch
+COPY --from=prune /app/out/full/ .
+RUN pnpm install -r --offline && pnpm turbo build -F $APP_NAME...
 
-# Production image - copy just the build files and run next
+# Production image - copy just build files
 FROM base AS prod
-WORKDIR /app
-ARG SERVICE_NAME
-ENV SERVICE_NAME ${SERVICE_NAME}
-ARG NEXT_TELEMETRY_DISABLED
-ENV NEXT_TELEMETRY_DISABLED=${NEXT_TELEMETRY_DISABLED}
 ENV NODE_ENV=production
 
-RUN apk add --no-cache \
-  chromium nss freetype harfbuzz ca-certificates ttf-freefont && \
-  mkdir .next && chown -R node:node .next
-COPY --from=builder --chown=node:node /app/services/$SERVICE_NAME/.next/standalone ./
-COPY --from=builder --chown=node:node /app/services/$SERVICE_NAME/.next/static ./.next/static
+COPY --from=build --chown=node:node /app/apps/$APP_NAME/.next/standalone ./
+COPY --from=build --chown=node:node /app/apps/$APP_NAME/.next/static \
+  ./apps/$APP_NAME/.next/static
 
 USER node
-EXPOSE 3000
-ENV PORT=3000
-CMD ["sh", "-c", "HOSTNAME='0.0.0.0' node server.js"]
+CMD ["sh", "-c", "node apps/$APP_NAME/server.js"]
