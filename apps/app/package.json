@@ -4,7 +4,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
     "lint": "tsc --noEmit && eslint --max-warnings 0 src",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
