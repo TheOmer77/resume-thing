@@ -28,6 +28,8 @@ COPY --from=prune /app/out/json/package.json \
 RUN pnpm fetch
 COPY --from=prune /app/out/json/ .
 RUN pnpm install -r --offline && \
+  apk add --no-cache \
+  chromium nss freetype harfbuzz ca-certificates ttf-freefont && \
   mkdir /app/apps/$APP_NAME/.next && \
   chown -R node:node /app/apps/$APP_NAME/.next
 
@@ -47,6 +49,8 @@ RUN pnpm install -r --offline && pnpm turbo build -F $APP_NAME...
 FROM base AS prod
 ENV NODE_ENV=production
 
+RUN apk add --no-cache \
+  chromium nss freetype harfbuzz ca-certificates ttf-freefont
 COPY --from=build --chown=node:node /app/apps/$APP_NAME/.next/standalone ./
 COPY --from=build --chown=node:node /app/apps/$APP_NAME/.next/static \
   ./apps/$APP_NAME/.next/static
