@@ -7,8 +7,7 @@
     "incremental": true,
     "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "plugins": [{ "name": "next" }],
-    "target": "es5"
+    "plugins": [{ "name": "next" }]
   },
   "include": ["src", "next-env.d.ts"],
   "exclude": ["node_modules"]
