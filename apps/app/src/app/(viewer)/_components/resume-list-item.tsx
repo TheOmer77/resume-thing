@@ -11,9 +11,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useConfirm } from '@/hooks/useConfirm';
-import { useModal } from '@/hooks/useModal';
-import { useResumeById } from '@/hooks/useResumeById';
+import { useConfirm } from '@/hooks/use-confirm';
+import { useModal } from '@/hooks/use-modal';
+import { useResumeById } from '@/hooks/use-resume-by-id';
 import type { Resume } from '@/db/schema';
 import { cn } from '@/lib/cn';
 

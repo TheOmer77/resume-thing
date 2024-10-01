@@ -6,7 +6,7 @@ import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 
 import { Spinner } from '@/components/ui/spinner';
-import { usePDFFile } from '@/hooks/usePDFFile';
+import { usePDFFile } from '@/hooks/use-pdf-file';
 import { cn } from '@/lib/cn';
 import type { PDFViewerProps } from '@/types/pdf';
 

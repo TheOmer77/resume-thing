@@ -1,6 +1,6 @@
 'use client';
 
-import { useResumes } from '@/hooks/useResumes';
+import { useResumes } from '@/hooks/use-resumes';
 
 import { ResumeListItem } from './resume-list-item';
 

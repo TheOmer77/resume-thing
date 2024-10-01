@@ -19,8 +19,8 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
-import { useModal } from '@/hooks/useModal';
-import { useResumeById } from '@/hooks/useResumeById';
+import { useModal } from '@/hooks/use-modal';
+import { useResumeById } from '@/hooks/use-resume-by-id';
 import { renameResumeSchema, type Resume } from '@/db/schema';
 import { cn } from '@/lib/cn';
 

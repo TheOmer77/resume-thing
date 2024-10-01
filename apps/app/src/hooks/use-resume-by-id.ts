@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import type { InferRequestType, InferResponseType } from 'hono';
 
-import { useToastMutation } from '@/hooks/useToastMutation';
+import { useToastMutation } from '@/hooks/use-toast-mutation';
 import { client } from '@/lib/hono';
 
 export const useResumeById = (id: string, { enabled = true } = {}) => {

@@ -17,7 +17,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { MODAL_SEARCH_KEY, useModal } from '@/hooks/useModal';
+import { MODAL_SEARCH_KEY, useModal } from '@/hooks/use-modal';
 
 type ConfirmDialogData = {
   title: string;

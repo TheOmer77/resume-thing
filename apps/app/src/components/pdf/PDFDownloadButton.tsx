@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import { DownloadIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { usePDFFile } from '@/hooks/usePDFFile';
+import { usePDFFile } from '@/hooks/use-pdf-file';
 import type { PDFViewerProps } from '@/types/pdf';
 
 type PDFDownloadButtonProps = PDFViewerProps & { title?: string };
