@@ -12,7 +12,7 @@ import { db } from '@/db';
 import { renameResumeSchema, resume } from '@/db/schema';
 import { getBlocks, insertBlocks } from '@/db/queries/block';
 import { createDuplicateBlocks } from '@/lib/blocks';
-import { getDuplicateName } from '@/lib/getDuplicateName';
+import { getDuplicateName } from '@/lib/get-duplicate-name';
 
 export const resumesRouter = new Hono()
   .get('/', async ctx => {

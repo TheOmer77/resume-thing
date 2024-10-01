@@ -4,8 +4,8 @@ import tailwindTypography from '@tailwindcss/typography';
 import { mkdir, writeFile } from 'fs/promises';
 import type { BlankEnv, BlankInput } from 'hono/types';
 
-import { extractHtmlBodyContent } from '@/lib/extractHtmlContent';
-import { generateTailwindCss } from '@/lib/generateTailwindCss';
+import { extractHtmlBodyContent } from '@/lib/extract-html-content';
+import { generateTailwindCss } from '@/lib/generate-tailwind-css';
 import { interCdn } from '@/constants/inter';
 import { resumeTheme } from '@/constants/resume';
 
