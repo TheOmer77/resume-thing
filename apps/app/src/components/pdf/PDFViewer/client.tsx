@@ -53,7 +53,7 @@ export const ClientPDFViewer = ({
       {...props}
       ref={setContainerRef}
       className={cn(
-        'flex min-h-dvh w-full flex-col bg-muted/40 pb-4 pt-[4.5rem]',
+        'bg-muted/40 flex min-h-dvh w-full flex-col pb-4 pt-[4.5rem]',
         className
       )}
     >

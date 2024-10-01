@@ -20,7 +20,7 @@ export const DialogDescription = forwardRef<
   return (
     <Comp
       ref={ref}
-      className={cn('text-sm text-muted-foreground', className)}
+      className={cn('text-muted-foreground text-sm', className)}
       {...props}
     />
   );

@@ -10,14 +10,13 @@ import { interCdn } from '@/constants/inter';
 import { resumeTheme } from '@/constants/resume';
 
 /** Weird hack to fix some complex Tailwind classnames. */
-const fixTwClasses = (html: string) => {
-  return html.replace(/class="([^"]*?)"/g, (_, classNames: string) => {
+const fixTwClasses = (html: string) =>
+  html.replace(/class="([^"]*?)"/g, (_, classNames: string) => {
     const modifiedClassNames = classNames
       .replace(/&amp;/g, '&')
       .replace(/&gt;/, '>');
     return `class="${modifiedClassNames}"`;
   });
-};
 
 /** Temporary hack: Render a page in a separate Next.js route. */
 const getHtml = async (ctx: Context<BlankEnv, '/:id', BlankInput>) => {

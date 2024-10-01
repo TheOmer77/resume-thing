@@ -43,13 +43,9 @@ const blockContentWhere = or(
 );
 /** Required for child schemas to be fetched properly. */
 const groupBy = queryMap
-    .reduce<PgColumn[]>((arr, { schema, properties }) => {
-      return [
-        ...arr,
-        schema.blockId,
-        ...Object.values(properties).filter(value => !(value instanceof SQL)),
-      ];
-    }, [])
+    .reduce<
+      PgColumn[]
+    >((arr, { schema, properties }) => [...arr, schema.blockId, ...Object.values(properties).filter(value => !(value instanceof SQL))], [])
     .flat(),
   orderBy = [
     isNull(block.order), // Blocks without order are last

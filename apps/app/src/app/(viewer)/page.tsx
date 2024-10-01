@@ -17,7 +17,7 @@ const HomePage = async () => {
   });
 
   return (
-    <div className='min-h-dvh bg-muted/40 pt-16'>
+    <div className='bg-muted/40 min-h-dvh pt-16'>
       <Header />
       {/* THIS UI IS TEMPORARY!! */}
       <main className='mx-auto w-full max-w-screen-2xl p-4 sm:px-8'>

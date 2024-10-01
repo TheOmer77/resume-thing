@@ -54,7 +54,7 @@ export const ResumeListItem = ({ resume }: { resume: Resume }) => {
       >
         <Link href={`/view/${resume.id}`}>
           <span className='text-lg font-semibold'>{resume.title}</span>
-          <span className='text-sm text-muted-foreground'>
+          <span className='text-muted-foreground text-sm'>
             {`${
               resume.createdAt.valueOf() === resume.updatedAt.valueOf()
                 ? 'Created'

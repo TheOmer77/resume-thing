@@ -14,7 +14,7 @@ export const Spinner = forwardRef<
   <Loader2Icon
     {...props}
     ref={ref}
-    className={cn('size-6 animate-spin text-muted-foreground', className)}
+    className={cn('text-muted-foreground size-6 animate-spin', className)}
   />
 ));
 Spinner.displayName = 'Spinner';

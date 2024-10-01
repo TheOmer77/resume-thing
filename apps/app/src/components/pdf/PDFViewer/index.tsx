@@ -2,7 +2,6 @@ import type { PDFViewerProps } from '@/types/pdf';
 
 import { ClientPDFViewer } from './client';
 
-// @ts-expect-error This is a polyfill for Promise.withResolvers
 if (typeof Promise.withResolvers === 'undefined') {
   const withResolvers = () => {
     let resolve, reject;
