@@ -4,7 +4,7 @@ import {
   QueryClient,
 } from '@tanstack/react-query';
 
-import { Header } from '@/components/layout/Header';
+import { Header } from '@/components/layout/header';
 import { getResumes } from '@/db/queries/resume';
 
 import { ResumeList } from './_components/resume-list';

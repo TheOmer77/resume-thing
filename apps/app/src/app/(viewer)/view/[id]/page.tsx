@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 
-import { Header } from '@/components/layout/Header';
+import { Header } from '@/components/layout/header';
 import { PDFDownloadButton } from '@/components/pdf/PDFDownloadButton';
 import { PDFViewer } from '@/components/pdf/PDFViewer';
 import { getResumeById } from '@/db/queries/resume';
