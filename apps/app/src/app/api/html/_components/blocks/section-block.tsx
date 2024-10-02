@@ -1,9 +1,9 @@
 import type { SectionBlockData } from '@/types/blocks';
 
-import { TextBlock } from './TextBlock';
-import { TitleBlock } from './TitleBlock';
-import { ContactInfoBlock } from './ContactInfoBlock';
-import { ExperienceBlock } from './ExperienceBlock';
+import { TextBlock } from './text-block';
+import { TitleBlock } from './title-block';
+import { ContactInfoBlock } from './contact-info-block';
+import { ExperienceBlock } from './experience-block';
 import { useBlocks } from '../../context';
 import type { BlockProps } from './types';
 
