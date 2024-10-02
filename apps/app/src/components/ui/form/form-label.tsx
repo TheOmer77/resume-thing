@@ -9,7 +9,7 @@ import {
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/cn';
 
-import { useFormField } from './useFormField';
+import { useFormField } from './use-form-field';
 
 export const FormLabel = forwardRef<
   ElementRef<typeof Label>,

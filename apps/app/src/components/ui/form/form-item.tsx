@@ -9,7 +9,7 @@ import {
 
 import { cn } from '@/lib/cn';
 
-import { FormItemContext } from './FormItemContext';
+import { FormItemContext } from './form-item-context';
 
 export const FormItem = forwardRef<
   ElementRef<'div'>,

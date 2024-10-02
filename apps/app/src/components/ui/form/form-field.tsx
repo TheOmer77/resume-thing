@@ -7,7 +7,7 @@ import {
   type FieldValues,
 } from 'react-hook-form';
 
-import { FormFieldContext } from './FormFieldContext';
+import { FormFieldContext } from './form-field-context';
 
 export const FormField = <
   TFieldValues extends FieldValues = FieldValues,

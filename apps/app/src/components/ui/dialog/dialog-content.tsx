@@ -11,8 +11,8 @@ import {
 
 import { cn } from '@/lib/cn';
 
-import { DialogClose } from './DialogClose';
-import { DialogOverlay } from './DialogOverlay';
+import { DialogClose } from './dialog-close';
+import { DialogOverlay } from './dialog-overlay';
 import { useDialogType } from './context';
 
 export const DialogContent = forwardRef<

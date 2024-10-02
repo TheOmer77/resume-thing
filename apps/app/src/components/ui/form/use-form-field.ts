@@ -3,8 +3,8 @@
 import { useContext } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { FormFieldContext } from './FormFieldContext';
-import { FormItemContext } from './FormItemContext';
+import { FormFieldContext } from './form-field-context';
+import { FormItemContext } from './form-item-context';
 
 export const useFormField = () => {
   const fieldContext = useContext(FormFieldContext);
