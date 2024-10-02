@@ -2,7 +2,7 @@
   "$schema": "https://turbo.build/schema.json",
   "globalEnv": ["APP_NAME", "BACKEND_URL", "DB_URL", "PORT"],
   "tasks": {
-    "dev": { "persistent": true, "cache": false },
+    "dev": { "persistent": true, "cache": false, "env": ["PDF_DEBUG"] },
     "build": {
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "dependsOn": ["^build"],
