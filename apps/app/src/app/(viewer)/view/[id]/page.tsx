@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation';
 
 import { Header } from '@/components/layout/header';
-import { PDFDownloadButton } from '@/components/pdf/PDFDownloadButton';
-import { PDFViewer } from '@/components/pdf/PDFViewer';
+import { PDFDownloadButton } from '@/components/pdf/pdf-download-button';
+import { PDFViewer } from '@/components/pdf/pdf-viewer';
 import { getResumeById } from '@/db/queries/resume';
 
 type ResumeViewPageProps = { params: { id: string } };
