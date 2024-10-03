@@ -1,0 +1,23 @@
+services:
+  app:
+    restart: unless-stopped
+    build:
+      dockerfile: ./apps/app/Dockerfile
+      context: .
+      target: prod
+    ports:
+      - '3000:3000'
+    environment:
+      - DB_URL=${DB_URL:-postgresql://postgres:postgres@db:5432/postgres}
+
+  db:
+    restart: unless-stopped
+    image: postgres:16.4-alpine3.20
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${DB_USER:-postgres}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-postgres}
+
+volumes:
+  db-data:
